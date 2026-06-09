@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>可靠性工程师手册|§1-2 产品质量与可靠性的关系</title>
+  <meta property="og:title" content="可靠性工程师手册|§1-2 产品质量与可靠性的关系" />
+  <meta property="og:description" content="§1-2 产品质量与可靠性的关系。包含完整讲解、关键术语、重点提醒与 5 道互动练习题。" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:image" content="https://dj-octavio.github.io/reliability-test/preview-1-1.png" />
+  <meta property="og:image:width" content="800" />
+  <meta property="og:image:height" content="400" />
+  <style>
+    :root {
+      --bg: #f6faff;
+      --paper: #ffffff;
+      --ink: #152033;
+      --muted: #637083;
+      --line: #dbe7f4;
+      --blue: #246bfe;
+      --cyan: #0f9fb6;
+      --green: #159a63;
+      --orange: #f08a24;
+      --red: #d94b5f;
+      --purple: #7657d8;
+      --shadow: 0 18px 45px rgba(39, 72, 114, 0.11);
+      --radius: 8px;
+      --max: 1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,rgba(36,107,254,.06),rgba(15,159,182,.03) 38%,transparent 72%),var(--bg);line-height:1.65}
+    a{color:inherit;text-decoration:none}
+    .page-shell{min-height:100vh}
+    .topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,250,255,.86);border-bottom:1px solid rgba(219,231,244,.9)}
+    .topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(36,107,254,.22);position:relative;flex:0 0 auto}.brand-mark::after{content:"";width:14px;height:14px;border:2px solid #fff;border-left:0;border-bottom:0;position:absolute;top:9px;left:8px;transform:rotate(45deg)}.brand-title{font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-subtitle{font-size:12px;color:var(--muted);margin-top:1px}.top-links{display:flex;align-items:center;gap:6px;color:#334158;font-size:13px;white-space:nowrap}.top-links a{padding:7px 9px;border-radius:7px;transition:background 160ms ease,color 160ms ease}.top-links a:hover{background:#eaf2ff;color:var(--blue)}
+    .hero{max-width:var(--max);margin:0 auto;padding:58px 24px 34px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:32px;align-items:stretch}.hero h1{margin:0;font-size:clamp(36px,5vw,68px);line-height:1.05;letter-spacing:0;max-width:850px}.hero-lead{color:#405066;font-size:18px;margin:22px 0 0;max-width:720px}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 16px;border-radius:8px;border:1px solid var(--line);background:#fff;color:#233047;font-size:14px;font-weight:700;cursor:pointer}.button.primary{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 14px 30px rgba(36,107,254,.22)}
+    .hero-board{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center;height:100%;min-height:340px}.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:center}.score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:8px;padding:14px;min-height:116px;transition:transform 180ms ease,border-color 180ms ease,background 180ms ease}.score-item:hover{transform:translateY(-4px);border-color:#b7cdfa;background:#ffffff}.score-number{font-size:28px;font-weight:850;line-height:1}.score-title{margin-top:8px;font-size:15px;font-weight:800}.score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}
+    .main-layout{max-width:900px;margin:0 auto;padding:18px 24px 72px}.side-nav{position:sticky;top:78px;background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 32px rgba(39,72,114,.08);padding:12px}.side-nav a{display:block;padding:10px 11px;border-radius:7px;color:#46566f;font-size:13px;font-weight:700;transition:background 160ms ease,color 160ms ease,transform 160ms ease}.side-nav a:hover{background:#eaf2ff;color:var(--blue);transform:translateX(3px)}.content{display:grid;gap:22px}section{scroll-margin-top:96px}.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px}.section-kicker{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:0;margin-bottom:8px}h2{margin:0 0 14px;font-size:clamp(26px,3vw,38px);line-height:1.14;letter-spacing:0}h3{margin:24px 0 9px;font-size:20px;line-height:1.25;letter-spacing:0}p{margin:10px 0;color:#304059}ul,ol{margin:10px 0 0;padding-left:22px;color:#304059}li+li{margin-top:5px}.callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b}.callout.warn{border-left-color:var(--orange);background:#fff5e9;color:#6a3a08}.keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850}.keyword.green{background:#e7f7ef;color:var(--green)}.keyword.orange{background:#fff0dc;color:var(--orange)}.keyword.purple{background:#f0edff;color:var(--purple)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:8px;padding:18px}.card h4{margin:0 0 8px;font-size:16px;letter-spacing:0}.card p{margin:0;font-size:14px}.formula{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}.formula-step{min-height:104px;border:1px solid #dce8f6;background:#fff;border-radius:8px;padding:14px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:8px}.formula-step strong{font-size:16px}.formula-step span{color:var(--muted);font-size:12px;line-height:1.4}
+    .quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}.question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}.question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px}.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px}.badge-multi{background:#fff0f6;color:#d63384}.badge-single{background:#e8f5e9;color:#2e7d32}.option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px}.option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0}.submit-wrap{text-align:center;margin:20px 0}.submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}.result{display:none;margin-top:20px}.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}.result-correct{background:#e8f5e9;border:1px solid #a5d6a7}.result-wrong{background:#fce4ec;border:1px solid #ef9a9a}.result-q{font-weight:600;margin-bottom:6px}.result-your{color:#d32f2f}.result-answer{color:#2e7d32;font-weight:600}.result-explain{margin-top:6px;color:#555;font-size:13px}.score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}.footer{text-align:center;padding:16px;font-size:12px;color:#999}.footer .sign{font-size:13px;color:#666;margin-top:6px}
+    .divider{height:1px;background:#e8e8e8;margin:16px 0}.tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}.timeline{position:relative;padding-left:24px}.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#e8ecff}.timeline-item{position:relative;margin-bottom:16px}.timeline-item::before{content:'';position:absolute;left:-20px;top:4px;width:12px;height:12px;border-radius:50%;background:#2b6aff;border:2px solid #fff;box-shadow:0 0 0 2px #e8ecff}.timeline-year{font-weight:700;color:#1a52d6;font-size:14px}.timeline-text{font-size:14px;color:#555;margin-top:2px}.six-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:12px 0}.six-item{background:#f8f9fa;border-radius:8px;padding:10px;text-align:center}.six-item .en{font-size:11px;color:#999}.six-item .cn{font-size:14px;font-weight:600;color:#333}
+    @media (max-width: 980px){.hero,.main-layout{grid-template-columns:1fr}.side-nav{position:static}.hero-board{order:-1}.cards,.formula,.six-grid{grid-template-columns:1fr 1fr}}
+    @media (max-width: 640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px}.cards,.formula,.six-grid{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}
+  
+
+    /* Pagination */
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+  </style>
+</head>
+<body>
+<div class="page-shell">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top" aria-label="返回顶部">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>
+          <span class="brand-title">可靠性工程师手册</span>
+          <span class="brand-subtitle">§1-2 产品质量与可靠性的关系</span>
+        </span>
+      </a>
+      <nav class="top-links">
+        <a href="#s1">质量与可靠性</a><a href="#s2">三个阶段</a><a href="#s3">核心区别</a><a href="#quiz">练习题</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div>
+      <h1>产品质量与可靠性的关系</h1>
+      <p class="hero-lead">质量管理关注≤0时刻的合格品率，可靠性关注>0时刻产品合格水平的保持能力。产品质量本身包含可靠性，高可靠是顾客满意的核心条件。</p>
+      
+    </div>
+    <div class="hero-board">
+      <div class="score-grid">
+        <div class="score-item"><div class="score-number" style="color: var(--blue);">≤0</div><div class="score-title">设计质量</div><div class="score-text">研发阶段的设计质量，决定产品先天可靠性</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--green);">=0</div><div class="score-title">制造质量</div><div class="score-text">生产过程的合格品率，关注一致性和稳定性</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--orange);">>0</div><div class="score-title">使用质量</div><div class="score-text">使用过程中合格水平的保持能力，本质就是可靠性</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--purple);">95%</div><div class="score-title">合格品率 vs 可靠度</div><div class="score-text">质量管理用百分比，可靠性用时间表示</div></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-layout">
+    
+
+    <div class="content">
+<section class="panel">
+              <div class="section-kicker">1.2.1</div><div id="s1"></div>
+        <h2>产品质量与可靠性的关系</h2>
+        <p>20世纪90年代，世界著名质量管理大师朱兰博士预言：<span class="keyword purple">"21世纪将是质量的世纪"</span>。质量一词以前所未有的频率被提及——经济发展质量、生活质量、空气质量、产品质量、工作质量等。</p>
+        <h3>质量的三种含义</h3>
+        <p>回顾百年质量管理历史，人们对产品质量的认识经历了三个阶段：</p>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-year">最初：符合性质量</div>
+            <div class="timeline-text">产品是否符合设计规范和标准要求，以合格品率衡量</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">发展：适用性质量</div>
+            <div class="timeline-text">产品是否适合顾客使用需求，强调功能适用</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2000年后：满意性质量</div>
+            <div class="timeline-text">以顾客为关注焦点，即"客体的一组固有特性满足要求的程度"</div>
+          </div>
+        </div>
+        <h3>固有特性包含什么？</h3>
+        <div class="callout">产品固有特性不仅包含性能、功能特性，还应包含<span class="keyword">可靠性</span>、<span class="keyword">维修性</span>、<span class="keyword">测试性</span>、<span class="keyword">保障性</span>和<span class="keyword">安全性</span>，以及环境适应性、电磁兼容性、经济性和美观舒适性等。</div>
+        <p>从这个意义上讲，可靠性、维修性等特性肯定是质量特性中的重要特性，<span class="keyword green">产品质量本身包含可靠性、维修性等特性</span>。</p>
+      </section>
+
+
+      
+      <section class="panel">
+        <div class="section-kicker">1.2.2</div><div id="s2"></div>
+        <h2>产品寿命周期三阶段质量</h2>
+        <p>按产品寿命周期的不同阶段，可以把质量分成三个阶段，分别对应研发过程的设计质量、生产过程的质量和使用过程中表现出来的使用质量：</p>
+        <div class="cards">
+          <article class="card">
+            <h4>≤0 的质量：设计质量</h4>
+            <p>体现在产品研发阶段的设计定型以及制造与验收规范的确认。<span class="keyword green">≤0的设计质量决定了=0的制造质量和>0的使用质量</span>，是预防质量的核心。</p>
+          </article>
+          <article class="card">
+            <h4>=0 的质量：制造质量</h4>
+            <p>体现在出厂前严格检验，用合格品率度量。质量管理工作的重点是<span class="keyword">提高制造过程的一致性和稳定性</span>，降低不合格品率。</p>
+          </article>
+          <article class="card">
+            <h4>>0 的质量：使用质量</h4>
+            <p>体现在产品使用过程中合格水平的保持能力，<span class="keyword green">本质上就是产品可靠性</span>——合格产品在规定的条件下、规定的时间内完成规定功能的能力。</p>
+          </article>
+          <article class="card">
+            <h4>质量与可靠性的度量区别</h4>
+            <p><span class="keyword">质量管理常用百分比</span>（如合格品率95%比90%好），<span class="keyword">可靠性常用时间</span>（如MMBF从1万提高到2万公里，可靠性提高了）。</p>
+          </article>
+        </div>
+      </section>
+
+
+      
+      <section class="panel">
+        <div class="section-kicker">1.2.3</div><div id="s3"></div>
+        <h2>质量管理与可靠性的核心区别</h2>
+        <h3>关注焦点不同</h3>
+        <div class="cards">
+          <article class="card">
+            <h4>🔧 传统质量管理</h4>
+            <p>关注 <span class="keyword">"≤0时刻的合格品率"</span>，重点是保证制造过程的一致性和稳定性，减少企业内部质量损失，带来"直接"效益。</p>
+          </article>
+          <article class="card">
+            <h4>🛡️ 可靠性工程</h4>
+            <p>关注 <span class="keyword">">0时刻为什么合格品会变成不合格"</span>，即为什么会发生故障，重点是研发过程中的质量设计，提前预防故障。</p>
+          </article>
+        </div>
+        <h3>车轴实例</h3>
+        <p>设计一根车轴，制造检验尺寸为 (10±0.001)mm，称为"精品"。但装配到汽车上后行驶1万公里就断了——这就是典型的可靠性问题，说明<span class="keyword orange">设计时没有进行可靠性设计与分析，试验与评价进行得很不充分</span>。</p>
+        <div class="callout warn">≤0的设计质量决定了=0的制造质量和>0的使用质量。可靠性是顾客最关心的质量，是企业减少外部质量损失和售后服务成本的关键。</div>
+        <h3>克劳士比：质量是免费的</h3>
+        <p>质量管理大师克劳士比说"质量是免费的"——在研发设计时就事先考虑产品在未来用户使用过程中可能发生的故障或缺陷，并在设计时采取预防措施加以解决。这样做的成本远低于事后维修和召回的成本。</p>
+        <div class="callout">产品质量包含可靠性，可靠性是性能和功能得以发挥的基础和前提。若产品不可靠，再好的性能也无法发挥。</div>
+      </section>
+
+
+      <section class="panel quiz-section">
+        <div class="section-kicker">练习题</div>
+        <h2>互动练习题(5道)</h2>
+        <div class="question" data-id="q0" data-answer="C" data-type="single">
+          <div class="question-header">第1题：根据朱兰博士的预言，21世纪将是？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q0" value="A"><span>A. 可靠性的世纪</span></label>
+          <label class="option-label"><input type="radio" name="q0" value="B"><span>B. 信息化的世纪</span></label>
+          <label class="option-label"><input type="radio" name="q0" value="C"><span>C. 质量的世纪</span></label>
+          <label class="option-label"><input type="radio" name="q0" value="D"><span>D. 智能化的世纪</span></label>
+        </div>
+        <div class="question" data-id="q1" data-answer="ABD" data-type="multi">
+          <div class="question-header">第2题：产品的固有特性除了性能、功能外，还应包含？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q1" value="A"><span>A. 可靠性、维修性</span></label>
+          <label class="option-label"><input type="checkbox" name="q1" value="B"><span>B. 测试性、保障性、安全性</span></label>
+          <label class="option-label"><input type="checkbox" name="q1" value="C"><span>C. 产品包装的美观度</span></label>
+          <label class="option-label"><input type="checkbox" name="q1" value="D"><span>D. 环境适应性、电磁兼容性</span></label>
+        </div>
+        <div class="question" data-id="q2" data-answer="A" data-type="single">
+          <div class="question-header">第3题：">0的质量"本质上是什么？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q2" value="A"><span>A. 产品可靠性，即合格水平的保持能力</span></label>
+          <label class="option-label"><input type="radio" name="q2" value="B"><span>B. 出厂检验合格品率</span></label>
+          <label class="option-label"><input type="radio" name="q2" value="C"><span>C. 设计阶段的预防质量</span></label>
+          <label class="option-label"><input type="radio" name="q2" value="D"><span>D. 售后服务质量</span></label>
+        </div>
+        <div class="question" data-id="q3" data-answer="BD" data-type="multi">
+          <div class="question-header">第4题：关于质量管理与可靠性的区别，以下说法正确的是？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q3" value="A"><span>A. 质量管理用时间表示，可靠性用百分比表示</span></label>
+          <label class="option-label"><input type="checkbox" name="q3" value="B"><span>B. 质量管理关注≤0时刻的合格品率</span></label>
+          <label class="option-label"><input type="checkbox" name="q3" value="C"><span>C. 可靠性关注制造过程的一致性</span></label>
+          <label class="option-label"><input type="checkbox" name="q3" value="D"><span>D. 可靠性关注>0时刻为什么会发生故障</span></label>
+        </div>
+        <div class="question" data-id="q4" data-answer="ABD" data-type="multi">
+          <div class="question-header">第5题：车轴实例中，检验为"精品"却在使用中断裂，说明了什么？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. 制造质量合格不代表可靠性好</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. 设计时没有进行可靠性设计与分析</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. 检验标准有问题</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. 研发过程的试验与评价进行得不充分</span></label>
+        </div>
+        <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
+        <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
+      </section>
+
+      
+        <section class="panel">
+        <div class="section-kicker">提交前自检</div>
+        <h2>自检提示</h2>
+        <div class="tag-list">
+          <span class="tag">质量三阶段</span><span class="tag">合格品率</span><span class="tag">可靠性</span><span class="tag">预防设计</span><span class="tag">克劳士比</span>
+        </div>
+        <div class="callout">记忆点:质量管理用百分比，可靠性用时间；≤0的设计质量决定=0的制造质量和>0的使用质量；若产品不可靠，再好的性能也无法发挥。</div>
+      </section>
+
+
+    </div>
+  </main>
+
+  <footer class="footer"><p>© 可靠性工程师手册互动讲解页</p><div class="sign">⚡ 与你同行 AI 浪潮,打造智能工作新范式</div></footer>
+</div>
+
+
+<script>
+var explanations = {
+  q0: "朱兰博士预言21世纪将是质量的世纪，进入21世纪以来，质量一词以前所未有的频率被提及，涵盖经济发展质量、生活质量、产品质量等方方面面。",
+  q1: "教材原文：产品固有特性包含性能和功能特性，还应包含可靠性、维修性、测试性、保障性和安全性，以及环境适应性、电磁兼容性、经济性和美观舒适性等。C选项'包装美观度'不是固有特性。",
+  q2: ">0的质量体现在产品使用过程中合格水平的保持能力，本质上就是产品可靠性——合格产品在规定的条件下、规定的时间内完成规定功能的能力。",
+  q3: "质量管理常用百分比表示（如合格品率），关注≤0时刻的合格品率，重点是制造过程的一致性；可靠性常用时间表示（如MMBF），关注>0时刻为什么合格品会变成不合格（故障），重点是研发阶段的质量设计。",
+  q4: "车轴检验为精品(10±0.001)mm但1万公里断裂，说明制造质量合格不代表可靠性好。根源是设计时没有进行可靠性设计与分析，研发过程的试验与评价不充分，导致设计缺陷没有在研发中暴露出来。"
+};
+var questions = [
+  {id: 'q0', text: '根据朱兰博士的预言，21世纪将是？'},
+  {id: 'q1', text: '产品的固有特性除了性能、功能外，还应包含？'},
+  {id: 'q2', text: '">0的质量"本质上是什么？'},
+  {id: 'q3', text: '关于质量管理与可靠性的区别，以下说法正确的是？'},
+  {id: 'q4', text: '车轴实例中，检验为"精品"却在使用中断裂，说明了什么？'}
+];
+function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');const ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>';else html+='<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>';html+='<div class="result-explain">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?'  满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
+</script>
+
+</body>
+</html>

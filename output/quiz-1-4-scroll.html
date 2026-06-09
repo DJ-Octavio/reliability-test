@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>可靠性工程师手册|§1-4 可靠性定义及分类</title>
+  <meta property="og:title" content="可靠性工程师手册|§1-4 可靠性定义及分类" />
+  <meta property="og:description" content="§1-4 可靠性定义及分类。包含完整讲解、关键术语、重点提醒与 5 道互动练习题。" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:image" content="https://dj-octavio.github.io/reliability-test/preview-1-1.png" />
+  <meta property="og:image:width" content="800" />
+  <meta property="og:image:height" content="400" />
+  <style>
+    :root {
+      --bg: #f6faff;
+      --paper: #ffffff;
+      --ink: #152033;
+      --muted: #637083;
+      --line: #dbe7f4;
+      --blue: #246bfe;
+      --cyan: #0f9fb6;
+      --green: #159a63;
+      --orange: #f08a24;
+      --red: #d94b5f;
+      --purple: #7657d8;
+      --shadow: 0 18px 45px rgba(39, 72, 114, 0.11);
+      --radius: 8px;
+      --max: 1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,rgba(36,107,254,.06),rgba(15,159,182,.03) 38%,transparent 72%),var(--bg);line-height:1.65}
+    a{color:inherit;text-decoration:none}
+    .page-shell{min-height:100vh}
+    .topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,250,255,.86);border-bottom:1px solid rgba(219,231,244,.9)}
+    .topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(36,107,254,.22);position:relative;flex:0 0 auto}.brand-mark::after{content:"";width:14px;height:14px;border:2px solid #fff;border-left:0;border-bottom:0;position:absolute;top:9px;left:8px;transform:rotate(45deg)}.brand-title{font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-subtitle{font-size:12px;color:var(--muted);margin-top:1px}.top-links{display:flex;align-items:center;gap:6px;color:#334158;font-size:13px;white-space:nowrap}.top-links a{padding:7px 9px;border-radius:7px;transition:background 160ms ease,color 160ms ease}.top-links a:hover{background:#eaf2ff;color:var(--blue)}
+    .hero{max-width:var(--max);margin:0 auto;padding:58px 24px 34px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:32px;align-items:stretch}.hero h1{margin:0;font-size:clamp(36px,5vw,68px);line-height:1.05;letter-spacing:0;max-width:850px}.hero-lead{color:#405066;font-size:18px;margin:22px 0 0;max-width:720px}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 16px;border-radius:8px;border:1px solid var(--line);background:#fff;color:#233047;font-size:14px;font-weight:700;cursor:pointer}.button.primary{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 14px 30px rgba(36,107,254,.22)}
+    .hero-board{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center;height:100%;min-height:340px}.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:center}.score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:8px;padding:14px;min-height:116px;transition:transform 180ms ease,border-color 180ms ease,background 180ms ease}.score-item:hover{transform:translateY(-4px);border-color:#b7cdfa;background:#ffffff}.score-number{font-size:28px;font-weight:850;line-height:1}.score-title{margin-top:8px;font-size:15px;font-weight:800}.score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}
+    .main-layout{max-width:900px;margin:0 auto;padding:18px 24px 72px}.side-nav{position:sticky;top:78px;background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 32px rgba(39,72,114,.08);padding:12px}.side-nav a{display:block;padding:10px 11px;border-radius:7px;color:#46566f;font-size:13px;font-weight:700;transition:background 160ms ease,color 160ms ease,transform 160ms ease}.side-nav a:hover{background:#eaf2ff;color:var(--blue);transform:translateX(3px)}.content{display:grid;gap:22px}section{scroll-margin-top:96px}.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px}.section-kicker{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:0;margin-bottom:8px}h2{margin:0 0 14px;font-size:clamp(26px,3vw,38px);line-height:1.14;letter-spacing:0}h3{margin:24px 0 9px;font-size:20px;line-height:1.25;letter-spacing:0}p{margin:10px 0;color:#304059}ul,ol{margin:10px 0 0;padding-left:22px;color:#304059}li+li{margin-top:5px}.callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b}.callout.warn{border-left-color:var(--orange);background:#fff5e9;color:#6a3a08}.keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850}.keyword.green{background:#e7f7ef;color:var(--green)}.keyword.orange{background:#fff0dc;color:var(--orange)}.keyword.purple{background:#f0edff;color:var(--purple)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:8px;padding:18px}.card h4{margin:0 0 8px;font-size:16px;letter-spacing:0}.card p{margin:0;font-size:14px}.formula{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}.formula-step{min-height:104px;border:1px solid #dce8f6;background:#fff;border-radius:8px;padding:14px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:8px}.formula-step strong{font-size:16px}.formula-step span{color:var(--muted);font-size:12px;line-height:1.4}
+    .quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}.question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}.question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px}.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px}.badge-multi{background:#fff0f6;color:#d63384}.badge-single{background:#e8f5e9;color:#2e7d32}.option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px}.option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0}.submit-wrap{text-align:center;margin:20px 0}.submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}.result{display:none;margin-top:20px}.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}.result-correct{background:#e8f5e9;border:1px solid #a5d6a7}.result-wrong{background:#fce4ec;border:1px solid #ef9a9a}.result-q{font-weight:600;margin-bottom:6px}.result-your{color:#d32f2f}.result-answer{color:#2e7d32;font-weight:600}.result-explain{margin-top:6px;color:#555;font-size:13px}.score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}.footer{text-align:center;padding:16px;font-size:12px;color:#999}.footer .sign{font-size:13px;color:#666;margin-top:6px}
+    .divider{height:1px;background:#e8e8e8;margin:16px 0}.tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}.timeline{position:relative;padding-left:24px}.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#e8ecff}.timeline-item{position:relative;margin-bottom:16px}.timeline-item::before{content:'';position:absolute;left:-20px;top:4px;width:12px;height:12px;border-radius:50%;background:#2b6aff;border:2px solid #fff;box-shadow:0 0 0 2px #e8ecff}.timeline-year{font-weight:700;color:#1a52d6;font-size:14px}.timeline-text{font-size:14px;color:#555;margin-top:2px}.six-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:12px 0}.six-item{background:#f8f9fa;border-radius:8px;padding:10px;text-align:center}.six-item .en{font-size:11px;color:#999}.six-item .cn{font-size:14px;font-weight:600;color:#333}
+    @media (max-width: 980px){.hero,.main-layout{grid-template-columns:1fr}.side-nav{position:static}.hero-board{order:-1}.cards,.formula,.six-grid{grid-template-columns:1fr 1fr}}
+    @media (max-width: 640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px}.cards,.formula,.six-grid{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}
+  
+
+    /* Pagination */
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+  </style>
+</head>
+<body>
+<div class="page-shell">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top" aria-label="返回顶部">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>
+          <span class="brand-title">可靠性工程师手册</span>
+          <span class="brand-subtitle">§1-4 可靠性定义及分类</span>
+        </span>
+      </a>
+      <nav class="top-links">
+        <a href="#s1">定义与三规定</a><a href="#s2">四种分类</a><a href="#s3">能力与概率</a><a href="#quiz">练习题</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div>
+      <h1>可靠性定义及分类</h1>
+      <p class="hero-lead">可靠性是产品在规定的条件下和规定的时间内，完成规定功能的能力。可靠性的概率度量称为可靠度。</p>
+      
+    </div>
+    <div class="hero-board">
+      <div class="score-grid">
+        <div class="score-item"><div class="score-number" style="color: var(--blue);">≤0</div><div class="score-title">规定条件</div><div class="score-text">使用环境、任务剖面、寿命剖面</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--blue);">=0</div><div class="score-title">规定时间</div><div class="score-text">工作小时、年、公里、次数等寿命单位</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--blue);">>0</div><div class="score-title">规定功能</div><div class="score-text">明确故障判据，否则难以验证</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--blue);">固有</div><div class="score-title">固有可靠性</div><div class="score-text">设计制造赋予，理想条件下的可靠性</div></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-layout">
+    
+
+    <div class="content">
+<section class="panel">
+        
+      <section id="s1" class="panel">
+        <div class="section-kicker">1.4.1</div>
+        <h2>可靠性的定义与"三规定"</h2>
+        <p>可靠性的定义是<span class="keyword purple">产品在规定条件下和规定时间内，完成规定功能的能力</span>。可靠性的概率度量称为<span class="keyword">可靠度</span>。</p>
+        <h3>"三规定"缺一不可</h3>
+        <div class="cards">
+          <article class="card">
+            <h4>规定条件</h4>
+            <p>产品可靠性与其工作条件密切相关。同一个产品在不同条件下表现出的可靠性水平有很大差别。使用条件越恶劣，产品可靠性水平越低。理解规定条件时，必须了解<span class="keyword">寿命剖面</span>和<span class="keyword">任务剖面</span>。</p>
+          </article>
+          <article class="card">
+            <h4>规定时间</h4>
+            <p>可靠性定义中的时间是广义的，也称寿命单位，如工作小时、年、公里、次数等。工作时间越长，产品的可靠性越低。<span class="keyword green">产品的可靠性是随时间延长的递减函数</span>。</p>
+          </article>
+          <article class="card">
+            <h4>规定功能</h4>
+            <p>规定功能是指产品规格说明书规定的正常工作性能指标，是判断产品是否发生故障的标准。<span class="keyword orange">评价可靠性时一定要给出故障判据</span>，否则会引起争议。</p>
+          </article>
+          <article class="card">
+            <h4>规定不明确会怎样</h4>
+            <p>如果规定不明确、不具体，仅仅给出一个可靠性指标要求是难以验证的，或在验证中产品研制方和订购方会因各自利益和理解的不同而发生争议。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="s2" class="panel">
+        <div class="section-kicker">1.4.2</div>
+        <h2>可靠性的四种分类</h2>
+        <h3>固有可靠性 vs 使用可靠性</h3>
+        <div class="cards">
+          <article class="card">
+            <h4>固有可靠性</h4>
+            <p>通过设计和制造赋予产品的，在理想的使用和保障条件下所具有的可靠性。是产品的固有属性，也是<span class="keyword green">产品开发者可以控制的</span>。</p>
+          </article>
+          <article class="card">
+            <h4>使用可靠性</h4>
+            <p>产品在实际使用条件下表现出的可靠性，反映产品设计制造、使用、维修、环境等因素的<span class="keyword orange">综合影响</span>。</p>
+          </article>
+        </div>
+        <div class="callout">同一产品，固有可靠性水平肯定比使用可靠性水平要高。</div>
+        <h3>基本可靠性 vs 任务可靠性</h3>
+        <div class="cards">
+          <article class="card">
+            <h4>基本可靠性</h4>
+            <p>产品在规定条件和规定时间内无故障工作的能力。评定时应统计<span class="keyword">所有寿命单位和所有关联故障</span>，不限于任务期间或危及任务成功的故障。反映产品对维修资源的要求。</p>
+          </article>
+          <article class="card">
+            <h4>任务可靠性</h4>
+            <p>产品在规定的任务剖面内完成规定功能的能力。仅考虑<span class="keyword green">在任务期间发生的影响任务完成的故障</span>。提高任务可靠性可采用冗余或替代工作模式，但这会降低基本可靠性。</p>
+          </article>
+        </div>
+        <div class="callout warn">同一产品的基本可靠性水平肯定比任务可靠性水平要低，实际使用时要在两者之间进行权衡。</div>
+      </section>
+
+      <section id="s3" class="panel">
+        <div class="section-kicker">1.4.3</div>
+        <h2>能力与概率度量</h2>
+        <p>"能力"是产品本身的固有特性，是指产品在规定条件下和规定时间内完成规定功能的水平。</p>
+        <p>由于产品在规定条件下和规定时间内完成规定功能的能力<span class="keyword orange">不是一个确定值，而是一个随机变量</span>，所以在定量表述时，<span class="keyword green">要用概率来度量</span>。</p>
+        <h3>可修复 vs 不可修复产品</h3>
+        <div class="cards">
+          <article class="card">
+            <h4>可修复产品</h4>
+            <p>发生故障后可以通过修复性维修恢复到规定状态并值得修复的产品。如汽车、坦克、飞机等。</p>
+          </article>
+          <article class="card">
+            <h4>不可修复产品</h4>
+            <p>一次性使用产品，发生故障后无法恢复。如弹药、日光灯等。</p>
+          </article>
+        </div>
+        <h3>寿命剖面和任务剖面</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-year">寿命剖面</div>
+            <div class="timeline-text">产品从制造到寿命终结或退出使用这段时间内所经历的全部事件和环境的时序描述</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">任务剖面</div>
+            <div class="timeline-text">产品在完成规定任务这段时间内所经历的事件和环境的时序描述，包括任务完成或致命性故障的判断准则</div>
+          </div>
+        </div>
+        <div class="callout">寿命剖面包括一个或几个任务剖面。规定条件必须包含这两个剖面的完整描述。</div>
+      </section><section class="panel quiz-section">
+        <div class="section-kicker">练习题</div>
+        <h2>互动练习题(5道)</h2>
+                <div class="question" data-id="q0" data-answer="C" data-type="single">
+          <div class="question-header">第1题：可靠性的定义是什么？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q0" value="A"><span>A. 产品在规定时间内正常工作的概率</span></label>
+          <label class="option-label"><input type="radio" name="q0" value="B"><span>B. 产品在规定条件下完成规定功能的能力</span></label>
+          <label class="option-label"><input type="radio" name="q0" value="C"><span>C. 产品在规定条件下和规定时间内，完成规定功能的能力</span></label>
+          <label class="option-label"><input type="radio" name="q0" value="D"><span>D. 产品在规定条件下的使用寿命</span></label>
+        </div>
+        <div class="question" data-id="q1" data-answer="AB" data-type="multi">
+          <div class="question-header">第2题：关于"规定时间"，以下说法正确的是？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q1" value="A"><span>A. 可靠性定义中的时间是广义的，也称寿命单位</span></label>
+          <label class="option-label"><input type="checkbox" name="q1" value="B"><span>B. 产品的可靠性是随时间延长的递减函数</span></label>
+          <label class="option-label"><input type="checkbox" name="q1" value="C"><span>C. 产品的可靠性随时间延长而增加</span></label>
+          <label class="option-label"><input type="checkbox" name="q1" value="D"><span>D. 规定时间只能用小时或天作为单位</span></label>
+        </div>
+        <div class="question" data-id="q2" data-answer="A" data-type="single">
+          <div class="question-header">第3题：关于固有可靠性和使用可靠性，以下说法正确的是？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q2" value="A"><span>A. 固有可靠性水平肯定比使用可靠性水平高</span></label>
+          <label class="option-label"><input type="radio" name="q2" value="B"><span>B. 使用可靠性水平肯定比固有可靠性水平高</span></label>
+          <label class="option-label"><input type="radio" name="q2" value="C"><span>C. 两者水平相等</span></label>
+          <label class="option-label"><input type="radio" name="q2" value="D"><span>D. 使用可靠性是产品开发者可以控制的</span></label>
+        </div>
+        <div class="question" data-id="q3" data-answer="AC" data-type="multi">
+          <div class="question-header">第4题：关于基本可靠性和任务可靠性，以下说法正确的是？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q3" value="A"><span>A. 基本可靠性反映产品对维修资源的要求</span></label>
+          <label class="option-label"><input type="checkbox" name="q3" value="B"><span>B. 任务可靠性水平肯定比基本可靠性水平低</span></label>
+          <label class="option-label"><input type="checkbox" name="q3" value="C"><span>C. 提高任务可靠性可能降低基本可靠性</span></label>
+          <label class="option-label"><input type="checkbox" name="q3" value="D"><span>D. 基本可靠性仅考虑任务期间的故障</span></label>
+        </div>
+        <div class="question" data-id="q4" data-answer="B" data-type="single">
+          <div class="question-header">第5题：评价产品可靠性时，为什么必须给出故障判据？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q4" value="A"><span>A. 因为故障判据是可靠性设计的前提</span></label>
+          <label class="option-label"><input type="radio" name="q4" value="B"><span>B. 因为没有故障判据会引起争议，难以验证</span></label>
+          <label class="option-label"><input type="radio" name="q4" value="C"><span>C. 因为故障判据决定产品的可靠度</span></label>
+          <label class="option-label"><input type="radio" name="q4" value="D"><span>D. 因为故障判据是产品的固有属性</span></label>
+        </div>
+<div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
+        <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
+      </section>
+
+      
+        <section class="panel">
+        <div class="section-kicker">提交前自检</div>
+        <h2>自检提示</h2>
+        <div class="tag-list">
+          <span class="tag">三规定</span><span class="tag">固有可靠性</span><span class="tag">使用可靠性</span><span class="tag">基本可靠性</span><span class="tag">任务可靠性</span>
+        </div>
+        <div class="callout">记忆点:可靠性=规定条件+规定时间+规定功能；固有>使用可靠性，基本>任务可靠性；可靠性是随机变量，用概率度量。</div>
+      </section>
+
+
+    </div>
+  </main>
+
+  <footer class="footer"><p>© 可靠性工程师手册互动讲解页</p><div class="sign">⚡ 与你同行 AI 浪潮,打造智能工作新范式</div></footer>
+</div>
+
+
+<script>
+var explanations = {
+  q0: "教材原文：可靠性的定义是产品在规定条件下和规定时间内，完成规定功能的能力。可靠性的概率度量称为可靠度。三个"规定"缺一不可。",
+  q1: "规定时间是广义的，如工作小时、年、公里、次数等。工作时间越长，可靠性越低，是随时间延长的递减函数。",
+  q2: "固有可靠性是设计制造赋予的、理想条件下的可靠性，是开发者可以控制的；使用可靠性反映实际使用中的综合影响。固有可靠性水平肯定比使用可靠性水平高。",
+  q3: "基本可靠性统计所有关联故障，反映对维修资源的要求；任务可靠性仅考虑任务期间影响任务完成的故障。提高任务可靠性可采用冗余，但会增加复杂性、降低基本可靠性。同一产品的基本可靠性水平肯定比任务可靠性水平低。",
+  q4: "教材原文：在评价产品可靠性时一定要给出故障的判据，例如电视机图像的清晰度低于多少线就判为故障，否则会引起争议。规定不明确、不具体会导致难以验证或发生争议。"
+};
+var questions = [
+  {id: 'q0', text: '可靠性的定义是什么？'},
+  {id: 'q1', text: '关于"规定时间"，以下说法正确的是？'},
+  {id: 'q2', text: '关于固有可靠性和使用可靠性，以下说法正确的是？'},
+  {id: 'q3', text: '关于基本可靠性和任务可靠性，以下说法正确的是？'},
+  {id: 'q4', text: '评价产品可靠性时，为什么必须给出故障判据？'}
+];
+function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');const ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>';else html+='<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>';html+='<div class="result-explain">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?'  满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
+</script>
+
+</body>
+</html>
