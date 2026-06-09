@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>可靠性工程师手册|§2-2 可靠性工程中常用的概率分布</title>
+  <meta property="og:title" content="可靠性工程师手册|§2-2 可靠性工程中常用的概率分布" />
+  <meta property="og:description" content="§2-2 可靠性工程中常用的概率分布。包含完整讲解、关键术语、重点提醒与 5 道互动练习题。" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:image" content="https://dj-octavio.github.io/reliability-test/preview-1-1.png" />
+  <meta property="og:image:width" content="800" />
+  <meta property="og:image:height" content="400" />
+  <style>
+    :root {
+      --bg: #f6faff;
+      --paper: #ffffff;
+      --ink: #152033;
+      --muted: #637083;
+      --line: #dbe7f4;
+      --blue: #246bfe;
+      --cyan: #0f9fb6;
+      --green: #159a63;
+      --orange: #f08a24;
+      --red: #d94b5f;
+      --purple: #7657d8;
+      --shadow: 0 18px 45px rgba(39, 72, 114, 0.11);
+      --radius: 8px;
+      --max: 1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,rgba(36,107,254,.06),rgba(15,159,182,.03) 38%,transparent 72%),var(--bg);line-height:1.65}
+    a{color:inherit;text-decoration:none}
+    .page-shell{min-height:100vh}
+    .topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,250,255,.86);border-bottom:1px solid rgba(219,231,244,.9)}
+    .topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(36,107,254,.22);position:relative;flex:0 0 auto}.brand-mark::after{content:"";width:14px;height:14px;border:2px solid #fff;border-left:0;border-bottom:0;position:absolute;top:9px;left:8px;transform:rotate(45deg)}.brand-title{font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-subtitle{font-size:12px;color:var(--muted);margin-top:1px}.top-links{display:flex;align-items:center;gap:6px;color:#334158;font-size:13px;white-space:nowrap}.top-links a{padding:7px 9px;border-radius:7px;transition:background 160ms ease,color 160ms ease}.top-links a:hover{background:#eaf2ff;color:var(--blue)}
+    .hero{max-width:var(--max);margin:0 auto;padding:58px 24px 34px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:32px;align-items:stretch}.hero h1{margin:0;font-size:clamp(36px,5vw,68px);line-height:1.05;letter-spacing:0;max-width:850px}.hero-lead{color:#405066;font-size:18px;margin:22px 0 0;max-width:720px}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 16px;border-radius:8px;border:1px solid var(--line);background:#fff;color:#233047;font-size:14px;font-weight:700;cursor:pointer}.button.primary{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 14px 30px rgba(36,107,254,.22)}
+    .hero-board{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center;height:100%;min-height:340px}.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:center}.score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:8px;padding:14px;min-height:116px;transition:transform 180ms ease,border-color 180ms ease,background 180ms ease}.score-item:hover{transform:translateY(-4px);border-color:#b7cdfa;background:#ffffff}.score-number{font-size:28px;font-weight:850;line-height:1}.score-title{margin-top:8px;font-size:15px;font-weight:800}.score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}
+    .main-layout{max-width:900px;margin:0 auto;padding:18px 24px 72px}.side-nav{position:sticky;top:78px;background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 32px rgba(39,72,114,.08);padding:12px}.side-nav a{display:block;padding:10px 11px;border-radius:7px;color:#46566f;font-size:13px;font-weight:700;transition:background 160ms ease,color 160ms ease,transform 160ms ease}.side-nav a:hover{background:#eaf2ff;color:var(--blue);transform:translateX(3px)}.content{display:grid;gap:22px}section{scroll-margin-top:96px}.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px}.section-kicker{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:0;margin-bottom:8px}h2{margin:0 0 14px;font-size:clamp(26px,3vw,38px);line-height:1.14;letter-spacing:0}h3{margin:24px 0 9px;font-size:20px;line-height:1.25;letter-spacing:0}p{margin:10px 0;color:#304059}ul,ol{margin:10px 0 0;padding-left:22px;color:#304059}li+li{margin-top:5px}.callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b}.callout.warn{border-left-color:var(--orange);background:#fff5e9;color:#6a3a08}.keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850}.keyword.green{background:#e7f7ef;color:var(--green)}.keyword.orange{background:#fff0dc;color:var(--orange)}.keyword.purple{background:#f0edff;color:var(--purple)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:8px;padding:18px}.card h4{margin:0 0 8px;font-size:16px;letter-spacing:0}.card p{margin:0;font-size:14px}.formula{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}.formula-step{min-height:104px;border:1px solid #dce8f6;background:#fff;border-radius:8px;padding:14px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:8px}.formula-step strong{font-size:16px}.formula-step span{color:var(--muted);font-size:12px;line-height:1.4}
+    .quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}.question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}.question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px}.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px}.badge-multi{background:#fff0f6;color:#d63384}.badge-single{background:#e8f5e9;color:#2e7d32}.option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px}.option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0}.submit-wrap{text-align:center;margin:20px 0}.submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}.result{display:none;margin-top:20px}.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}.result-correct{background:#e8f5e9;border:1px solid #a5d6a7}.result-wrong{background:#fce4ec;border:1px solid #ef9a9a}.result-q{font-weight:600;margin-bottom:6px}.result-your{color:#d32f2f}.result-answer{color:#2e7d32;font-weight:600}.result-explain{margin-top:6px;color:#555;font-size:13px}.score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}.footer{text-align:center;padding:16px;font-size:12px;color:#999}.footer .sign{font-size:13px;color:#666;margin-top:6px}
+    .divider{height:1px;background:#e8e8e8;margin:16px 0}.tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}.timeline{position:relative;padding-left:24px}.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#e8ecff}.timeline-item{position:relative;margin-bottom:16px}.timeline-item::before{content:'';position:absolute;left:-20px;top:4px;width:12px;height:12px;border-radius:50%;background:#2b6aff;border:2px solid #fff;box-shadow:0 0 0 2px #e8ecff}.timeline-year{font-weight:700;color:#1a52d6;font-size:14px}.timeline-text{font-size:14px;color:#555;margin-top:2px}.six-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:12px 0}.six-item{background:#f8f9fa;border-radius:8px;padding:10px;text-align:center}.six-item .en{font-size:11px;color:#999}.six-item .cn{font-size:14px;font-weight:600;color:#333}
+    @media (max-width: 980px){.hero,.main-layout{grid-template-columns:1fr}.side-nav{position:static}.hero-board{order:-1}.cards,.formula,.six-grid{grid-template-columns:1fr 1fr}}
+    @media (max-width: 640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px}.cards,.formula,.six-grid{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}
+  
+
+    /* Pagination */
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+  </style>
+</head>
+<body>
+<div class="page-shell">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top" aria-label="返回顶部">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>
+          <span class="brand-title">可靠性工程师手册</span>
+          <span class="brand-subtitle">§2-2 可靠性工程中常用的概率分布</span>
+        </span>
+      </a>
+      <nav class="top-links">
+        <a href="#s1">随机变量</a><a href="#s2">离散型分布</a><a href="#s3">连续型分布</a><a href="#quiz">练习题</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div>
+      <h1>可靠性工程中常用的概率分布</h1>
+      <p class="hero-lead">离散型分布（二项分布、泊松分布）和连续型分布（指数分布、正态分布、对数正态分布、威布尔分布）是可靠性分析的核心工具。</p>
+      
+    </div>
+    <div class="hero-board">
+      <div class="score-grid">
+        <div class="score-item"><div class="score-number" style="color: var(--blue);">离散</div><div class="score-title">二项/泊松</div><div class="score-text">成功与失败两种结果的试验</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--blue);">指数</div><div class="score-title">无记忆</div><div class="score-text">故障率为常数，最重要的分布</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--blue);">正态</div><div class="score-title">钟形对称</div><div class="score-text">磨损故障最常见，对称分布</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--blue);">威布尔</div><div class="score-title">通用分布</div><div class="score-text">可描述各种寿命特征</div></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-layout">
+    
+
+    <div class="content">
+<section class="panel">
+        
+      <section id="s1" class="panel">
+        <div class="section-kicker">2.2-2.2.1</div>
+        <h2>随机变量与概率分布</h2>
+        <p>产品的可靠性参数都是随机变量，要运用概率论的理论和方法来研究这些随机变量的规律。</p>
+        <div class="cards">
+          <article class="card"><h4>离散型随机变量</h4><p>可能取的值为有限个，用概率分布列表示，如二项分布、泊松分布。</p></article>
+          <article class="card"><h4>连续型随机变量</h4><p>在给定区间内可取得任意数值，如电子元器件的寿命、车辆的大修里程。</p></article>
+        </div>
+        <div class="callout">常用分布函数包括：两点分布、二项分布、泊松分布、均匀分布、正态分布、对数正态分布、指数分布、威布尔分布等。</div>
+      </section>
+
+      <section id="s2" class="panel">
+        <div class="section-kicker">2.2.2</div>
+        <h2>离散型随机变量的分布</h2>
+        <div class="cards">
+          <article class="card">
+            <h4>二项分布</h4>
+            <p>如果随机试验只有两个结果：成功与失败（贝努里试验），由 n 次相同贝努里试验组成，失败次数 X 服从二项分布。<span class="keyword">均值=np，方差=npq</span>。在可靠性工程和质量管理中很有用处。</p>
+          </article>
+          <article class="card">
+            <h4>泊松分布</h4>
+            <p>当 n≥20 且 p≤0.05 时，可用泊松分布近似表示二项分布。<span class="keyword green">均值=λ，方差=λ</span>。用于计算稀有事件（如低故障率）的概率。</p>
+          </article>
+        </div>
+        <div class="callout warn">例：新产品废品率0.2，随机抽20个，废品数为4的概率最大(0.218)。</div>
+      </section>
+
+      <section id="s3" class="panel">
+        <div class="section-kicker">2.2.3</div>
+        <h2>连续型随机变量的分布</h2>
+        <div class="cards">
+          <article class="card">
+            <h4>指数分布</h4>
+            <p><span class="keyword purple">可靠性工程最重要的分布</span>。对应浴盆曲线的偶然故障期，故障率为常数。具有无记忆性，只有一个变量 λ，数学上非常容易处理。</p>
+          </article>
+          <article class="card">
+            <h4>正态分布</h4>
+            <p>钟形对称曲线，参数为均值 μ 和方差 σ²。<span class="keyword">磨损故障最常见</span>。标准正态分布 N(0,1) 用于查表计算。</p>
+          </article>
+          <article class="card">
+            <h4>对数正态分布</h4>
+            <p>正态分布随机变量的自然对数。常用于半导体器件可靠性分析和维修时间数据分析。适合跨几个数量级的数据拟合。</p>
+          </article>
+          <article class="card">
+            <h4>威布尔分布</h4>
+            <p>由最弱环节模型导出的<span class="keyword green">通用分布</span>，通过调整形状参数可描述早期故障、偶然故障、耗损故障等各种寿命特征。</p>
+          </article>
+        </div>
+      </section><section class="panel quiz-section">
+        <div class="section-kicker">练习题</div>
+        <h2>互动练习题(5道)</h2>
+                <div class="question" data-id="q0" data-answer="C" data-type="single">
+          <div class="question-header">第1题：可靠性工程中最重要的连续型分布是？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q0" value="A"><span>A. 正态分布</span></label>
+          <label class="option-label"><input type="radio" name="q0" value="B"><span>B. 对数正态分布</span></label>
+          <label class="option-label"><input type="radio" name="q0" value="C"><span>C. 指数分布</span></label>
+          <label class="option-label"><input type="radio" name="q0" value="D"><span>D. 威布尔分布</span></label>
+        </div>
+        <div class="question" data-id="q1" data-answer="AC" data-type="multi">
+          <div class="question-header">第2题：以下属于离散型随机变量分布的有？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q1" value="A"><span>A. 二项分布</span></label>
+          <label class="option-label"><input type="checkbox" name="q1" value="B"><span>B. 正态分布</span></label>
+          <label class="option-label"><input type="checkbox" name="q1" value="C"><span>C. 泊松分布</span></label>
+          <label class="option-label"><input type="checkbox" name="q1" value="D"><span>D. 指数分布</span></label>
+        </div>
+        <div class="question" data-id="q2" data-answer="B" data-type="single">
+          <div class="question-header">第3题：指数分布的"无记忆性"指的是？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q2" value="A"><span>A. 系统在任何时刻的故障率都与系统已工作时间有关</span></label>
+          <label class="option-label"><input type="radio" name="q2" value="B"><span>B. 系统在任何时刻的故障率都与系统已工作时间无关</span></label>
+          <label class="option-label"><input type="radio" name="q2" value="C"><span>C. 系统的故障率随时间逐渐增加</span></label>
+          <label class="option-label"><input type="radio" name="q2" value="D"><span>D. 系统的故障率随时间逐渐减少</span></label>
+        </div>
+        <div class="question" data-id="q3" data-answer="BC" data-type="multi">
+          <div class="question-header">第4题：关于威布尔分布的特点，以下说法正确的是？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q3" value="A"><span>A. 只能描述偶然故障期的故障分布</span></label>
+          <label class="option-label"><input type="checkbox" name="q3" value="B"><span>B. 是通用分布，可描述多种寿命特征</span></label>
+          <label class="option-label"><input type="checkbox" name="q3" value="C"><span>C. 可描述早期故障、偶然故障、耗损故障</span></label>
+          <label class="option-label"><input type="checkbox" name="q3" value="D"><span>D. 只能通过计算机拟合，不能手工计算</span></label>
+        </div>
+        <div class="question" data-id="q4" data-answer="A" data-type="single">
+          <div class="question-header">第5题：当 n≥20 且 p≤0.05 时，可以用什么分布近似表示二项分布？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q4" value="A"><span>A. 泊松分布</span></label>
+          <label class="option-label"><input type="radio" name="q4" value="B"><span>B. 正态分布</span></label>
+          <label class="option-label"><input type="radio" name="q4" value="C"><span>C. 指数分布</span></label>
+          <label class="option-label"><input type="radio" name="q4" value="D"><span>D. 威布尔分布</span></label>
+        </div>
+<div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
+        <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
+      </section>
+
+      
+        <section class="panel">
+        <div class="section-kicker">提交前自检</div>
+        <h2>自检提示</h2>
+        <div class="tag-list">
+          <span class="tag">二项分布</span><span class="tag">泊松分布</span><span class="tag">指数分布</span><span class="tag">正态分布</span><span class="tag">威布尔分布</span>
+        </div>
+        <div class="callout">记忆点:指数分布最重要（无记忆性、故障率常数）；正态分布描述磨损故障；威布尔是通用分布可描述各种寿命特征；n≥20且p≤0.05时可用泊松近似二项。</div>
+      </section>
+
+
+    </div>
+  </main>
+
+  <footer class="footer"><p>© 可靠性工程师手册互动讲解页</p><div class="sign">⚡ 与你同行 AI 浪潮,打造智能工作新范式</div></footer>
+</div>
+
+
+<script>
+var explanations = {
+  q0: "教材原文：指数分布是可靠性工程最重要的一种分布。当产品进入浴盆曲线的偶然故障期后，故障率基本为常数，对应指数分布。",
+  q1: "可靠性工程中常用的离散型统计分布类型有二项分布和泊松分布。正态分布、指数分布、对数正态分布、威布尔分布是连续型分布。",
+  q2: "教材原文：指数分布的无记忆性是指故障分布为指数分布的系统的失效率，在任何时刻都与系统已工作过的时间长短没有关系。",
+  q3: "威布尔分布是通用分布，通过调整分布参数可构成不同分布，可以为各种类型产品的寿命特性建立模型，包括故障率为常数和随时间变化的递减/递增模型。",
+  q4: "教材原文：由于二项分布在实际计算中较为烦琐，当 n≥20 且 p≤0.05 时，就可以用泊松分布近似表示二项分布。"
+};
+var questions = [
+  {id: 'q0', text: '可靠性工程中最重要的连续型分布是？'},
+  {id: 'q1', text: '以下属于离散型随机变量分布的有？'},
+  {id: 'q2', text: '指数分布的"无记忆性"指的是？'},
+  {id: 'q3', text: '关于威布尔分布的特点，以下说法正确的是？'},
+  {id: 'q4', text: '当 n≥20 且 p≤0.05 时，可以用什么分布近似表示二项分布？'}
+];
+function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');const ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>';else html+='<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>';html+='<div class="result-explain">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?'  满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
+</script>
+
+</body>
+</html>
