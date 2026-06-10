@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>可靠性工程师手册|§3-6 电子产品可靠性设计与分析</title>
+  <meta property="og:title" content="可靠性工程师手册|§3-6 电子产品可靠性设计与分析" />
+  <meta property="og:description" content="§3-6 电子产品可靠性设计与分析。包含完整讲解、关键术语、重点提醒与 5 道互动练习题。" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:image" content="https://dj-octavio.github.io/reliability-test/preview-3-6.png" />
+  <meta property="og:image:width" content="800" />
+  <meta property="og:image:height" content="400" />
+  <style>
+    :root {
+      --bg: #f6faff;
+      --paper: #ffffff;
+      --ink: #152033;
+      --muted: #637083;
+      --line: #dbe7f4;
+      --blue: #246bfe;
+      --cyan: #0f9fb6;
+      --green: #159a63;
+      --orange: #f08a24;
+      --red: #d94b5f;
+      --purple: #7657d8;
+      --shadow: 0 18px 45px rgba(39, 72, 114, 0.11);
+      --radius: 8px;
+      --max: 1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,rgba(36,107,254,.06),rgba(15,159,182,.03) 38%,transparent 72%),var(--bg);line-height:1.65}
+    a{color:inherit;text-decoration:none}
+    .page-shell{min-height:100vh}
+    .topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,250,255,.86);border-bottom:1px solid rgba(219,231,244,.9)}
+    .topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(36,107,254,.22);position:relative;flex:0 0 auto}.brand-mark::after{content:"";width:14px;height:14px;border:2px solid #fff;border-left:0;border-bottom:0;position:absolute;top:9px;left:8px;transform:rotate(45deg)}.brand-title{font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-subtitle{font-size:12px;color:var(--muted);margin-top:1px}.top-links{display:flex;align-items:center;gap:6px;color:#334158;font-size:13px;white-space:nowrap}.top-links a{padding:7px 9px;border-radius:7px;transition:background 160ms ease,color 160ms ease}.top-links a:hover{background:#eaf2ff;color:var(--blue)}
+    .hero{max-width:var(--max);margin:0 auto;padding:58px 24px 34px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:32px;align-items:stretch}.hero h1{margin:0;font-size:clamp(36px,5vw,68px);line-height:1.05;letter-spacing:0;max-width:850px}.hero-lead{color:#405066;font-size:18px;margin:22px 0 0;max-width:720px}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 16px;border-radius:8px;border:1px solid var(--line);background:#fff;color:#233047;font-size:14px;font-weight:700;cursor:pointer}.button.primary{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 14px 30px rgba(36,107,254,.22)}
+    .hero-board{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center;height:100%;min-height:340px}.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:center}.score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:8px;padding:14px;min-height:116px;transition:transform 180ms ease,border-color 180ms ease,background 180ms ease}.score-item:hover{transform:translateY(-4px);border-color:#b7cdfa;background:#ffffff}.score-number{font-size:28px;font-weight:850;line-height:1}.score-title{margin-top:8px;font-size:15px;font-weight:800}.score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}
+    .main-layout{max-width:900px;margin:0 auto;padding:18px 24px 72px}.side-nav{position:sticky;top:78px;background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 32px rgba(39,72,114,.08);padding:12px}.side-nav a{display:block;padding:10px 11px;border-radius:7px;color:#46566f;font-size:13px;font-weight:700;transition:background 160ms ease,color 160ms ease,transform 160ms ease}.side-nav a:hover{background:#eaf2ff;color:var(--blue);transform:translateX(3px)}.content{display:grid;gap:22px}section{scroll-margin-top:96px}.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px}.section-kicker{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:0;margin-bottom:8px}h2{margin:0 0 14px;font-size:clamp(26px,3vw,38px);line-height:1.14;letter-spacing:0}h3{margin:24px 0 9px;font-size:20px;line-height:1.25;letter-spacing:0}p{margin:10px 0;color:#304059}ul,ol{margin:10px 0 0;padding-left:22px;color:#304059}li+li{margin-top:5px}.callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b}.callout.warn{border-left-color:var(--orange);background:#fff5e9;color:#6a3a08}.keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850}.keyword.green{background:#e7f7ef;color:var(--green)}.keyword.orange{background:#fff0dc;color:var(--orange)}.keyword.purple{background:#f0edff;color:var(--purple)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:8px;padding:18px}.card h4{margin:0 0 8px;font-size:16px;letter-spacing:0}.card p{margin:0;font-size:14px}.formula{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}.formula-step{min-height:104px;border:1px solid #dce8f6;background:#fff;border-radius:8px;padding:14px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:8px}.formula-step strong{font-size:16px}.formula-step span{color:var(--muted);font-size:12px;line-height:1.4}
+    .quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}.question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}.question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px}.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px}.badge-multi{background:#fff0f6;color:#d63384}.badge-single{background:#e8f5e9;color:#2e7d32}.option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px}.option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0}.submit-wrap{text-align:center;margin:20px 0}.submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}.result{display:none;margin-top:20px}.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}.result-correct{background:#e8f5e9;border:1px solid #a5d6a7}.result-wrong{background:#fce4ec;border:1px solid #ef9a9a}.result-q{font-weight:600;margin-bottom:6px}.result-your{color:#d32f2f}.result-answer{color:#2e7d32;font-weight:600}.result-explain{margin-top:6px;color:#555;font-size:13px}.score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}.footer{text-align:center;padding:16px;font-size:12px;color:#999}.footer .sign{font-size:13px;color:#666;margin-top:6px}
+    .divider{height:1px;background:#e8e8e8;margin:16px 0}.tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}.timeline{position:relative;padding-left:24px}.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#e8ecff}.timeline-item{position:relative;margin-bottom:16px}.timeline-item::before{content:'';position:absolute;left:-20px;top:4px;width:12px;height:12px;border-radius:50%;background:#2b6aff;border:2px solid #fff;box-shadow:0 0 0 2px #e8ecff}.timeline-year{font-weight:700;color:#1a52d6;font-size:14px}.timeline-text{font-size:14px;color:#555;margin-top:2px}.six-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:12px 0}.six-item{background:#f8f9fa;border-radius:8px;padding:10px;text-align:center}.six-item .en{font-size:11px;color:#999}.six-item .cn{font-size:14px;font-weight:600;color:#333}
+    @media (max-width: 980px){.hero,.main-layout{grid-template-columns:1fr}.side-nav{position:static}.hero-board{order:-1}.cards,.formula,.six-grid{grid-template-columns:1fr 1fr}}
+    @media (max-width: 640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px}.cards,.formula,.six-grid{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}
+  </style>
+</head>
+<body>
+<div class="page-shell">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top" aria-label="返回顶部">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>
+          <span class="brand-title">可靠性工程师手册</span>
+          <span class="brand-subtitle">§3-6 电子产品可靠性设计与分析</span>
+        </span>
+      </a>
+      <nav class="top-links">
+        <a href="#s1">选用控制</a><a href="#s2">降额设计</a><a href="#s3">热设计</a><a href="#s4">容差分析</a><a href="#quiz">练习题</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div>
+      <h1>电子产品可靠性设计与分析</h1>
+      <p class="hero-lead">围绕元器件选用与控制、降额设计、热设计和电路容差分析四条主线，把“选得对、用得稳、温度控得住、参数偏差算得清”落到可执行的工程方法上。</p>
+      <div class="hero-actions">
+        <a class="button primary" href="#quiz">开始练习</a>
+        <a class="button" href="#s1">先看内容</a>
+      </div>
+    </div>
+    <div class="hero-board">
+      <div class="score-grid">
+        <div class="score-item"><div class="score-number" style="color: var(--blue);">4</div><div class="score-title">设计主线</div><div class="score-text">选用控制、降额、热设计、容差分析</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--green);">100%</div><div class="score-title">筛选原则</div><div class="score-text">关键器件二次筛选与过程控制要到位</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--orange);">≤30%</div><div class="score-title">目录外器件</div><div class="score-text">型号总数一般不宜超出控制线</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--purple);">±200kHz</div><div class="score-title">容差边界</div><div class="score-text">最坏情况法要与允许频移直接比对</div></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-layout">
+    <div class="content">
+      <section class="panel">
+        <div class="section-kicker">3.6.1</div><div id="s1"></div>
+        <h2>元器件选用与控制</h2>
+        <p>本节的起点不是“选个能用的器件”，而是按照《开发产品元器件优选目录》（PPL）和控制流程，把器件选型、采购、监制、验收、筛选、DPA、保管、使用、防静电、失效分析、评审和信息管理串成闭环。</p>
+        <div class="cards">
+          <article class="card"><h4>选用原则</h4><p>优先选目录内器件；目录外器件必须满足技术性能和质量等级要求，且应选成熟、稳定、标准化、可持续供货的器件，不选淘汰、停产或即将停产器件。</p></article>
+          <article class="card"><h4>选用顺序</h4><p>国产器件按PPL、QPL/QML、成功应用经验、体系认证供应商的顺序选；进口器件按PPL、国外权威QPL/PPL、严格老炼且有可靠性指标的器件顺序选。</p></article>
+          <article class="card"><h4>过程控制</h4><p>关键、重要或“七专”及以上半导体器件要下厂监制和验收；原则上器件应100%二次筛选；关键器件按产品类型要求实施DPA，并关注失效分析和信息反馈。</p></article>
+          <article class="card"><h4>数量控制</h4><p>目录外器件型号一般不应超出总数30%；新研制器件一般不应超过20%；关键件、重要件不应选工业品级器件，国外无法复测筛选的器件要严格控制。</p></article>
+        </div>
+        <div class="callout">这部分的关键词是<span class="keyword">目录</span>、<span class="keyword">审批</span>、<span class="keyword">监制</span>、<span class="keyword">二次筛选</span>、<span class="keyword">防静电</span>和<span class="keyword">信息闭环</span>。</div>
+      </section>
+
+      <section class="panel">
+        <div class="section-kicker">3.6.2</div><div id="s2"></div>
+        <h2>电子产品的降额设计</h2>
+        <p>降额设计就是让器件或设备实际工作应力低于额定值，以降低故障率、提升可靠性。教材强调：关键器件一定要满足标准规定的降额因子，且不能用“过度降额”去掩盖器件选型或质量等级不足的问题。</p>
+        <div class="formula">
+          <div class="formula-step"><strong>降额因子</strong><span>实际工作应力 / 额定应力</span></div>
+          <div class="formula-step"><strong>关键参数</strong><span>电压、电流、频率、功耗、最高结温等</span></div>
+          <div class="formula-step"><strong>设计边界</strong><span>保证可靠性，同时避免体积、重量、成本无谓上升</span></div>
+          <div class="formula-step"><strong>常用依据</strong><span>GJB/Z 35-1993；国外可参考RAC要求</span></div>
+        </div>
+        <p>工程上要重点看器件类别对应的敏感参数，例如稳压器关注输入/输出电压差、输出电流和结温，MOS器件关注电源电压、输出电流、频率和结温，微波管关注温度、输出功率、反射功率和占空比。</p>
+        <div class="callout warn">注意：<span class="keyword orange">不能靠过度降额弥补低质量等级选型</span>；也不能因为器件质量等级高，就完全不做降额设计。</div>
+      </section>
+
+      <section class="panel">
+        <div class="section-kicker">3.6.3</div><div id="s3"></div>
+        <h2>电子产品的热设计</h2>
+        <p>温度对可靠性影响非常显著。教材给出的核心观点很直接：温度升高，元器件失效率上升，工作寿命下降，所以必须通过降额和热设计两条路径把温度压下来。</p>
+        <div class="cards">
+          <article class="card"><h4>基本原则</h4><p>控制散热量、选对传热方式、尽量减小内热阻/外热阻/系统热阻、冷却系统要简单经济并适应环境，同时热设计要和电气、机械设计同步进行。</p></article>
+          <article class="card"><h4>冷却选择</h4><p>常用优选顺序是自然冷却、强迫风冷、液体冷却、蒸发冷却。能自然冷却就先不要加复杂系统，除非散热能力已经不够。</p></article>
+          <article class="card"><h4>功率器件</h4><p>功率器件常需加散热器；接触面要平直光洁，接触处应涂导热膏或加导热绝缘片，型材散热器肋片宜沿长度方向垂直安装以利自然对流。</p></article>
+          <article class="card"><h4>结构层面</h4><p>器件布局要利于自然对流和传导散热；印制板可做散热加强；导轨要低热阻并与机箱壁形成良好热接触；机箱形式按散热需求选择密封、通风或强迫风冷。</p></article>
+        </div>
+        <div class="callout">热设计不是单纯“加风扇”，而是<span class="keyword green">冷却方式 + 布局 + 结构 + 机箱</span>的系统设计。</div>
+      </section>
+
+      <section class="panel">
+        <div class="section-kicker">3.6.4</div><div id="s4"></div>
+        <h2>电路容差分析</h2>
+        <p>容差分析用于预测电路性能参数稳定性，研究制造公差、环境温度变化和退化效应对电路性能的影响。简单说，就是提前判断“参数漂一点，功能会不会跑偏”。</p>
+        <div class="cards">
+          <article class="card"><h4>三类来源</h4><p>制造公差是固定偏差；环境条件引起的漂移通常可逆；退化效应随时间累积且不可逆。三者叠加后，电路参数可能越界。</p></article>
+          <article class="card"><h4>分析方法</h4><p>常用最坏情况分析法、仿真、阶矩法。复杂电路建议用EDA/CAD工具辅助，既提高精度，也减少手工计算负担。</p></article>
+          <article class="card"><h4>工程动作</h4><p>研制中后期开展；以设计人员为主、可靠性工程师配合；设计改动后要重做分析；不合格时先缩小灵敏度最大的参数偏差，再考虑重选标称值或改结构。</p></article>
+          <article class="card"><h4>最坏情况法</h4><p>最保守，适合高可靠要求场景；但如果参数变化范围内性能变化不单调，就可能得到错误结果，必须谨慎使用。</p></article>
+        </div>
+        <div class="callout warn">例子里的调谐电路用最坏情况法判定后不能满足±200kHz要求，说明该方法很适合发现“漂移故障”。</div>
+      </section>
+
+      <section class="panel quiz-section" id="quiz">
+        <div class="section-kicker">练习题</div>
+        <h2>互动练习题（5道）</h2>
+        <div class="question" data-id="q0" data-answer="ABCD" data-type="multi">
+          <div class="question-header">第1题：元器件使用全过程控制包括哪些方面？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q0" value="A"><span>A. 选择、采购、监制、验收</span></label>
+          <label class="option-label"><input type="checkbox" name="q0" value="B"><span>B. 筛选、DPA、保管、使用</span></label>
+          <label class="option-label"><input type="checkbox" name="q0" value="C"><span>C. 静电防护、失效分析、评审</span></label>
+          <label class="option-label"><input type="checkbox" name="q0" value="D"><span>D. 信息管理、反馈、统计与处理</span></label>
+        </div>
+        <div class="question" data-id="q1" data-answer="B" data-type="single">
+          <div class="question-header">第2题：元器件降额因子是指什么？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q1" value="A"><span>A. 额定应力与实际工作应力之比</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="B"><span>B. 实际工作应力与额定应力之比</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="C"><span>C. 失效率与温度的比值</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="D"><span>D. 环境应力与功率损耗之比</span></label>
+        </div>
+        <div class="question" data-id="q2" data-answer="ABCD" data-type="multi">
+          <div class="question-header">第3题：热设计的基本原则包括哪些？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q2" value="A"><span>A. 控制散热量的大小来控制温升</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="B"><span>B. 选择合理的热传递方式</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="C"><span>C. 尽量减小各种热阻</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="D"><span>D. 热设计应与电气及机械设计同时进行</span></label>
+        </div>
+        <div class="question" data-id="q3" data-answer="A" data-type="single">
+          <div class="question-header">第4题：常用冷却方法的优选顺序是什么？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q3" value="A"><span>A. 自然冷却 → 强迫风冷 → 液体冷却 → 蒸发冷却</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="B"><span>B. 强迫风冷 → 自然冷却 → 液体冷却 → 蒸发冷却</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="C"><span>C. 液体冷却 → 蒸发冷却 → 强迫风冷 → 自然冷却</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="D"><span>D. 蒸发冷却 → 液体冷却 → 强迫风冷 → 自然冷却</span></label>
+        </div>
+        <div class="question" data-id="q4" data-answer="ABCD" data-type="multi">
+          <div class="question-header">第5题：电路容差分析的工程应用要点包括哪些？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. 研制阶段中后期开展</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. 设计改动后重新分析</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. 不合格时先缩小灵敏度最大的参数偏差</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. 最坏情况法要注意参数变化是否单调</span></label>
+        </div>
+        <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
+        <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
+      </section>
+
+      <section class="panel">
+        <div class="section-kicker">提交前自检</div>
+        <h2>自检提示</h2>
+        <div class="tag-list">
+          <span class="tag">PPL</span><span class="tag">QPL/QML</span><span class="tag">降额因子</span><span class="tag">热阻</span><span class="tag">最坏情况法</span>
+        </div>
+        <div class="callout">记忆点：先管好器件来源，再做好降额和热设计，最后用容差分析确认电路边界。四步连起来，才算完整的电子产品可靠性设计。</div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer"><p>© 可靠性工程师手册互动讲解页</p><div class="sign">⚡ 与你同行 AI 浪潮,打造智能工作新范式</div></footer>
+</div>
+
+<script>
+var explanations = {
+  q0: "教材明确指出：元器件使用全过程控制包括选择、采购、监制、验收、筛选、破坏性物理分析（DPA）、保管、使用、静电防护、失效分析、评审、信息管理等全流程。四个选项合起来才完整。",
+  q1: "降额因子是元器件实际工作应力与额定应力之比，而不是反过来。这个定义直接对应教材原文。",
+  q2: "教材要求热设计通过控制散热量、选择合理热传递方式、尽量减小热阻、冷却系统简单经济，并与电气及机械设计同时进行。四项都属于基本原则。",
+  q3: "教材给出的优选顺序就是：自然冷却、强迫风冷、液体冷却、蒸发冷却。先自然冷却，能省就省，满足不了再升级。",
+  q4: "工程应用要点包括：研制中后期开展、设计改动后重做、不合格先缩小灵敏度最大的参数偏差、最坏情况法要注意参数变化趋势是否单调。"
+};
+var questions = [
+  {id: "q0", text: "元器件使用全过程控制包括哪些方面？"},
+  {id: "q1", text: "元器件降额因子是指什么？"},
+  {id: "q2", text: "热设计的基本原则包括哪些？"},
+  {id: "q3", text: "常用冷却方法的优选顺序是什么？"},
+  {id: "q4", text: "电路容差分析的工程应用要点包括哪些？"}
+];
+function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');const ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>';else html+='<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>';html+='<div class="result-explain">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?'  满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
+</script>
+</body>
+</html>

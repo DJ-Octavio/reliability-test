@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>可靠性工程师手册|§3-7 机械产品可靠性设计与分析</title>
+  <meta property="og:title" content="可靠性工程师手册|§3-7 机械产品可靠性设计与分析" />
+  <meta property="og:description" content="§3-7 机械产品可靠性设计与分析。包含可靠性度量参数、概率设计法、工程实践与 5 道互动练习题。" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="zh_CN" />
+  <style>
+    :root {--bg:#f6faff;--paper:#ffffff;--ink:#152033;--muted:#637083;--line:#dbe7f4;--blue:#246bfe;--cyan:#0f9fb6;--green:#159a63;--orange:#f08a24;--red:#d94b5f;--purple:#7657d8;--shadow:0 18px 45px rgba(39,72,114,.11);--radius:8px;--max:1180px;}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,rgba(36,107,254,.06),rgba(15,159,182,.03) 38%,transparent 72%),var(--bg);line-height:1.65}
+    a{color:inherit;text-decoration:none}.page-shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,250,255,.86);border-bottom:1px solid rgba(219,231,244,.9)}
+    .topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(36,107,254,.22);position:relative;flex:0 0 auto}.brand-mark::after{content:"";width:14px;height:14px;border:2px solid #fff;border-left:0;border-bottom:0;position:absolute;top:9px;left:8px;transform:rotate(45deg)}.brand-title{font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-subtitle{font-size:12px;color:var(--muted);margin-top:1px}.top-links{display:flex;align-items:center;gap:6px;color:#334158;font-size:13px;white-space:nowrap}.top-links a{padding:7px 9px;border-radius:7px;transition:background 160ms ease,color 160ms ease}.top-links a:hover{background:#eaf2ff;color:var(--blue)}
+    .hero{max-width:var(--max);margin:0 auto;padding:58px 24px 34px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:32px;align-items:stretch}.hero h1{margin:0;font-size:clamp(36px,5vw,68px);line-height:1.05;letter-spacing:0;max-width:850px}.hero-lead{color:#405066;font-size:18px;margin:22px 0 0;max-width:720px}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 16px;border-radius:8px;border:1px solid var(--line);background:#fff;color:#233047;font-size:14px;font-weight:700;cursor:pointer}.button.primary{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 14px 30px rgba(36,107,254,.22)}
+    .hero-board{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center;height:100%;min-height:340px}.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:center}.score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:8px;padding:14px;min-height:116px;transition:transform 180ms ease,border-color 180ms ease,background 180ms ease}.score-item:hover{transform:translateY(-4px);border-color:#b7cdfa;background:#ffffff}.score-number{font-size:28px;font-weight:850;line-height:1}.score-title{margin-top:8px;font-size:15px;font-weight:800}.score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}
+    .main-layout{max-width:900px;margin:0 auto;padding:18px 24px 72px}.content{display:grid;gap:22px}section{scroll-margin-top:96px}.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px}.section-kicker{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:0;margin-bottom:8px}h2{margin:0 0 14px;font-size:clamp(26px,3vw,38px);line-height:1.14;letter-spacing:0}h3{margin:24px 0 9px;font-size:20px;line-height:1.25;letter-spacing:0}p{margin:10px 0;color:#304059}ul,ol{margin:10px 0 0;padding-left:22px;color:#304059}li+li{margin-top:5px}.callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b}.callout.warn{border-left-color:var(--orange);background:#fff5e9;color:#6a3a08}.keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850}.keyword.green{background:#e7f7ef;color:var(--green)}.keyword.orange{background:#fff0dc;color:var(--orange)}.keyword.purple{background:#f0edff;color:var(--purple)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:8px;padding:18px}.card h4{margin:0 0 8px;font-size:16px;letter-spacing:0}.card p{margin:0;font-size:14px}.formula{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}.formula-step{min-height:104px;border:1px solid #dce8f6;background:#fff;border-radius:8px;padding:14px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:8px}.formula-step strong{font-size:16px}.formula-step span{color:var(--muted);font-size:12px;line-height:1.4}
+    .quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}.question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}.question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px}.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px}.badge-multi{background:#fff0f6;color:#d63384}.badge-single{background:#e8f5e9;color:#2e7d32}.option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px}.option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0}.submit-wrap{text-align:center;margin:20px 0}.submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}.result{display:none;margin-top:20px}.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}.result-correct{background:#e8f5e9;border:1px solid #a5d6a7}.result-wrong{background:#fce4ec;border:1px solid #ef9a9a}.result-q{font-weight:600;margin-bottom:6px}.result-your{color:#d32f2f}.result-answer{color:#2e7d32;font-weight:600}.result-explain{margin-top:6px;color:#555;font-size:13px}.score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}.footer{text-align:center;padding:16px;font-size:12px;color:#999}.footer .sign{font-size:13px;color:#666;margin-top:6px}
+    .divider{height:1px;background:#e8e8e8;margin:16px 0}.tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}.timeline{position:relative;padding-left:24px}.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#e8ecff}.timeline-item{position:relative;margin-bottom:16px}.timeline-item::before{content:'';position:absolute;left:-20px;top:4px;width:12px;height:12px;border-radius:50%;background:#2b6aff;border:2px solid #fff;box-shadow:0 0 0 2px #e8ecff}.timeline-year{font-weight:700;color:#1a52d6;font-size:14px}.timeline-text{font-size:14px;color:#555;margin-top:2px}.six-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:12px 0}.six-item{background:#f8f9fa;border-radius:8px;padding:10px;text-align:center}.six-item .en{font-size:11px;color:#999}.six-item .cn{font-size:14px;font-weight:600;color:#333}
+    @media (max-width: 980px){.hero,.main-layout{grid-template-columns:1fr}.hero-board{order:-1}.cards,.formula,.six-grid{grid-template-columns:1fr 1fr}}
+    @media (max-width: 640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px}.cards,.formula,.six-grid{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}
+  </style>
+</head>
+<body>
+<div class="page-shell">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top" aria-label="返回顶部"><span class="brand-mark" aria-hidden="true"></span><span><span class="brand-title">可靠性工程师手册</span><span class="brand-subtitle">§3-7 机械产品可靠性设计与分析</span></span></a>
+      <nav class="top-links"><a href="#s1">度量参数</a><a href="#s2">概率设计</a><a href="#s3">工程实践</a><a href="#quiz">练习题</a></nav>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div>
+      <h1>机械产品可靠性设计与分析</h1>
+      <p class="hero-lead">本节聚焦机械产品的可靠性度量参数、概率设计法以及工程设计实践。核心思路是：先明确可靠性要求，再用失效机理和概率方法把“应力—强度”关系落实到设计中，最后通过评审、分析与增长验证形成闭环。</p>
+    </div>
+    <div class="hero-board">
+      <div class="score-grid">
+        <div class="score-item"><div class="score-number" style="color: var(--blue);">R / MTBF</div><div class="score-title">常用度量</div><div class="score-text">机械系统最常用可靠度、寿命、平均故障间隔时间/里程</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--green);">应力-强度</div><div class="score-title">设计主线</div><div class="score-text">强度大于应力时可靠，等于时临界，小于时失效</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--orange);">5级</div><div class="score-title">可靠度分级</div><div class="score-text">按失效影响重要性建议分级使用</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--purple);">9步</div><div class="score-title">设计流程</div><div class="score-text">从明确要求到可靠性增长，形成闭环</div></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-layout"><div class="content">
+
+    <section class="panel" id="s1">
+      <div class="section-kicker">3.7.4</div>
+      <h2>机械产品的可靠性度量参数</h2>
+      <p>教材指出，机械产品一般可分为<span class="keyword">整机（系统）</span>和<span class="keyword">零部件</span>。适合机械产品可靠性的常用度量参数，无论是机械系统还是零部件，最常用的是：<span class="keyword green">可靠度</span>、<span class="keyword green">寿命或可靠寿命</span>、<span class="keyword green">平均故障间隔时间/里程（MTBF）</span>。</p>
+      <div class="cards">
+        <div class="card"><h4>可靠度</h4><p>指产品在规定条件下、在规定时间内不发生故障的概率。教材建议按照失效影响的重要性将可靠度分成 5 级，关键零件的可靠度许用值应取高值。</p></div>
+        <div class="card"><h4>寿命 / 可靠寿命</h4><p>机械产品都存在使用寿命问题。对设计寿命期内并非所有产品都能可靠工作的情形，可用“可靠度为给定值 R 时的工作寿命”来表征，轴承常以 R=0.9 的寿命作为参数。</p></div>
+        <div class="card"><h4>MTBF / 里程</h4><p>平均故障间隔时间/里程常用于机械整机或系统可靠性度量，其定义是工作总时间/里程与故障总次数之比。它能反映统计意义上的可靠性水平。</p></div>
+        <div class="card"><h4>设计提示</h4><p>机械系统的失效率通常非恒定，零部件寿命数据又较缺乏，因此 MTBF 往往需要结合大量统计或试验数据才能确定。</p></div>
+      </div>
+      <div class="callout">重点：机械零部件的可靠性度量不是“越多越好”，而是要根据故障后果、设计寿命和关键程度来选参数，尤其关键件要选更高的可靠度许用值。</div>
+    </section>
+
+    <section class="panel" id="s2">
+      <div class="section-kicker">3.7.5</div>
+      <h2>概率设计法：机械可靠性定量设计的主方法</h2>
+      <p>教材明确写到：<span class="keyword orange">概率设计法是机械产品可靠性定量设计的主要方法</span>。它以<span class="keyword">应力—强度干涉模型</span>和<span class="keyword">功能失效极限状态函数理论</span>为基础，把载荷、强度、尺寸、寿命等看作服从一定分布的随机变量，再用概率方法计算失效概率和可靠度。</p>
+      <div class="formula">
+        <div class="formula-step"><strong>应力</strong><span>可能引起失效的一切因素组合，如载荷、温度、振动等</span></div>
+        <div class="formula-step"><strong>强度</strong><span>抵抗破坏或失效的一切因素组合，如材料、尺寸、结构等</span></div>
+        <div class="formula-step"><strong>可靠状态</strong><span>强度 &gt; 应力</span></div>
+        <div class="formula-step"><strong>失效状态</strong><span>强度 &lt; 应力</span></div>
+      </div>
+      <h3>设计逻辑</h3>
+      <ol>
+        <li>先确定设计工况和可靠性要求。</li>
+        <li>再识别与设计相关的随机变量及其分布。</li>
+        <li>计算失效概率与可靠度，评估是否满足要求。</li>
+        <li>若不满足，则回到结构、尺寸、材料、工艺等环节调整设计。</li>
+      </ol>
+      <div class="callout warn">工程含义：机械设计不能只做“名义值设计”，还要把随机波动纳入分析，否则很容易在实际使用中因应力超出强度而失效。</div>
+    </section>
+
+    <section class="panel" id="s3">
+      <div class="section-kicker">3.7.6</div>
+      <h2>工程设计实践：把可靠性落到图纸与试验</h2>
+      <p>机械产品可靠性设计分析的流程是教材强调的闭环：<span class="keyword purple">明确要求 → 调查相似产品 → 可靠性分配 → FMEA/FTA → 关键件定性/定量设计 → 计算分析 → 设计评审 → 可靠性增长</span>。</p>
+      <div class="cards">
+        <div class="card"><h4>1. 明确可靠性要求</h4><p>要先明确定性和定量要求，如可靠度、寿命、平均故障间隔里程等，并结合寿命剖面、任务剖面和故障判别准则。</p></div>
+        <div class="card"><h4>2. 分析相似产品</h4><p>收集常见故障模式、故障频率、故障原因、成功经验和失败教训，提炼出可靠性设计准则。</p></div>
+        <div class="card"><h4>3. 关键件定量设计</h4><p>关键件、重要件除了借鉴成功经验，还应创造条件进行概率设计；先给定工况，再计算可靠度并迭代优化。</p></div>
+        <div class="card"><h4>4. 可靠性增长</h4><p>图纸转化为样机后，要通过试验暴露缺陷，再改进、验证，持续提升可靠性。</p></div>
+      </div>
+      <h3>工程应用要点</h3>
+      <ul>
+        <li>机械结构应尽可能简单，减少不必要环节与传力路线。</li>
+        <li>关键设计变量要做灵敏度分析，关注外部条件变化。</li>
+        <li>应进行应力—强度优化设计，找出最佳匹配。</li>
+        <li>需考虑公差配合、表面粗糙度、环境防护、刚度与疲劳等因素。</li>
+        <li>防止某个构件失效引起连锁失效，可采用止裂、多路传力、多重元件设计等。</li>
+      </ul>
+      <div class="callout">记住一句话：机械产品可靠性不是“检验出来”的，而是从设计开始，通过分析、评审和增长试验“做出来”的。</div>
+    </section>
+
+    <section class="panel" id="quiz">
+      <div class="section-kicker">互动练习</div>
+      <h2>5 道练习题</h2>
+      <div class="quiz-section">
+        <div class="question" data-id="q1" data-answer="B" data-type="single">
+          <div class="question-header">第1题：机械产品最常用的可靠性度量参数组合是？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q1" value="A"><span>A. 可靠度、失效率、失效密度</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="B"><span>B. 可靠度、寿命/可靠寿命、MTBF/里程</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="C"><span>C. 仅平均修复时间 MTTR</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="D"><span>D. 仅故障模式数量</span></label>
+        </div>
+        <div class="question" data-id="q2" data-answer="A" data-type="single">
+          <div class="question-header">第2题：关于可靠度的描述，哪一项正确？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q2" value="A"><span>A. 产品在规定条件下、规定时间内不发生故障的概率</span></label>
+          <label class="option-label"><input type="radio" name="q2" value="B"><span>B. 产品出厂时的合格率</span></label>
+          <label class="option-label"><input type="radio" name="q2" value="C"><span>C. 维修人员的修复速度</span></label>
+          <label class="option-label"><input type="radio" name="q2" value="D"><span>D. 产品的平均修复时间</span></label>
+        </div>
+        <div class="question" data-id="q3" data-answer="BC" data-type="multi">
+          <div class="question-header">第3题：关于机械产品可靠性的特点，哪些说法正确？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q3" value="A"><span>A. 机械产品失效模式通常比电子产品更简单</span></label>
+          <label class="option-label"><input type="checkbox" name="q3" value="B"><span>B. 机械产品故障常与疲劳、磨损、腐蚀等耗损型机理相关</span></label>
+          <label class="option-label"><input type="checkbox" name="q3" value="C"><span>C. 机械产品寿命和可靠性试验通常小子样、耗时较长</span></label>
+          <label class="option-label"><input type="checkbox" name="q3" value="D"><span>D. 机械产品可靠性数据已经非常充分且标准化</span></label>
+        </div>
+        <div class="question" data-id="q4" data-answer="ACD" data-type="multi">
+          <div class="question-header">第4题：机械产品概率设计法的基础包含哪些内容？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. 应力—强度干涉模型</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. 只看名义值，不考虑随机变量</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. 功能失效极限状态函数理论</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. 将载荷、强度、尺寸、寿命视为随机变量</span></label>
+        </div>
+        <div class="question" data-id="q5" data-answer="ABD" data-type="multi">
+          <div class="question-header">第5题：下列哪些属于教材给出的工程实践要点？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q5" value="A"><span>A. 结构尽可能简单，减少不必要环节</span></label>
+          <label class="option-label"><input type="checkbox" name="q5" value="B"><span>B. 关键设计变量应进行灵敏度分析</span></label>
+          <label class="option-label"><input type="checkbox" name="q5" value="C"><span>C. 对所有机械产品都优先采用最复杂结构</span></label>
+          <label class="option-label"><input type="checkbox" name="q5" value="D"><span>D. 设计更改后应再次进行可靠性分析</span></label>
+        </div>
+        <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
+        <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-kicker">补充记忆</div>
+      <h2>本节抓手</h2>
+      <div class="tag-list"><span class="tag">可靠度</span><span class="tag">可靠寿命</span><span class="tag">MTBF/里程</span><span class="tag">应力-强度</span><span class="tag">概率设计法</span><span class="tag">可靠性增长</span></div>
+      <div class="callout">一句话总结：机械产品可靠性设计的核心，是把随机载荷、材料波动、结构尺寸和使用寿命都纳入概率分析，并通过工程闭环持续验证。</div>
+    </section>
+
+  </div></main>
+
+  <footer class="footer"><p>© 可靠性工程师手册互动讲解页</p><div class="sign">机械产品可靠性设计与分析 · §3-7</div></footer>
+</div>
+<script>
+const explanations = {
+  q1: '教材指出，机械产品最常用的可靠性度量参数是可靠度、寿命或可靠寿命以及平均故障间隔时间/里程。',
+  q2: '可靠度的定义就是产品在规定条件下、规定时间内不发生故障的概率。',
+  q3: '教材明确说明：机械产品失效模式复杂，常见故障机理包括疲劳、磨损、腐蚀；寿命和可靠性试验多为小子样且时间长，机械数据也较缺乏。',
+  q4: '概率设计法以应力—强度干涉模型和功能失效极限状态函数理论为基础，把载荷、强度、尺寸、寿命等看成随机变量。',
+  q5: '教材工程应用要点包括：结构简单化、关键变量灵敏度分析、设计更改后重新做可靠性分析等。'
+};
+const questions = [
+  {id:'q1', text:'机械产品最常用的可靠性度量参数组合是？'},
+  {id:'q2', text:'关于可靠度的描述，哪一项正确？'},
+  {id:'q3', text:'关于机械产品可靠性的特点，哪些说法正确？'},
+  {id:'q4', text:'机械产品概率设计法的基础包含哪些内容？'},
+  {id:'q5', text:'下列哪些属于教材给出的工程实践要点？'}
+];
+function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');const ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>';else html+='<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>';html+='<div class="result-explain">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?'  满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
+</script>
+</body>
+</html>

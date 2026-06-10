@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>可靠性工程师手册|§3-5 可靠性设计准则的制定与实施</title>
+  <meta property="og:title" content="可靠性工程师手册|§3-5 可靠性设计准则的制定与实施" />
+  <meta property="og:description" content="§3-5 可靠性设计准则的制定与实施。包含完整讲解、关键术语、重点提醒与 5 道互动练习题。" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="zh_CN" />
+  <style>
+    :root {--bg:#f6faff;--paper:#ffffff;--ink:#152033;--muted:#637083;--line:#dbe7f4;--blue:#246bfe;--cyan:#0f9fb6;--green:#159a63;--orange:#f08a24;--red:#d94b5f;--purple:#7657d8;--shadow:0 18px 45px rgba(39,72,114,.11);--radius:8px;--max:1180px;}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,rgba(36,107,254,.06),rgba(15,159,182,.03) 38%,transparent 72%),var(--bg);line-height:1.65} a{color:inherit;text-decoration:none} .page-shell{min-height:100vh} .topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,250,255,.86);border-bottom:1px solid rgba(219,231,244,.9)} .topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px} .brand{display:flex;align-items:center;gap:12px;min-width:0} .brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(36,107,254,.22);position:relative;flex:0 0 auto} .brand-mark::after{content:"";width:14px;height:14px;border:2px solid #fff;border-left:0;border-bottom:0;position:absolute;top:9px;left:8px;transform:rotate(45deg)} .brand-title{font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .brand-subtitle{font-size:12px;color:var(--muted);margin-top:1px} .top-links{display:flex;align-items:center;gap:6px;color:#334158;font-size:13px;white-space:nowrap} .top-links a{padding:7px 9px;border-radius:7px;transition:background 160ms ease,color 160ms ease} .top-links a:hover{background:#eaf2ff;color:var(--blue)}
+    .hero{max-width:var(--max);margin:0 auto;padding:58px 24px 34px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:32px;align-items:stretch} .hero h1{margin:0;font-size:clamp(36px,5vw,68px);line-height:1.05;letter-spacing:0;max-width:850px} .hero-lead{color:#405066;font-size:18px;margin:22px 0 0;max-width:720px} .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px} .button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 16px;border-radius:8px;border:1px solid var(--line);background:#fff;color:#233047;font-size:14px;font-weight:700;cursor:pointer} .button.primary{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 14px 30px rgba(36,107,254,.22)}
+    .hero-board{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center;height:100%;min-height:340px} .score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:center} .score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:8px;padding:14px;min-height:116px;transition:transform 180ms ease,border-color 180ms ease,background 180ms ease} .score-item:hover{transform:translateY(-4px);border-color:#b7cdfa;background:#ffffff} .score-number{font-size:28px;font-weight:850;line-height:1} .score-title{margin-top:8px;font-size:15px;font-weight:800} .score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}
+    .main-layout{max-width:900px;margin:0 auto;padding:18px 24px 72px} .content{display:grid;gap:22px} section{scroll-margin-top:96px} .panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px} .section-kicker{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:0;margin-bottom:8px} h2{margin:0 0 14px;font-size:clamp(26px,3vw,38px);line-height:1.14;letter-spacing:0} h3{margin:24px 0 9px;font-size:20px;line-height:1.25;letter-spacing:0} p{margin:10px 0;color:#304059} ul,ol{margin:10px 0 0;padding-left:22px;color:#304059} li+li{margin-top:5px} .callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b} .callout.warn{border-left-color:var(--orange);background:#fff5e9;color:#6a3a08} .keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850} .keyword.green{background:#e7f7ef;color:var(--green)} .keyword.orange{background:#fff0dc;color:var(--orange)} .keyword.purple{background:#f0edff;color:var(--purple)} .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px} .card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:8px;padding:18px} .card h4{margin:0 0 8px;font-size:16px;letter-spacing:0} .card p{margin:0;font-size:14px} .formula{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px} .formula-step{min-height:104px;border:1px solid #dce8f6;background:#fff;border-radius:8px;padding:14px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:8px} .formula-step strong{font-size:16px} .formula-step span{color:var(--muted);font-size:12px;line-height:1.4}
+    .quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)} .quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2} .question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px} .question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px} .badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px} .badge-multi{background:#fff0f6;color:#d63384} .badge-single{background:#e8f5e9;color:#2e7d32} .option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px} .option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0} .submit-wrap{text-align:center;margin:20px 0} .submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer} .result{display:none;margin-top:20px} .result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px} .result-correct{background:#e8f5e9;border:1px solid #a5d6a7} .result-wrong{background:#fce4ec;border:1px solid #ef9a9a} .result-q{font-weight:600;margin-bottom:6px} .result-your{color:#d32f2f} .result-answer{color:#2e7d32;font-weight:600} .result-explain{margin-top:6px;color:#555;font-size:13px} .score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700} .footer{text-align:center;padding:16px;font-size:12px;color:#999} .footer .sign{font-size:13px;color:#666;margin-top:6px} .tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0} .tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}
+    @media (max-width: 980px){.hero,.main-layout{grid-template-columns:1fr} .hero-board{order:-1} .cards,.formula{grid-template-columns:1fr 1fr}} @media (max-width: 640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px} .cards,.formula{grid-template-columns:1fr} .top-links{display:none} .panel{padding:20px}}
+  </style>
+</head>
+<body>
+<div class="page-shell">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top" aria-label="返回顶部">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>
+          <span class="brand-title">可靠性工程师手册</span>
+          <span class="brand-subtitle">§3-5 可靠性设计准则的制定与实施</span>
+        </span>
+      </a>
+      <nav class="top-links">
+        <a href="#u">通用准则</a><a href="#o">总体准则</a><a href="#e">电子准则</a><a href="#m">机械准则</a><a href="#quiz">练习题</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div>
+      <h1>可靠性设计准则的制定与实施</h1>
+      <p class="hero-lead">本节强调：可靠性定性设计分析的核心，是把教材、标准、相似产品经验转化为可执行的设计准则，并在设计、评审、更改和验证中持续贯彻。</p>
+      <div class="hero-actions">
+        <a class="button primary" href="#quiz">开始互动练习</a>
+        <a class="button" href="#u">先看通用准则</a>
+      </div>
+    </div>
+    <div class="hero-board">
+      <div class="score-grid">
+        <div class="score-item"><div class="score-number" style="color:var(--blue)">3类</div><div class="score-title">通用准则主轴</div><div class="score-text">简化、冗余、热设计</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--green)">25条</div><div class="score-title">总体设计要求</div><div class="score-text">从应力、环境到接口与安装</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--orange)">27条</div><div class="score-title">电子产品准则</div><div class="score-text">降额、标准化、防差错、防短路</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--purple)">26条</div><div class="score-title">机械产品准则</div><div class="score-text">强度、裕度、振动、磨损与防松</div></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-layout">
+    <div class="content">
+      <section class="panel">
+        <div class="section-kicker">章节导读</div>
+        <h2>为什么要制定可靠性设计准则</h2>
+        <p>教材明确指出，可靠性定性设计分析方法是在产品设计和开发中制定和实施产品可靠性设计准则，这是提高设计开发产品可靠性最为有效的方法。</p>
+        <p>制定依据主要有三类：<span class="keyword">相似产品经验</span>、<span class="keyword green">国内外标准规范手册</span>、<span class="keyword orange">使用方可靠性要求</span>。设计准则既是设计依据，也是评审依据；凡是不符合要求的，都必须说明。</p>
+        <div class="callout">这类准则的价值不在“写得多”，而在于能否<strong>逐条落实、可检查、可追溯、可验证</strong>。</div>
+      </section>
+
+      <section class="panel" id="u">
+        <div class="section-kicker">3.5.2</div>
+        <h2>通用可靠性设计准则</h2>
+        <div class="cards">
+          <div class="card"><h4>简化设计</h4><p>功能分析权衡、合并相似功能、减少层次与单元数量；优先标准化、通用化、互换性设计，减少品种和装配差错。</p></div>
+          <div class="card"><h4>冗余设计</h4><p>当简化设计、降额设计及高可靠零部件仍不足以满足任务要求时，才采用冗余设计；同时关注切换装置与共模/共因故障。</p></div>
+          <div class="card"><h4>热设计</h4><p>围绕传导、对流、辐射、耐热和散热通道优化，尽量让热流短、面积大、接触好，并重视金属机箱、导热材料与风道布局。</p></div>
+          <div class="card"><h4>贯穿原则</h4><p>通用准则的本质，是把“减少故障源、控制应力、避免单点故障、管理热风险”变成结构与工艺语言。</p></div>
+        </div>
+        <h3>关键术语</h3>
+        <div class="tag-list"><span class="tag">标准化</span><span class="tag">通用化</span><span class="tag">互换性</span><span class="tag">切换装置</span><span class="tag">共因故障</span><span class="tag">散热路径</span></div>
+        <h3>重点提醒</h3>
+        <ul>
+          <li>简化设计不是“删到不能用”，而是在满足功能前提下减少复杂度。</li>
+          <li>冗余不是第一选择，只有在其他办法仍不足时才采用。</li>
+          <li>热设计既要考虑器件散热，也要考虑安装方向、风道、孔位和周围零件辐射热。</li>
+        </ul>
+      </section>
+
+      <section class="panel" id="o">
+        <div class="section-kicker">3.5.3</div>
+        <h2>总体可靠性设计准则</h2>
+        <p>总体准则的核心，是把可靠性要求转化为可考核验证的设计要求，并结合寿命剖面、任务剖面、环境条件、相似产品故障、生产工艺、人机工程、安装运输维修等因素进行系统性设计。</p>
+        <div class="cards">
+          <div class="card"><h4>任务与环境</h4><p>确定载荷谱、工作模式、应力条件；对极限环境、防盐雾、防腐蚀、防潮湿、防霉菌等进行防护设计。</p></div>
+          <div class="card"><h4>安全与应急</h4><p>危及安全的主要故障模式要分析并消除；关键系统应设防护、报警、独立应急设施，避免故障扩散。</p></div>
+          <div class="card"><h4>继承与控制</h4><p>优先成熟方案，严格控制新技术比例；制定元器件优选清单，简化规格数量，保证标准化和通用化。</p></div>
+          <div class="card"><h4>全生命周期</h4><p>设计要考虑功能测试、包装、贮存、装卸、运输和维修对可靠性的影响，不能只看出厂状态。</p></div>
+        </div>
+        <h3>工程落点</h3>
+        <ul>
+          <li>接口可靠性设计要防止局部故障扩散。</li>
+          <li>安装设计要避免定位困难、安装差错与相互干涉。</li>
+          <li>重要工况参数超限时，应有报警或显示装置。</li>
+        </ul>
+      </section>
+
+      <section class="panel" id="e">
+        <div class="section-kicker">3.5.4</div>
+        <h2>电子产品可靠性设计准则</h2>
+        <p>电子产品准则突出四件事：<span class="keyword">器件控制</span>、<span class="keyword green">降额设计</span>、<span class="keyword orange">接口与防差错</span>、<span class="keyword purple">装配与防护</span>。</p>
+        <div class="cards">
+          <div class="card"><h4>器件与标准</h4><p>器件选用要按元器件大纲和优选目录，优先军用等级，且新技术、新材料、新器件必须验证合格后才能用。</p></div>
+          <div class="card"><h4>降额与电/热应力</h4><p>电子、电气系统要做电/热应力分析并进行降额设计，避免因应力过高导致寿命缩短或早期失效。</p></div>
+          <div class="card"><h4>模块与故障隔离</h4><p>一个模块的故障只影响本模块输出，不应扩散到其他部件；输入极性保护、短路防护、电弧防护都很关键。</p></div>
+          <div class="card"><h4>装配与线束</h4><p>编号清晰、接插件防差错、装配方法程序化、线束安装牢固，振动区域要防磨损，易装错部位要有机械防错措施。</p></div>
+        </div>
+        <h3>工程提示</h3>
+        <ul>
+          <li>电线接头、插头、检测插座数量尽量少。</li>
+          <li>固定式元器件优先于可变式元器件。</li>
+          <li>密封、惰性气体、防潮防振包装，都是可靠性的一部分。</li>
+        </ul>
+      </section>
+
+      <section class="panel" id="m">
+        <div class="section-kicker">3.5.5</div>
+        <h2>机械产品可靠性设计准则</h2>
+        <p>机械准则强调结构简化、应力控制、裕度设计、抗振抗冲击、磨损/卡滞防护和成熟技术继承。它关注的不只是“能不能动”，更是“能不能长期稳定地动”。</p>
+        <div class="cards">
+          <div class="card"><h4>结构与强度</h4><p>简化装配和传力路线，减少应力集中，进行应力—强度优化、结构裕度设计和动力响应分析。</p></div>
+          <div class="card"><h4>失效抑制</h4><p>通过止裂、多路传力、多重元件设计，避免单个构件失效引发连锁失效。</p></div>
+          <div class="card"><h4>环境与材料</h4><p>关注公差、粗糙度、表面处理、防腐、防霉、温差变形以及真空低温冷焊与高低温交变间隙匹配。</p></div>
+          <div class="card"><h4>运动与连接</h4><p>防磨损、防卡滞、防过大冲击，采用可靠防松结构与合适材料流线方向，焊接件和高强度钢件尤其要注意工艺风险。</p></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-kicker">3.5.6</div>
+        <h2>工程实施要点</h2>
+        <div class="cards">
+          <div class="card"><h4>把准则变成动作</h4><p>准则要同步嵌入性能设计，设计人员逐条落实，并在初步设计、详细设计阶段输出符合性报告。</p></div>
+          <div class="card"><h4>把更改纳入复核</h4><p>一旦产品设计更改，必须重新进行符合性检查；外购件若明显违背准则，要分析影响并用系统设计补偿。</p></div>
+          <div class="card"><h4>让准则持续有效</h4><p>准则要根据研制情况逐步完善，增加有效条款、删除无效条款，且内容要可操作。</p></div>
+          <div class="card"><h4>落地检查表</h4><p>看得见、查得到、能验证，是工程实施的底线；不能只停留在文件层面。</p></div>
+        </div>
+        <div class="callout warn">重点：设计准则不是“写完就结束”，而是贯穿设计、评审、变更、验证与交付的全过程控制工具。</div>
+      </section>
+
+      <section class="panel" id="quiz">
+        <div class="section-kicker">互动测验</div>
+        <h2>5 道练习题</h2>
+        <div class="quiz-section">
+          <div class="question" data-id="q1" data-answer="B" data-type="single">
+            <div class="question-header">第1题：当简化设计、降额设计及高可靠零部件仍不能满足任务可靠性要求时，应优先采用什么？<span class="badge badge-single">单选</span></div>
+            <label class="option-label"><input type="radio" name="q1" value="A"><span>A. 热设计</span></label>
+            <label class="option-label"><input type="radio" name="q1" value="B"><span>B. 冗余设计</span></label>
+            <label class="option-label"><input type="radio" name="q1" value="C"><span>C. 简化设计</span></label>
+            <label class="option-label"><input type="radio" name="q1" value="D"><span>D. 标准化设计</span></label>
+          </div>
+          <div class="question" data-id="q2" data-answer="ACD" data-type="multi">
+            <div class="question-header">第2题：简化设计中应重点考虑哪些做法？<span class="badge badge-multi">多选</span></div>
+            <label class="option-label"><input type="checkbox" name="q2" value="A"><span>A. 合并相同或相似功能</span></label>
+            <label class="option-label"><input type="checkbox" name="q2" value="B"><span>B. 增加产品层次和单元数量</span></label>
+            <label class="option-label"><input type="checkbox" name="q2" value="C"><span>C. 减少执行同类功能的零部件数量</span></label>
+            <label class="option-label"><input type="checkbox" name="q2" value="D"><span>D. 优先选用标准化程度高的零部件</span></label>
+          </div>
+          <div class="question" data-id="q3" data-answer="BC" data-type="multi">
+            <div class="question-header">第3题：总体可靠性设计准则中，哪些属于明确提到的工程要求？<span class="badge badge-multi">多选</span></div>
+            <label class="option-label"><input type="checkbox" name="q3" value="A"><span>A. 只在试验阶段考虑环境因素</span></label>
+            <label class="option-label"><input type="checkbox" name="q3" value="B"><span>B. 重要工况参数超限时应设报警或显示装置</span></label>
+            <label class="option-label"><input type="checkbox" name="q3" value="C"><span>C. 设计应考虑包装、贮存、装卸、运输和维修的影响</span></label>
+            <label class="option-label"><input type="checkbox" name="q3" value="D"><span>D. 可以不考虑接口故障扩散</span></label>
+          </div>
+          <div class="question" data-id="q4" data-answer="ABD" data-type="multi">
+            <div class="question-header">第4题：电子产品可靠性设计准则中，哪些说法正确？<span class="badge badge-multi">多选</span></div>
+            <label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. 新技术、新工艺、新材料、新元器件必须经验证合格</span></label>
+            <label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. 应进行电/热应力分析并进行降额设计</span></label>
+            <label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. 接口故障可以自由扩散，只要单点功能正常即可</span></label>
+            <label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. 线束安装和支撑应牢固，振动区域要防磨损</span></label>
+          </div>
+          <div class="question" data-id="q5" data-answer="ACD" data-type="multi">
+            <div class="question-header">第5题：机械产品可靠性设计准则中，哪些属于正确要求？<span class="badge badge-multi">多选</span></div>
+            <label class="option-label"><input type="checkbox" name="q5" value="A"><span>A. 减少应力集中，控制应力水平</span></label>
+            <label class="option-label"><input type="checkbox" name="q5" value="B"><span>B. 结构越复杂越利于可靠性</span></label>
+            <label class="option-label"><input type="checkbox" name="q5" value="C"><span>C. 采用止裂措施、多路传力设计、多重元件设计</span></label>
+            <label class="option-label"><input type="checkbox" name="q5" value="D"><span>D. 真空低温时运动副要有防冷焊措施</span></label>
+          </div>
+          <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
+          <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-kicker">记忆卡片</div>
+        <h2>一眼记住本节</h2>
+        <div class="tag-list"><span class="tag">先简化</span><span class="tag">后冗余</span><span class="tag">重热设计</span><span class="tag">重验证</span><span class="tag">重贯标</span></div>
+        <div class="callout">记忆点：可靠性设计准则的本质，是把经验教训和标准要求，变成设计人员“能执行、能检查、能复核”的具体动作。</div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer"><p>© 可靠性工程师手册互动讲解页</p><div class="sign">为 §3-5 生成的可滚动互动学习页</div></footer>
+</div>
+<script>
+const explanations = {
+  q1: '教材原文明确指出：当简化设计、降额设计及高可靠零部件仍不能满足任务可靠性要求时，应采用冗余设计。',
+  q2: '简化设计强调合并功能、减少层次和单元数量、减少同类零部件数量，并优先选用标准化程度高的零部件；增加层次与单元数量与教材要求相反。',
+  q3: '总体准则明确要求：重要工况参数超限时设报警或显示；设计中要考虑包装、贮存、装卸、运输和维修对可靠性的影响。',
+  q4: '电子产品准则要求新技术经验证合格、进行电/热应力分析和降额设计，并要求线束安装支撑牢固、防止振动磨损。',
+  q5: '机械准则要求减少应力集中、采用止裂和多路传力设计，并对真空低温和高低温交变情况提出防冷焊和间隙匹配要求。'
+};
+const questions = [
+  {id:'q1', text:'当简化设计、降额设计及高可靠零部件仍不能满足任务可靠性要求时，应优先采用什么？'},
+  {id:'q2', text:'简化设计中应重点考虑哪些做法？'},
+  {id:'q3', text:'总体可靠性设计准则中，哪些属于明确提到的工程要求？'},
+  {id:'q4', text:'电子产品可靠性设计准则中，哪些说法正确？'},
+  {id:'q5', text:'机械产品可靠性设计准则中，哪些属于正确要求？'}
+];
+function submitQuiz(){
+  let score=0, html='';
+  questions.forEach((q, idx)=>{
+    const box=document.querySelector('.question[data-id="'+q.id+'"]');
+    const correct=box.getAttribute('data-answer');
+    const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');
+    const ok=checked===correct;
+    if(ok) score++;
+    html += '<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';
+    html += '<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';
+    if(!ok) html += '<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>';
+    else html += '<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>';
+    html += '<div class="result-explain">'+explanations[q.id]+'</div></div>';
+  });
+  document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?'  满分！':'');
+  document.getElementById('resultDetails').innerHTML=html;
+  document.getElementById('result').style.display='block';
+  document.getElementById('result').scrollIntoView({behavior:'smooth'});
+  const btn=document.querySelector('.submit-btn'); btn.textContent='已提交'; btn.disabled=true; btn.style.opacity='0.6';
+  document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true);
+}
+</script>
+</body>
+</html>
