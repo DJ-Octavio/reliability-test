@@ -8,9 +8,6 @@
   <meta property="og:description" content="§1-3 可靠性工程。包含完整讲解、关键术语、重点提醒与 5 道互动练习题。" />
   <meta property="og:type" content="article" />
   <meta property="og:locale" content="zh_CN" />
-  <meta property="og:image" content="https://dj-octavio.github.io/reliability-test/preview-1-1.png" />
-  <meta property="og:image:width" content="800" />
-  <meta property="og:image:height" content="400" />
   <style>
     :root {
       --bg: #f6faff;
@@ -40,23 +37,9 @@
     .hero-board{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center;height:100%;min-height:340px}.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:center}.score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:8px;padding:14px;min-height:116px;transition:transform 180ms ease,border-color 180ms ease,background 180ms ease}.score-item:hover{transform:translateY(-4px);border-color:#b7cdfa;background:#ffffff}.score-number{font-size:28px;font-weight:850;line-height:1}.score-title{margin-top:8px;font-size:15px;font-weight:800}.score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}
     .main-layout{max-width:900px;margin:0 auto;padding:18px 24px 72px}.side-nav{position:sticky;top:78px;background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 32px rgba(39,72,114,.08);padding:12px}.side-nav a{display:block;padding:10px 11px;border-radius:7px;color:#46566f;font-size:13px;font-weight:700;transition:background 160ms ease,color 160ms ease,transform 160ms ease}.side-nav a:hover{background:#eaf2ff;color:var(--blue);transform:translateX(3px)}.content{display:grid;gap:22px}section{scroll-margin-top:96px}.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px}.section-kicker{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:0;margin-bottom:8px}h2{margin:0 0 14px;font-size:clamp(26px,3vw,38px);line-height:1.14;letter-spacing:0}h3{margin:24px 0 9px;font-size:20px;line-height:1.25;letter-spacing:0}p{margin:10px 0;color:#304059}ul,ol{margin:10px 0 0;padding-left:22px;color:#304059}li+li{margin-top:5px}.callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b}.callout.warn{border-left-color:var(--orange);background:#fff5e9;color:#6a3a08}.keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850}.keyword.green{background:#e7f7ef;color:var(--green)}.keyword.orange{background:#fff0dc;color:var(--orange)}.keyword.purple{background:#f0edff;color:var(--purple)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:8px;padding:18px}.card h4{margin:0 0 8px;font-size:16px;letter-spacing:0}.card p{margin:0;font-size:14px}.formula{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}.formula-step{min-height:104px;border:1px solid #dce8f6;background:#fff;border-radius:8px;padding:14px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:8px}.formula-step strong{font-size:16px}.formula-step span{color:var(--muted);font-size:12px;line-height:1.4}
     .quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}.question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}.question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px}.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px}.badge-multi{background:#fff0f6;color:#d63384}.badge-single{background:#e8f5e9;color:#2e7d32}.option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px}.option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0}.submit-wrap{text-align:center;margin:20px 0}.submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}.result{display:none;margin-top:20px}.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}.result-correct{background:#e8f5e9;border:1px solid #a5d6a7}.result-wrong{background:#fce4ec;border:1px solid #ef9a9a}.result-q{font-weight:600;margin-bottom:6px}.result-your{color:#d32f2f}.result-answer{color:#2e7d32;font-weight:600}.result-explain{margin-top:6px;color:#555;font-size:13px}.score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}.footer{text-align:center;padding:16px;font-size:12px;color:#999}.footer .sign{font-size:13px;color:#666;margin-top:6px}
-    .divider{height:1px;background:#e8e8e8;margin:16px 0}.tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}.timeline{position:relative;padding-left:24px}.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#e8ecff}.timeline-item{position:relative;margin-bottom:16px}.timeline-item::before{content:'';position:absolute;left:-20px;top:4px;width:12px;height:12px;border-radius:50%;background:#2b6aff;border:2px solid #fff;box-shadow:0 0 0 2px #e8ecff}.timeline-year{font-weight:700;color:#1a52d6;font-size:14px}.timeline-text{font-size:14px;color:#555;margin-top:2px}.six-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:12px 0}.six-item{background:#f8f9fa;border-radius:8px;padding:10px;text-align:center}.six-item .en{font-size:11px;color:#999}.six-item .cn{font-size:14px;font-weight:600;color:#333}
-    @media (max-width: 980px){.hero,.main-layout{grid-template-columns:1fr}.side-nav{position:static}.hero-board{order:-1}.cards,.formula,.six-grid{grid-template-columns:1fr 1fr}}
-    @media (max-width: 640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px}.cards,.formula,.six-grid{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}
-  
-
-    /* Pagination */
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
+    .divider{height:1px;background:#e8e8e8;margin:16px 0}.tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}
+    @media (max-width: 980px){.hero,.main-layout{grid-template-columns:1fr}.side-nav{position:static}.hero-board{order:-1}.cards,.formula{grid-template-columns:1fr 1fr}}
+    @media (max-width: 640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px}.cards,.formula{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}
   </style>
 </head>
 <body>
@@ -71,7 +54,7 @@
         </span>
       </a>
       <nav class="top-links">
-        <a href="#s1">与故障斗争</a><a href="#s2">四步法</a><a href="#s3">管理</a><a href="#quiz">练习题</a>
+        <a href="#s1">学科定义</a><a href="#s2">四步法</a><a href="#s3">可靠性管理</a><a href="#quiz">练习题</a>
       </nav>
     </div>
   </header>
@@ -79,147 +62,163 @@
   <section class="hero" id="top">
     <div>
       <h1>可靠性工程</h1>
-      <p class="hero-lead">可靠性工程是一门与故障做斗争的学科。产品的可靠性不是算出来的、不是试出来的，而是设计出来、制造出来和管理出来的。</p>
-      
+      <p class="hero-lead">与故障做斗争的学科——产品的可靠性不是算出来的、不是试出来的，而是设计出来、制造出来和管理出来的。</p>
     </div>
     <div class="hero-board">
       <div class="score-grid">
-        <div class="score-item"><div class="score-number" style="color: var(--blue);">预防</div><div class="score-title">核心第一步</div><div class="score-text">第一次就把事情做正确，是可靠性工程的核心</div></div>
-        <div class="score-item"><div class="score-number" style="color: var(--green);">发现</div><div class="score-title">尽早暴露缺陷</div><div class="score-text">发现得越早损失越小，FMEA/FTA/可靠性评审等</div></div>
-        <div class="score-item"><div class="score-number" style="color: var(--orange);">纠正</div><div class="score-title">故障归零管理</div><div class="score-text">技术五归零+管理五归零</div></div>
-        <div class="score-item"><div class="score-number" style="color: var(--purple);">验证</div><div class="score-title">确保措施有效</div><div class="score-text">鉴定试验、验收试验、加速寿命试验</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--green);">🛡️</div><div class="score-title">预防(核心第一步)</div><div class="score-text">克劳士比"第一次就把事情做正确"</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--orange);">🔍</div><div class="score-title">发现(尽早暴露缺陷)</div><div class="score-text">发现得越早损失越小</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--red);">🔧</div><div class="score-title">纠正(故障归零管理)</div><div class="score-text">技术五归零 + 管理五归零</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--purple);">✅</div><div class="score-title">验证(确保措施有效)</div><div class="score-text">防止"小改出大错"，牢记"牵一发动全身"</div></div>
       </div>
     </div>
   </section>
 
   <main class="main-layout">
-    
-
     <div class="content">
-<section class="panel">
-              <div class="section-kicker">1.3.1</div><div id="s1"></div>
-        <h2>可靠性工程——与故障做斗争的学科</h2>
-        <p>可靠性工程是一门研究产品缺陷或故障的发生和发展的规律，进而解决缺陷或故障的预防和纠正，从而使缺陷或故障不发生或尽可能少发生的学科。</p>
-        
-        <div class="callout">有学者说：<span class="keyword purple">可靠性工程是一门与故障做斗争的学科</span>。</div>
-        
-        <p>产品的可靠性问题是产品使用过程中暴露的影响使用的典型的工程实践问题，<span class="keyword green">而不是有人误称的可靠性工程是很"玄"、非常难以琢磨的高深的数学问题</span>。数学在可靠性工程中的作用不可否认，但产品的可靠性<span class="keyword">不是算出来的，不是试出来的，而是设计出来、制造出来和管理出来的</span>，是在产品的全寿命周期中坚持与缺陷和故障斗争出来的。</p>
-        
-        <p>这与人们的健康是与疾病斗争出来的道理一样，与防止火灾保证平安是与火做斗争的道理一样，都必须首先从<span class="keyword">预防故障或缺陷入手</span>。继而若存在薄弱环节或隐患，能早发现，发现后能及时进行纠正，采取纠正措施。采取措施后就要对措施进行验证并对可靠性指标进行验证。</p>
+
+      <!-- Panel 1: 学科定义 -->
+      <section class="panel" id="s1">
+        <div class="section-kicker">1.3</div>
+        <h2>与故障做斗争的学科</h2>
+        <p>可靠性工程是一门研究产品<span class="keyword">缺陷或故障的发生和发展的规律</span>，进而解决缺陷或故障的预防和纠正，从而使缺陷或故障不发生或尽可能少发生的学科。有学者说，可靠性工程是一门<span class="keyword purple">与故障做斗争的学科</span>。</p>
+        <p>产品的可靠性问题是产品使用过程中暴露的影响使用的典型的工程实践问题，而不是有人误称的非常"玄"、难以琢磨的高深的数学问题。数学在可靠性工程中的作用不可否认——它可以用来描述产品故障发生的规律及对可靠性试验和使用信息进行产品可靠性水平的评定。</p>
+        <div class="callout">
+          <strong>核心结论：</strong>产品的可靠性<span class="keyword green">不是算出来的</span>，<span class="keyword green">不是试出来的</span>，而是<span class="keyword">设计出来</span>、<span class="keyword">制造出来</span>和<span class="keyword">管理出来</span>的，是在产品的全寿命周期中坚持与缺陷和故障做斗争的结果。
+        </div>
+        <p>这与人们的健康是与疾病斗争出来的道理一样，与防止火灾保证平安是与火做斗争的道理一样，都必须首先从预防故障或缺陷入手。</p>
+        <h3>与故障做斗争的完整流程</h3>
+        <p>首先从<strong>预防</strong>故障或缺陷入手，继而若存在薄弱环节或隐患能<strong>早发现</strong>，发现后能及时进行<strong>纠正</strong>，采取纠正措施。采取措施后就要对措施进行<strong>验证</strong>并对可靠性指标进行验证。
+        <div class="callout warn">
+          <strong>易错点提醒：</strong>可靠性≠数学计算。数学只是评定工具，可靠性是靠设计、制造和管理干出来的！
+        </div>
       </section>
 
+      <!-- Panel 2: 四步法 -->
+      <section class="panel" id="s2">
+        <div class="section-kicker">1.3 核心方法</div>
+        <h2>四步法：预防 · 发现 · 纠正 · 验证</h2>
+        <p>在产品的全寿命周期中，与故障做斗争的完整过程包含四个关键环节：</p>
 
-      
-      <section class="panel">
-        <div class="section-kicker">1.3.2</div><div id="s2"></div>
-        <h2>预防、发现、纠正、验证——四步法</h2>
-        
         <div class="cards">
           <article class="card">
-            <h4>🛡️ 预防：最重要的一步</h4>
-            <p>重视预防故障和缺陷是斗争的<span class="keyword green">最重要的一步，是可靠性工程的核心</span>。充分体现了质量管理大师克劳士比提出的<span class="keyword">"第一次就把事情做正确"</span>的思想。在产品研发过程的可靠性设计与分析中，采取一系列的可靠性设计与分析专门方法，如故障模式分析、故障树分析、潜在分析、电路容差分析、制定可靠性设计准则、元器件选择与控制等。</p>
+            <h4 style="color: var(--green);">🛡️ 预防（第一步，核心）</h4>
+            <p>重视预防故障和缺陷是斗争的<span class="keyword green">最重要的一步</span>，是可靠性工程的<span class="keyword green">核心</span>。充分体现了质量管理大师<span class="keyword">克劳士比</span>提出的<span class="keyword">"第一次就把事情做正确"</span>的思想。</p>
+            <p style="margin-top:8px;font-size:13px;color:var(--muted);">典型方法：可靠性预计、FMECA、FTA、潜在分析、电路容差分析、可靠性设计准则、元器件选择与控制、有限元分析、耐久性分析等。</p>
           </article>
           <article class="card">
-            <h4>🔍 发现：尽早暴露缺陷</h4>
-            <p>俗话说"智者千虑，必有一失"。工程师尽管已采取各种预防措施，但难免有疏漏，<span class="keyword green">发现得越早损失越小</span>。方法包括：故障模式影响及危害性分析、故障树分析、可靠性评审、环境应力筛选、可靠性研制试验、可靠性增长试验等。</p>
+            <h4 style="color: var(--orange);">🔍 发现（尽早暴露）</h4>
+            <p>智者千虑，必有一失。尽管已尽可能采取预防措施，但难免会有疏漏，因此<span class="keyword orange">尽早发现</span>缺陷或故障就显得非常重要——<span class="keyword orange">发现得越早损失越小</span>。</p>
+            <p style="margin-top:8px;font-size:13px;color:var(--muted);">典型方法：FMECA、FTA、可靠性评审、环境应力筛选、可靠性研制试验、可靠性增长试验等。</p>
           </article>
           <article class="card">
-            <h4>🔧 纠正：故障归零管理</h4>
-            <p>发现缺陷不是目的，解决缺陷才是目的。我国军工行业在实践中形成的<span class="keyword">故障归零管理</span>是有效方法：<span class="keyword purple">技术五归零</span>（定位准确、机理清楚、问题复现、措施有效、举一反三）+ <span class="keyword purple">管理五归零</span>（过程清楚、责任明确、措施落实、严肃处理、完善规章）。</p>
+            <h4 style="color: var(--red);">🔧 纠正（故障归零）</h4>
+            <p>发现缺陷不是目的，<span class="keyword">解决缺陷才是目的</span>。我国军工行业在实践中形成的<span class="keyword">故障归零管理</span>是十分有效的方法。</p>
+            <p style="margin-top:8px;font-size:13px;color:var(--muted);"><strong>技术五归零：</strong>定位准确、机理清楚、问题复现、措施有效、举一反三。</p>
+            <p style="margin-top:8px;font-size:13px;color:var(--muted);"><strong>管理五归零：</strong>过程清楚、责任明确、措施落实、严肃处理、完善规章。</p>
           </article>
           <article class="card">
-            <h4>✅ 验证：确保措施有效</h4>
-            <p>纠正措施制定后必须经过工程验证，<span class="keyword warn">要防止"小改出大错"</span>，牢记"牵一发动全身"的道理。某一故障件的改进很可能引起新的问题。验证方法包括：可靠性鉴定试验、可靠性验收试验、加速寿命试验等，已有国家标准和国家军用标准。</p>
+            <h4 style="color: var(--purple);">✅ 验证（防止反效果）</h4>
+            <p>纠正措施制定后必须经过工程验证，证明纠正的有效性。要防止工程中常出现的<span class="keyword purple">"小改出大错"</span>。一定要记住<span class="keyword purple">"牵一发动全身"</span>的道理。</p>
+            <p style="margin-top:8px;font-size:13px;color:var(--muted);">典型方法：可靠性鉴定试验、可靠性验收试验、加速寿命试验等。</p>
           </article>
+        </div>
+
+        <div class="callout" style="margin-top:18px;">
+          <strong>记忆点：</strong>四步法环环相扣——预防是核心第一步 → 发现得越早损失越小 → 纠正要彻底（五归零） → 验证防止"小改出大错"。
         </div>
       </section>
 
-
-      
-      <section class="panel">
-        <div class="section-kicker">1.3.3</div><div id="s3"></div>
-        <h2>可靠性管理——与技术缺一不可</h2>
-        
-        <p>在实施"预防、发现、纠正和验证"一系列技术方法的过程中<span class="keyword green">离不开可靠性管理</span>，缺少系统有效的管理，很多技术活动是难以有效开展的。</p>
-        
-        <div class="callout">有人把可靠性技术与管理形容为<span class="keyword purple">"一部车子的两个轮子，缺一不可"</span>。</div>
-        
+      <!-- Panel 3: 可靠性管理 -->
+      <section class="panel" id="s3">
+        <div class="section-kicker">1.3 管理</div>
+        <h2>可靠性管理：两个轮子缺一不可</h2>
+        <p>在实施"预防、发现、纠正和验证"一系列技术方法的过程中<span class="keyword purple">离不开可靠性管理</span>，缺少系统有效的管理，很多技术活动是难以有效开展的。</p>
+        <div class="callout">
+          <strong>经典比喻：</strong>有人把可靠性技术与管理形容为一部车子的<span class="keyword">两个轮子</span>，<span class="keyword green">缺一不可</span>。
+        </div>
         <h3>GJB 450A-2004 可靠性管理工作项目</h3>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-year">计划与监督</div>
-            <div class="timeline-text">制定可靠性计划、可靠性工作计划；对承制方、转承制方和供应方的监督与控制</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-year">评审与审查</div>
-            <div class="timeline-text">可靠性评审；建立故障审查组织</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-year">纠正措施系统</div>
-            <div class="timeline-text">建立故障报告、分析和纠正措施系统（FRACAS），对产品可靠性增长过程进行有效管理</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-year">增长管理</div>
-            <div class="timeline-text">可靠性增长管理，在产品全寿命周期中持续提高可靠性水平</div>
-          </div>
+        <p>《装备可靠性工作通用要求》中列出的可靠性管理工作项目包括：</p>
+        <ul>
+          <li><strong>制定可靠性计划</strong></li>
+          <li><strong>制定可靠性工作计划</strong></li>
+          <li><strong>对承制方、转承制方和供应方的监督与控制</strong></li>
+          <li><strong>可靠性评审</strong></li>
+          <li><strong>建立故障报告、分析和纠正措施系统</strong></li>
+          <li><strong>建立故障审查组织</strong></li>
+          <li><strong>可靠性增长管理</strong></li>
+        </ul>
+        <div class="callout warn">
+          <strong>重点提醒：</strong>可靠性技术与管理是一部车子的两个轮子，缺一不可。只有技术没有管理，技术活动难以有效开展；只有管理没有技术，管理就成了空架子。
         </div>
-        
-        <div class="callout warn">可靠性是设计出来的、制造出来的、管理出来的——不是算出来的、不是试出来的。</div>
       </section>
 
-
-      <section class="panel quiz-section">
+      <!-- Quiz Section -->
+      <section class="panel quiz-section" id="quiz">
         <div class="section-kicker">练习题</div>
-        <h2>互动练习题(5道)</h2>
-        <div class="question" data-id="q0" data-answer="BD" data-type="multi">
-          <div class="question-header">第1题：可靠性工程作为一门独立学科的标志性事件是？<span class="badge badge-multi">多选</span></div>
-          <label class="option-label"><input type="checkbox" name="q0" value="A"><span>A. 1950年成立电子设备可靠性专门委员会</span></label>
-          <label class="option-label"><input type="checkbox" name="q0" value="B"><span>B. 1952年成立AGREE小组</span></label>
-          <label class="option-label"><input type="checkbox" name="q0" value="C"><span>C. 1953年兰德公司进行调查</span></label>
-          <label class="option-label"><input type="checkbox" name="q0" value="D"><span>D. 1957年发表AGREE报告《军用电子设备可靠性》</span></label>
+        <h2>互动练习题（5道）</h2>
+
+        <div class="question" data-id="q0" data-answer="C" data-type="single">
+          <div class="question-header">第1题：关于产品可靠性的来源，以下说法正确的是？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q0" value="A"><span>A. 产品的可靠性是通过数学计算算出来的</span></label>
+          <label class="option-label"><input type="radio" name="q0" value="B"><span>B. 产品的可靠性是通过试验试出来的</span></label>
+          <label class="option-label"><input type="radio" name="q0" value="C"><span>C. 产品的可靠性是设计出来、制造出来和管理出来的</span></label>
+          <label class="option-label"><input type="radio" name="q0" value="D"><span>D. 产品的可靠性主要靠事后维修保障出来的</span></label>
         </div>
-        <div class="question" data-id="q1" data-answer="B" data-type="single">
-          <div class="question-header">第2题：20世纪80年代美国空军推行的"可靠性及维修性2000年行动计划"提出的目标是？<span class="badge badge-single">单选</span></div>
-          <label class="option-label"><input type="radio" name="q1" value="A"><span>A. 可靠性翻两番，维修性减四分之一</span></label>
-          <label class="option-label"><input type="radio" name="q1" value="B"><span>B. 可靠性翻一番，维修性减半</span></label>
-          <label class="option-label"><input type="radio" name="q1" value="C"><span>C. 可靠性提高50%，维修性提高50%</span></label>
-          <label class="option-label"><input type="radio" name="q1" value="D"><span>D. 零故障，零维修</span></label>
+
+        <div class="question" data-id="q1" data-answer="D" data-type="single">
+          <div class="question-header">第2题：可靠性工程四步法的核心第一步是什么？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q1" value="A"><span>A. 发现——尽早发现缺陷和薄弱环节</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="B"><span>B. 纠正——对缺陷和故障采取纠正措施</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="C"><span>C. 验证——对纠正措施和可靠性指标进行验证</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="D"><span>D. 预防——重视预防故障和缺陷</span></label>
         </div>
-        <div class="question" data-id="q2" data-answer="AB" data-type="multi">
-          <div class="question-header">第3题：根据我国产品可靠性现状，以下哪些说法正确？<span class="badge badge-multi">多选</span></div>
-          <label class="option-label"><input type="checkbox" name="q2" value="A"><span>A. 我国客车首次故障里程约1000~5000公里</span></label>
-          <label class="option-label"><input type="checkbox" name="q2" value="B"><span>B. 国际上客车首次故障里程约1.6万~2万公里</span></label>
-          <label class="option-label"><input type="checkbox" name="q2" value="C"><span>C. 我国客车可靠性已超过国际水平</span></label>
-          <label class="option-label"><input type="checkbox" name="q2" value="D"><span>D. 德国米勒产品10年不坏的说法是虚假宣传</span></label>
+
+        <div class="question" data-id="q2" data-answer="AC" data-type="multi">
+          <div class="question-header">第3题：以下属于我国军工行业故障归零管理中"技术五归零"内容的有？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q2" value="A"><span>A. 定位准确</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="B"><span>B. 过程清楚</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="C"><span>C. 问题复现</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="D"><span>D. 责任明确</span></label>
         </div>
-        <div class="question" data-id="q3" data-answer="C" data-type="single">
-          <div class="question-header">第4题：可靠性发展历程中，电子元器件可靠性每年平均提高的速度是？<span class="badge badge-single">单选</span></div>
-          <label class="option-label"><input type="radio" name="q3" value="A"><span>A. 10%</span></label>
-          <label class="option-label"><input type="radio" name="q3" value="B"><span>B. 15%</span></label>
-          <label class="option-label"><input type="radio" name="q3" value="C"><span>C. 20%</span></label>
-          <label class="option-label"><input type="radio" name="q3" value="D"><span>D. 30%</span></label>
+
+        <div class="question" data-id="q3" data-answer="B" data-type="single">
+          <div class="question-header">第4题：纠正措施制定后必须进行验证，主要是为了防止什么？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q3" value="A"><span>A. 纠正措施执行不到位</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="B"><span>B. "小改出大错"和"牵一发动全身"带来的新问题</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="C"><span>C. 故障报告系统不完善</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="D"><span>D. 可靠性评审流程不规范</span></label>
         </div>
+
         <div class="question" data-id="q4" data-answer="ABC" data-type="multi">
-          <div class="question-header">第5题：开展可靠性工作的重要性和紧迫性体现在哪些方面？<span class="badge badge-multi">多选</span></div>
-          <label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. 武器装备可靠性是发挥作战效能的关键</span></label>
-          <label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. 我国产品可靠性与国际相比存在显著差距</span></label>
-          <label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. 产品可靠性是影响企业盈利的关键</span></label>
-          <label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. 可靠性可以完全消除产品故障</span></label>
+          <div class="question-header">第5题：根据GJB 450A-2004，以下哪些属于可靠性管理工作项目？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. 制定可靠性计划</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. 可靠性评审</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. 建立故障报告、分析和纠正措施系统</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. 环境应力筛选试验</span></label>
         </div>
+
         <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
         <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
       </section>
 
-      
-        <section class="panel">
+      <!-- 自检提示 -->
+      <section class="panel">
         <div class="section-kicker">提交前自检</div>
         <h2>自检提示</h2>
         <div class="tag-list">
-          <span class="tag">AGREE报告</span><span class="tag">1957</span><span class="tag">里程碑</span><span class="tag">质量大坝</span><span class="tag">R&M2000</span>
+          <span class="tag">与故障做斗争</span>
+          <span class="tag">四步法</span>
+          <span class="tag">克劳士比</span>
+          <span class="tag">技术五归零</span>
+          <span class="tag">管理五归零</span>
+          <span class="tag">两个轮子</span>
+          <span class="tag">GJB 450A-2004</span>
         </div>
-        <div class="callout">记忆点:可靠性作为一门科学只有50多年历史；1957年AGREE报告是学科独立的里程碑；高可靠高质量是组织追求的永恒目标。</div>
+        <div class="callout">
+          <strong>记忆点：</strong>可靠性不是算出来的，是设计/制造/管理出来的；四步法：预防（核心）→ 发现（越早越好）→ 纠正（五归零）→ 验证（防小改出大错）；可靠性技术与管理是一部车子的两个轮子，缺一不可。
+        </div>
       </section>
-
 
     </div>
   </main>
@@ -227,23 +226,22 @@
   <footer class="footer"><p>© 可靠性工程师手册互动讲解页</p><div class="sign">⚡ 与你同行 AI 浪潮,打造智能工作新范式</div></footer>
 </div>
 
-
 <script>
 var explanations = {
-  q0: "教材原文：可靠性工程是一门研究产品缺陷或故障的发生和发展的规律，进而解决缺陷或故障的预防和纠正从而使缺陷或故障不发生或尽可能少发生的学科。有学者说可靠性工程是一门与故障做斗争的学科。",
-  q1: "教材原文：产品的可靠性不是算出来的，不是试出来的，而是设计出来、制造出来和管理出来的，是在产品的全寿命周期中坚持与缺陷和故障斗争出来的。",
-  q2: "教材原文：重视预防故障和缺陷是斗争的最重要的一步，是可靠性工程的核心，也充分体现了质量管理大师克劳士比提出的第一次就把事情做正确的思想。",
-  q3: "教材原文：技术五归零包括定位准确、机理清楚、问题复现、措施有效和举一反三。C选项'责任明确'属于管理五归零，不属于技术五归零。",
-  q4: "教材原文：有人把可靠性技术与管理形容为一部车子的两个轮子，缺一不可。缺少系统有效的管理，很多技术活动是难以有效开展的。同时纠正措施验证后要防止'小改出大错'。"
+  q0: "教材原文：产品的可靠性不是算出来的，不是试出来的，而是设计出来、制造出来和管理出来的，是在产品的全寿命周期中坚持与缺陷和故障做斗争的结果。A和B都是教材中明确否定的说法。",
+  q1: "教材原文：重视预防故障和缺陷是斗争的最重要的一步，是可靠性工程的核心，也充分体现了质量管理大师克劳士比提出的第一次就把事情做正确的思想。预防是四步法中的第一步和核心。",
+  q2: "技术五归零包括：定位准确、机理清楚、问题复现、措施有效、举一反三。B选项'过程清楚'和D选项'责任明确'属于管理五归零的内容，不属于技术五归零。",
+  q3: "教材原文：纠正措施制定后必须经过工程验证，以证明纠正的有效性，要防止工程中常出现的'小改出大错'。一定要记住'牵一发动全身'的道理。某一故障件的改进很可能会引起新的问题，所以必须对纠正进行验证。",
+  q4: "GJB 450A-2004列出的可靠性管理工作项目包括：制定可靠性计划、制定可靠性工作计划、对承制方/转承制方和供应方的监督与控制、可靠性评审、建立故障报告分析和纠正措施系统、建立故障审查组织、可靠性增长管理等。D选项'环境应力筛选试验'属于发现环节的技术方法，不属于管理项目。"
 };
 var questions = [
-  {id: 'q0', text: '可靠性工程本质上是一门什么学科？'},
-  {id: 'q1', text: '产品的可靠性是怎样得来的？'},
-  {id: 'q2', text: '可靠性工程斗争过程中最重要的一步是？'},
-  {id: 'q3', text: '故障归零管理中，技术五归零包括哪些？'},
-  {id: 'q4', text: '关于可靠性技术与管理的关系，以下说法正确的是？'}
+  {id: "q0", text: "关于产品可靠性的来源，以下说法正确的是？"},
+  {id: "q1", text: "可靠性工程四步法的核心第一步是什么？"},
+  {id: "q2", text: "以下属于我国军工行业故障归零管理中'技术五归零'内容的有？"},
+  {id: "q3", text: "纠正措施制定后必须进行验证，主要是为了防止什么？"},
+  {id: "q4", text: "根据GJB 450A-2004，以下哪些属于可靠性管理工作项目？"}
 ];
-function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');const ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>';else html+='<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>';html+='<div class="result-explain">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?'  满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
+function submitQuiz(){var score=0,html='';questions.forEach(function(q,idx){var box=document.querySelector('.question[data-id="'+q.id+'"]');var correct=box.getAttribute('data-answer');var checked=[].slice.call(box.querySelectorAll('input:checked')).map(function(x){return x.value}).join('');var ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>';else html+='<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>';html+='<div class="result-explain">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?' 满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(function(inp){inp.disabled=true})}
 </script>
 
 </body>
