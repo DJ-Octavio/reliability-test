@@ -12,52 +12,7 @@
   <meta property="og:image:width" content="800" />
   <meta property="og:image:height" content="400" />
   <style>
-    :root {
-      --bg: #f6faff;
-      --paper: #ffffff;
-      --ink: #152033;
-      --muted: #637083;
-      --line: #dbe7f4;
-      --blue: #246bfe;
-      --cyan: #0f9fb6;
-      --green: #159a63;
-      --orange: #f08a24;
-      --red: #d94b5f;
-      --purple: #7657d8;
-      --shadow: 0 18px 45px rgba(39, 72, 114, 0.11);
-      --radius: 8px;
-      --max: 1180px;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,rgba(36,107,254,.06),rgba(15,159,182,.03) 38%,transparent 72%),var(--bg);line-height:1.65}
-    a{color:inherit;text-decoration:none}
-    .page-shell{min-height:100vh}
-    .topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,250,255,.86);border-bottom:1px solid rgba(219,231,244,.9)}
-    .topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
-    .brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(36,107,254,.22);position:relative;flex:0 0 auto}.brand-mark::after{content:"";width:14px;height:14px;border:2px solid #fff;border-left:0;border-bottom:0;position:absolute;top:9px;left:8px;transform:rotate(45deg)}.brand-title{font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-subtitle{font-size:12px;color:var(--muted);margin-top:1px}.top-links{display:flex;align-items:center;gap:6px;color:#334158;font-size:13px;white-space:nowrap}.top-links a{padding:7px 9px;border-radius:7px;transition:background 160ms ease,color 160ms ease}.top-links a:hover{background:#eaf2ff;color:var(--blue)}
-    .hero{max-width:var(--max);margin:0 auto;padding:58px 24px 34px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:32px;align-items:stretch}.hero h1{margin:0;font-size:clamp(36px,5vw,68px);line-height:1.05;letter-spacing:0;max-width:850px}.hero-lead{color:#405066;font-size:18px;margin:22px 0 0;max-width:720px}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 16px;border-radius:8px;border:1px solid var(--line);background:#fff;color:#233047;font-size:14px;font-weight:700;cursor:pointer}.button.primary{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 14px 30px rgba(36,107,254,.22)}
-    .hero-board{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center;height:100%;min-height:340px}.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:center}.score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:8px;padding:14px;min-height:116px;transition:transform 180ms ease,border-color 180ms ease,background 180ms ease}.score-item:hover{transform:translateY(-4px);border-color:#b7cdfa;background:#ffffff}.score-number{font-size:28px;font-weight:850;line-height:1}.score-title{margin-top:8px;font-size:15px;font-weight:800}.score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}
-    .main-layout{max-width:900px;margin:0 auto;padding:18px 24px 72px}.side-nav{position:sticky;top:78px;background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 32px rgba(39,72,114,.08);padding:12px}.side-nav a{display:block;padding:10px 11px;border-radius:7px;color:#46566f;font-size:13px;font-weight:700;transition:background 160ms ease,color 160ms ease,transform 160ms ease}.side-nav a:hover{background:#eaf2ff;color:var(--blue);transform:translateX(3px)}.content{display:grid;gap:22px}section{scroll-margin-top:96px}.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px}.section-kicker{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:0;margin-bottom:8px}h2{margin:0 0 14px;font-size:clamp(26px,3vw,38px);line-height:1.14;letter-spacing:0}h3{margin:24px 0 9px;font-size:20px;line-height:1.25;letter-spacing:0}p{margin:10px 0;color:#304059}ul,ol{margin:10px 0 0;padding-left:22px;color:#304059}li+li{margin-top:5px}.callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b}.callout.warn{border-left-color:var(--orange);background:#fff5e9;color:#6a3a08}.keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850}.keyword.green{background:#e7f7ef;color:var(--green)}.keyword.orange{background:#fff0dc;color:var(--orange)}.keyword.purple{background:#f0edff;color:var(--purple)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:8px;padding:18px}.card h4{margin:0 0 8px;font-size:16px;letter-spacing:0}.card p{margin:0;font-size:14px}.formula{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}.formula-step{min-height:104px;border:1px solid #dce8f6;background:#fff;border-radius:8px;padding:14px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:8px}.formula-step strong{font-size:16px}.formula-step span{color:var(--muted);font-size:12px;line-height:1.4}
-    .quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}.question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}.question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px}.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px}.badge-multi{background:#fff0f6;color:#d63384}.badge-single{background:#e8f5e9;color:#2e7d32}.option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px}.option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0}.submit-wrap{text-align:center;margin:20px 0}.submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}.result{display:none;margin-top:20px}.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}.result-correct{background:#e8f5e9;border:1px solid #a5d6a7}.result-wrong{background:#fce4ec;border:1px solid #ef9a9a}.result-q{font-weight:600;margin-bottom:6px}.result-your{color:#d32f2f}.result-answer{color:#2e7d32;font-weight:600}.result-explain{margin-top:6px;color:#555;font-size:13px}.score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}.footer{text-align:center;padding:16px;font-size:12px;color:#999}.footer .sign{font-size:13px;color:#666;margin-top:6px}
-    .divider{height:1px;background:#e8e8e8;margin:16px 0}.tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}.timeline{position:relative;padding-left:24px}.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#e8ecff}.timeline-item{position:relative;margin-bottom:16px}.timeline-item::before{content:'';position:absolute;left:-20px;top:4px;width:12px;height:12px;border-radius:50%;background:#2b6aff;border:2px solid #fff;box-shadow:0 0 0 2px #e8ecff}.timeline-year{font-weight:700;color:#1a52d6;font-size:14px}.timeline-text{font-size:14px;color:#555;margin-top:2px}.six-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:12px 0}.six-item{background:#f8f9fa;border-radius:8px;padding:10px;text-align:center}.six-item .en{font-size:11px;color:#999}.six-item .cn{font-size:14px;font-weight:600;color:#333}
-    @media (max-width: 980px){.hero,.main-layout{grid-template-columns:1fr}.side-nav{position:static}.hero-board{order:-1}.cards,.formula,.six-grid{grid-template-columns:1fr 1fr}}
-    @media (max-width: 640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px}.cards,.formula,.six-grid{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}
-  
-
-    /* Pagination */
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-  </style>
+    :root{--bg:#f6faff;--paper:#fff;--ink:#152033;--muted:#637083;--line:#dbe7f4;--blue:#246bfe;--cyan:#0f9fb6;--green:#159a63;--orange:#f08a24;--red:#d94b5f;--purple:#7657d8;--shadow:0 18px 45px rgba(39,72,114,.11);--radius:8px;--max:1180px}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,rgba(36,107,254,.06),rgba(15,159,182,.03) 38%,transparent 72%),var(--bg);line-height:1.65}a{color:inherit;text-decoration:none}.page-shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,250,255,.86);border-bottom:1px solid rgba(219,231,244,.9)}.topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(36,107,254,.22);position:relative;flex:0 0 auto}.brand-mark::after{content:"";width:14px;height:14px;border:2px solid #fff;border-left:0;border-bottom:0;position:absolute;top:9px;left:8px;transform:rotate(45deg)}.brand-title{font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-subtitle{font-size:12px;color:var(--muted);margin-top:1px}.top-links{display:flex;align-items:center;gap:6px;color:#334158;font-size:13px;white-space:nowrap}.top-links a{padding:7px 9px;border-radius:7px;transition:background 160ms ease,color 160ms ease}.top-links a:hover{background:#eaf2ff;color:var(--blue)}.hero{max-width:var(--max);margin:0 auto;padding:58px 24px 34px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:32px;align-items:stretch}.hero h1{margin:0;font-size:clamp(36px,5vw,68px);line-height:1.05;letter-spacing:0;max-width:850px}.hero-lead{color:#405066;font-size:18px;margin:22px 0 0;max-width:720px}.hero-board{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center;height:100%;min-height:340px}.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:center}.score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:8px;padding:14px;min-height:116px;transition:transform 180ms ease,border-color 180ms ease,background 180ms ease}.score-item:hover{transform:translateY(-4px);border-color:#b7cdfa;background:#fff}.score-number{font-size:28px;font-weight:850;line-height:1}.score-title{margin-top:8px;font-size:15px;font-weight:800}.score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}.main-layout{max-width:900px;margin:0 auto;padding:18px 24px 72px}.content{display:grid;gap:22px}section{scroll-margin-top:96px}.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px}.section-kicker{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:0;margin-bottom:8px}h2{margin:0 0 14px;font-size:clamp(26px,3vw,38px);line-height:1.14}h3{margin:24px 0 9px;font-size:20px;line-height:1.25}p{margin:10px 0;color:#304059}ul,ol{margin:10px 0 0;padding-left:22px;color:#304059}li+li{margin-top:5px}.callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b}.callout.warn{border-left-color:var(--orange);background:#fff5e9;color:#6a3a08}.keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850}.keyword.green{background:#e7f7ef;color:var(--green)}.keyword.orange{background:#fff0dc;color:var(--orange)}.keyword.purple{background:#f0edff;color:var(--purple)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:8px;padding:18px}.card h4{margin:0 0 8px;font-size:16px}.card p{margin:0;font-size:14px}.quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}.question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}.question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px}.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px}.badge-multi{background:#fff0f6;color:#d63384}.badge-single{background:#e8f5e9;color:#2e7d32}.option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px}.option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0}.submit-wrap{text-align:center;margin:20px 0}.submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}.result{display:none;margin-top:20px}.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}.result-correct{background:#e8f5e9;border:1px solid #a5d6a7}.result-wrong{background:#fce4ec;border:1px solid #ef9a9a}.result-q{font-weight:600;margin-bottom:6px}.result-your{color:#d32f2f}.result-answer{color:#2e7d32;font-weight:600}.result-explain{margin-top:6px;color:#555;font-size:13px}.score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}.footer{text-align:center;padding:16px;font-size:12px;color:#999}.footer .sign{font-size:13px;color:#666;margin-top:6px}.tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}@media (max-width:980px){.hero,.main-layout{grid-template-columns:1fr}.hero-board{order:-1}.cards{grid-template-columns:1fr 1fr}}@media (max-width:640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px}.cards{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}</style>
 </head>
 <body>
 <div class="page-shell">
@@ -71,7 +26,7 @@
         </span>
       </a>
       <nav class="top-links">
-        <a href="#s1">为什么会失效</a><a href="#s2">应力-强度模型</a><a href="#s3">失效归因</a><a href="#quiz">练习题</a>
+        <a href="#s1">设计</a><a href="#s2">应力强度</a><a href="#s3">方法</a><a href="#quiz">练习题</a>
       </nav>
     </div>
   </header>
@@ -79,130 +34,133 @@
   <section class="hero" id="top">
     <div>
       <h1>概述</h1>
-      <p class="hero-lead">产品的可靠性首先是设计出来的。应力—强度干涉模型说明：可靠性设计的核心是让产品强度始终大于可能承受的应力。</p>
-      
+      <p class="hero-lead">产品的可靠性是设计出来的、制造出来的、管理出来的，但首先是设计出来的。本章讲解产品为什么会失效，以及可靠性设计与分析的核心方法和思路。</p>
     </div>
     <div class="hero-board">
       <div class="score-grid">
-        <div class="score-item"><div class="score-number" style="color: var(--blue);">设计</div><div class="score-title">先天</div><div class="score-text">可靠性首先是设计出来的</div></div>
-        <div class="score-item"><div class="score-number" style="color: var(--blue);">应力</div><div class="score-title">外因</div><div class="score-text">负载、温度、振动等</div></div>
-        <div class="score-item"><div class="score-number" style="color: var(--blue);">强度</div><div class="score-title">内因</div><div class="score-text">尺寸、材料、结构等</div></div>
-        <div class="score-item"><div class="score-number" style="color: var(--blue);">干涉</div><div class="score-title">博弈</div><div class="score-text">强度大于应力才可靠</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--blue);">首先</div><div class="score-title">设计出来</div><div class="score-text">可靠性首先是设计出来的</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--green);">应力</div><div class="score-title">强度博弈</div><div class="score-text">强度>应力=可靠，强度<应力=失效</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--orange);">13项</div><div class="score-title">设计分析方法</div><div class="score-text">GJB 450A-2004规定的可靠性设计与分析工作项目</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--purple);">预防</div><div class="score-title">核心思想</div><div class="score-text">抓住设计中的可靠性设计就是落实"预防为主"</div></div>
       </div>
     </div>
   </section>
 
   <main class="main-layout">
-    
-
     <div class="content">
-<section class="panel">
-        
-      <section id="s1" class="panel">
-        <div class="section-kicker">3.1.1</div>
-        <h2>可靠性首先是设计出来的</h2>
-        <p>产品的可靠性是设计出来的、制造出来的、管理出来的，但<span class="keyword purple">首先是设计出来的</span>。第1章已经说明：产品在出厂时是合格的，使用一段时间后又发生故障，这说明设计定型或制造与验收规范存在缺陷，而规范是研发时经过设计和试验最后确定的，因此本质上还是设计有缺陷。</p>
-        <div class="callout">抓住设计中的可靠性设计，就是落实“<span class="keyword">预防为主</span>”质量管理思想。</div>
+      <section class="panel">
+        <div class="section-kicker">3.1.1</div><div id="s1"></div>
+        <h2>产品的可靠性首先是设计出来的</h2>
+        <p>产品的可靠性是设计出来的、制造出来的、管理出来的，但<span class="keyword green">首先是设计出来的</span>。这一点从第1章论述的在出厂时合格的产品为什么在使用后又可能会发生故障，就可以清楚地了解。</p>
+        <p>出厂后又发生故障，也就是说本来产品在出厂时是合格的，在使用后又变成"不合格"，即不能满足用户的使用要求了。这说明出厂时检验依据存在缺陷，而检验的依据或判据是产品研发结束的设计定型或产品确认时确定的制造与验收规范的内容，这说明确定的制造与验收规范有缺陷，而制造与验收规范是产品研发时经过设计和试验最后确定的，这进一步说明<span class="keyword">设计是有缺陷的</span>。</p>
+        <div class="callout">因此，在产品研发过程中开展系统化的可靠性设计与分析非常重要。抓住设计中的可靠性设计就是落实<span class="keyword purple">"预防为主"</span>质量管理思想。</div>
       </section>
 
-      <section id="s2" class="panel">
-        <div class="section-kicker">3.1.2</div>
+      <section class="panel">
+        <div class="section-kicker">3.1.2</div><div id="s2"></div>
         <h2>应力—强度干涉模型</h2>
-        <p>产品为什么会发生故障或失效，主要取决于产品在设计时所赋予的<span class="keyword">强度</span>和产品使用中所承受的<span class="keyword">应力</span>这对矛盾因素的博弈结果。</p>
+        <p>产品在使用过程中是否会发生失效或故障，主要取决于产品在设计时所赋予的产品强度和产品使用中所承受的<span class="keyword">载荷或应力这对矛盾因素的博弈结果</span>。</p>
+        <p>在可靠性工程中所说的应力和强度都是广义的：<span class="keyword green">强度</span>是指抵抗破坏或失效的一切因素组合（如尺寸、材料等），<span class="keyword orange">应力</span>是指可能引起产品失效的一切因素的组合（如负载、温度、振动等）。</p>
         <div class="cards">
-          <article class="card"><h4>强度 > 应力</h4><p>产品处于可靠状态</p></article>
-          <article class="card"><h4>强度 = 应力</h4><p>产品处于极限状态</p></article>
-          <article class="card"><h4>强度 < 应力</h4><p>产品处于失效状态</p></article>
+          <article class="card"><h4>✅ 可靠状态</h4><p>强度 <strong>></strong> 应力</p></article>
+          <article class="card"><h4>⚠️ 极限状态</h4><p>强度 <strong>=</strong> 应力</p></article>
+          <article class="card"><h4>❌ 失效状态</h4><p>强度 <strong><</strong> 应力</p></article>
+          <article class="card"><h4>📐 设计原则</h4><p>把产品的强度设计得足够大，使其在整个使用过程中始终保持大于所有可能的应力及其组合</p></article>
         </div>
-        <div class="callout">应力和强度都是广义概念：强度是抵抗破坏的一切因素组合，应力是可能引起失效的一切因素组合。</div>
+        <p>据此可以把产品为什么失效简要归纳为两点：<span class="keyword">（1）应力分析和估计不足</span>，尤其对应力的随机性考虑不够；<span class="keyword">（2）强度不够</span>导致失效的发生，可能是疲劳、腐蚀、磨损或选材不当使强度随时间推移而降低。</p>
       </section>
 
-      <section id="s3" class="panel">
-        <div class="section-kicker">3.1.3</div>
-        <h2>产品为什么会失效</h2>
-        <div class="timeline">
-          <div class="timeline-item"><div class="timeline-year">应力分析不足</div><div class="timeline-text">对使用中可能承受的应力分析和估计不足，尤其对随机性估计不足</div></div>
-          <div class="timeline-item"><div class="timeline-year">强度不够</div><div class="timeline-text">设计的强度不足，或材料、零部件、制造装配缺陷导致强度下降</div></div>
-          <div class="timeline-item"><div class="timeline-year">维修考虑不当</div><div class="timeline-text">设计时对维修考虑不当，也会导致失效</div></div>
-        </div>
-        <div class="callout warn">可靠性分析就是要仔细、全面地分析产品所有可能的应力，并将强度设计得足够大，使其始终大于应力及其组合。</div>
-      </section><section class="panel quiz-section">
+      <section class="panel">
+        <div class="section-kicker">3.1.3</div><div id="s3"></div>
+        <h2>GJB 450A-2004 规定的13项工作项目</h2>
+        <p>GJB 450A-2004《装备可靠性工作通用要求》中规定了可靠性设计与分析工作有 <span class="keyword purple">13项工作项目</span>：</p>
+        <ul>
+          <li>建立可靠性模型</li>
+          <li>可靠性分配</li>
+          <li>可靠性预计</li>
+          <li>故障模式、影响及危害性分析</li>
+          <li>故障树分析</li>
+          <li>潜在分析</li>
+          <li>电路容差分析</li>
+          <li>制定可靠性设计准则</li>
+          <li>元器件、零部件和原材料选择与控制</li>
+          <li>确定可靠性关键产品</li>
+          <li>确定功能测试、包装、贮存、装卸、运输和维修对产品可靠性的影响</li>
+          <li>有限元分析</li>
+          <li>耐久性分析</li>
+        </ul>
+        <div class="callout warn">可靠性设计与分析的这些通用方法只有紧密结合产品的具体特点，进行有针对性的应用才能有效地提高产品的可靠性。这些方法都是成熟的，但推广应用效果不理想的重要一点就是<strong>结合产品的具体实际不够</strong>。</div>
+      </section>
+
+      <section class="panel quiz-section" id="quiz">
         <div class="section-kicker">练习题</div>
         <h2>互动练习题(5道)</h2>
-                <div class="question" data-id="q0" data-answer="A" data-type="single">
-          <div class="question-header">第1题：产品可靠性首先是怎样得来的？<span class="badge badge-single">单选</span></div>
-          <label class="option-label"><input type="radio" name="q0" value="A"><span>A. 设计出来的</span></label>
-          <label class="option-label"><input type="radio" name="q0" value="B"><span>B. 试出来的</span></label>
-          <label class="option-label"><input type="radio" name="q0" value="C"><span>C. 算出来的</span></label>
-          <label class="option-label"><input type="radio" name="q0" value="D"><span>D. 管出来的</span></label>
+        <div class="question" data-id="q0" data-answer="D" data-type="single">
+          <div class="question-header">第1题：产品的可靠性是如何得来的？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q0" value="A"><span>A. 主要靠试验验证出来</span></label>
+          <label class="option-label"><input type="radio" name="q0" value="B"><span>B. 主要靠统计计算出来</span></label>
+          <label class="option-label"><input type="radio" name="q0" value="C"><span>C. 主要靠出厂检验把关</span></label>
+          <label class="option-label"><input type="radio" name="q0" value="D"><span>D. 设计出来、制造出来和管理出来的，首先是设计出来的</span></label>
         </div>
-        <div class="question" data-id="q1" data-answer="C" data-type="single">
-          <div class="question-header">第2题：应力—强度干涉模型中，产品处于失效状态的条件是？<span class="badge badge-single">单选</span></div>
-          <label class="option-label"><input type="radio" name="q1" value="A"><span>A. 强度大于应力</span></label>
-          <label class="option-label"><input type="radio" name="q1" value="B"><span>B. 强度等于应力</span></label>
-          <label class="option-label"><input type="radio" name="q1" value="C"><span>C. 强度小于应力</span></label>
-          <label class="option-label"><input type="radio" name="q1" value="D"><span>D. 应力等于0</span></label>
+        <div class="question" data-id="q1" data-answer="B" data-type="single">
+          <div class="question-header">第2题：在应力-强度干涉模型中，产品处于可靠状态的条件是？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q1" value="A"><span>A. 强度 = 应力</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="B"><span>B. 强度 > 应力</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="C"><span>C. 强度 < 应力</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="D"><span>D. 强度 ≥ 0</span></label>
         </div>
         <div class="question" data-id="q2" data-answer="ABC" data-type="multi">
-          <div class="question-header">第3题：以下哪些属于广义的“应力”？<span class="badge badge-multi">多选</span></div>
-          <label class="option-label"><input type="checkbox" name="q2" value="A"><span>A. 负载</span></label>
-          <label class="option-label"><input type="checkbox" name="q2" value="B"><span>B. 温度</span></label>
-          <label class="option-label"><input type="checkbox" name="q2" value="C"><span>C. 振动</span></label>
-          <label class="option-label"><input type="checkbox" name="q2" value="D"><span>D. 材料强度</span></label>
+          <div class="question-header">第3题：产品失效的主要原因可以归纳为哪些？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q2" value="A"><span>A. 对应力的随机性分析和估计不足</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="B"><span>B. 强度不够导致失效</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="C"><span>C. 元器件、原材料选用不当或制造缺陷使强度降低</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="D"><span>D. 产品外观不好看</span></label>
         </div>
-        <div class="question" data-id="q3" data-answer="B" data-type="single">
-          <div class="question-header">第4题：抓住设计中的可靠性设计体现了什么思想？<span class="badge badge-single">单选</span></div>
-          <label class="option-label"><input type="radio" name="q3" value="A"><span>A. 事后维修为主</span></label>
-          <label class="option-label"><input type="radio" name="q3" value="B"><span>B. 预防为主</span></label>
-          <label class="option-label"><input type="radio" name="q3" value="C"><span>C. 试验为主</span></label>
-          <label class="option-label"><input type="radio" name="q3" value="D"><span>D. 成本最低原则</span></label>
+        <div class="question" data-id="q3" data-answer="D" data-type="single">
+          <div class="question-header">第4题：抓住设计中的可靠性设计体现了什么质量管理思想？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q3" value="A"><span>A. 事后检验为主</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="B"><span>B. 统计过程控制</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="C"><span>C. 全面质量管理</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="D"><span>D. 预防为主</span></label>
         </div>
         <div class="question" data-id="q4" data-answer="ABCD" data-type="multi">
-          <div class="question-header">第5题：以下哪些可能导致产品失效？<span class="badge badge-multi">多选</span></div>
-          <label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. 使用中承受的应力估计不足</span></label>
-          <label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. 强度设计不够</span></label>
-          <label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. 材料/零部件/装配缺陷导致强度下降</span></label>
-          <label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. 设计时对维修考虑不当</span></label>
+          <div class="question-header">第5题：GJB 450A-2004规定的可靠性设计与分析工作项目包括哪些？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. 建立可靠性模型、可靠性分配、可靠性预计</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. 故障模式、影响及危害性分析、故障树分析</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. 制定可靠性设计准则、元器件选择与控制</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. 电路容差分析、有限元分析、耐久性分析</span></label>
         </div>
-<div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
+        <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
         <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
       </section>
 
-      
-        <section class="panel">
+      <section class="panel">
         <div class="section-kicker">提交前自检</div>
         <h2>自检提示</h2>
-        <div class="tag-list">
-          <span class="tag">应力-强度模型</span><span class="tag">设计可靠性</span><span class="tag">预防为主</span><span class="tag">失效归因</span><span class="tag">广义应力</span>
-        </div>
-        <div class="callout">记忆点:可靠性首先是设计出来的；应力-强度干涉模型：强度>应力可靠，强度<应力失效；可靠性分析要全面分析所有可能应力。</div>
+        <div class="tag-list"><span class="tag">设计为先</span><span class="tag">应力-强度</span><span class="tag">13项方法</span><span class="tag">预防为主</span><span class="tag">GJB 450A</span></div>
+        <div class="callout">记忆点：可靠性首先是设计出来的；强度>应力=可靠；GJB 450A-2004规定了13项可靠性设计与分析方法；抓住设计就是落实"预防为主"。</div>
       </section>
-
-
     </div>
   </main>
 
   <footer class="footer"><p>© 可靠性工程师手册互动讲解页</p><div class="sign">⚡ 与你同行 AI 浪潮,打造智能工作新范式</div></footer>
 </div>
-
-
 <script>
 var explanations = {
-  q0: "教材原文：产品的可靠性是设计出来的，制造出来的，管理出来的，但首先是设计出来的。",
-  q1: "教材原文：当强度大于应力时，产品处于可靠状态；强度等于应力时处于极限状态；强度小于应力时处于失效状态。",
-  q2: "教材原文：应力是指可能引起产品失效的一切因素的组合，如负载、温度、振动等。材料强度属于强度，不属于应力。",
-  q3: "教材原文：抓住设计中的可靠性设计就是落实“预防为主”质量管理思想。",
-  q4: "教材原文：产品失效可归因于应力分析不足、强度不够、材料和制造装配缺陷导致强度下降，以及对维修考虑不当等。"
+ q0: "教材明确写到：产品的可靠性是设计出来的、制造出来的、管理出来的，但首先是设计出来的。",
+ q1: "教材原文：在产品应力与强度的博弈中，当强度大于应力时，产品处于可靠状态；当强度等于应力时，产品处于极限状态；当强度小于应力时，产品处于失效状态。",
+ q2: "教材把产品失效原因归纳为两点：（1）应力分析和估计不足，尤其对应力的随机性考虑不够；（2）强度不够导致失效，可能是元器件、原材料选用不当或制造缺陷使强度降低。",
+ q3: "教材指出：在产品研发过程中开展系统化的可靠性设计与分析非常重要，抓住设计中的可靠性设计就是落实'预防为主'质量管理思想。",
+ q4: "GJB 450A-2004规定的13项工作项目包括：建立可靠性模型、可靠性分配、可靠性预计、FMECA、FTA、潜在分析、电路容差分析、制定设计准则、元器件选择与控制、确定关键产品、确定功能测试等对产品可靠性的影响、有限元分析、耐久性分析。"
 };
 var questions = [
-  {id: 'q0', text: '产品可靠性首先是怎样得来的？'},
-  {id: 'q1', text: '应力—强度干涉模型中，产品处于失效状态的条件是？'},
-  {id: 'q2', text: '以下哪些属于广义的“应力”？'},
-  {id: 'q3', text: '抓住设计中的可靠性设计体现了什么思想？'},
-  {id: 'q4', text: '以下哪些可能导致产品失效？'}
+ {id:"q0",text:"产品的可靠性是如何得来的？"},
+ {id:"q1",text:"在应力-强度干涉模型中，产品处于可靠状态的条件是？"},
+ {id:"q2",text:"产品失效的主要原因可以归纳为哪些？"},
+ {id:"q3",text:"抓住设计中的可靠性设计体现了什么质量管理思想？"},
+ {id:"q4",text:"GJB 450A-2004规定的可靠性设计与分析工作项目包括哪些？"}
 ];
 function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');const ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>';else html+='<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>';html+='<div class="result-explain">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?'  满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
 </script>
-
 </body>
 </html>
