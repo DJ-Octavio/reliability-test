@@ -8,39 +8,11 @@
   <meta property="og:description" content="§1-3 可靠性工程。包含完整讲解、关键术语、重点提醒与 5 道互动练习题。" />
   <meta property="og:type" content="article" />
   <meta property="og:locale" content="zh_CN" />
+  <meta property="og:image" content="https://dj-octavio.github.io/reliability-test/preview-1-1.png" />
+  <meta property="og:image:width" content="800" />
+  <meta property="og:image:height" content="400" />
   <style>
-    :root {
-      --bg: #f6faff;
-      --paper: #ffffff;
-      --ink: #152033;
-      --muted: #637083;
-      --line: #dbe7f4;
-      --blue: #246bfe;
-      --cyan: #0f9fb6;
-      --green: #159a63;
-      --orange: #f08a24;
-      --red: #d94b5f;
-      --purple: #7657d8;
-      --shadow: 0 18px 45px rgba(39, 72, 114, 0.11);
-      --radius: 8px;
-      --max: 1180px;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,rgba(36,107,254,.06),rgba(15,159,182,.03) 38%,transparent 72%),var(--bg);line-height:1.65}
-    a{color:inherit;text-decoration:none}
-    .page-shell{min-height:100vh}
-    .topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,250,255,.86);border-bottom:1px solid rgba(219,231,244,.9)}
-    .topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
-    .brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(36,107,254,.22);position:relative;flex:0 0 auto}.brand-mark::after{content:"";width:14px;height:14px;border:2px solid #fff;border-left:0;border-bottom:0;position:absolute;top:9px;left:8px;transform:rotate(45deg)}.brand-title{font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-subtitle{font-size:12px;color:var(--muted);margin-top:1px}.top-links{display:flex;align-items:center;gap:6px;color:#334158;font-size:13px;white-space:nowrap}.top-links a{padding:7px 9px;border-radius:7px;transition:background 160ms ease,color 160ms ease}.top-links a:hover{background:#eaf2ff;color:var(--blue)}
-    .hero{max-width:var(--max);margin:0 auto;padding:58px 24px 34px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:32px;align-items:stretch}.hero h1{margin:0;font-size:clamp(36px,5vw,68px);line-height:1.05;letter-spacing:0;max-width:850px}.hero-lead{color:#405066;font-size:18px;margin:22px 0 0;max-width:720px}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 16px;border-radius:8px;border:1px solid var(--line);background:#fff;color:#233047;font-size:14px;font-weight:700;cursor:pointer}.button.primary{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 14px 30px rgba(36,107,254,.22)}
-    .hero-board{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center;height:100%;min-height:340px}.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:center}.score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:8px;padding:14px;min-height:116px;transition:transform 180ms ease,border-color 180ms ease,background 180ms ease}.score-item:hover{transform:translateY(-4px);border-color:#b7cdfa;background:#ffffff}.score-number{font-size:28px;font-weight:850;line-height:1}.score-title{margin-top:8px;font-size:15px;font-weight:800}.score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}
-    .main-layout{max-width:900px;margin:0 auto;padding:18px 24px 72px}.side-nav{position:sticky;top:78px;background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 32px rgba(39,72,114,.08);padding:12px}.side-nav a{display:block;padding:10px 11px;border-radius:7px;color:#46566f;font-size:13px;font-weight:700;transition:background 160ms ease,color 160ms ease,transform 160ms ease}.side-nav a:hover{background:#eaf2ff;color:var(--blue);transform:translateX(3px)}.content{display:grid;gap:22px}section{scroll-margin-top:96px}.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px}.section-kicker{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:0;margin-bottom:8px}h2{margin:0 0 14px;font-size:clamp(26px,3vw,38px);line-height:1.14;letter-spacing:0}h3{margin:24px 0 9px;font-size:20px;line-height:1.25;letter-spacing:0}p{margin:10px 0;color:#304059}ul,ol{margin:10px 0 0;padding-left:22px;color:#304059}li+li{margin-top:5px}.callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b}.callout.warn{border-left-color:var(--orange);background:#fff5e9;color:#6a3a08}.keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850}.keyword.green{background:#e7f7ef;color:var(--green)}.keyword.orange{background:#fff0dc;color:var(--orange)}.keyword.purple{background:#f0edff;color:var(--purple)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:8px;padding:18px}.card h4{margin:0 0 8px;font-size:16px;letter-spacing:0}.card p{margin:0;font-size:14px}.formula{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}.formula-step{min-height:104px;border:1px solid #dce8f6;background:#fff;border-radius:8px;padding:14px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:8px}.formula-step strong{font-size:16px}.formula-step span{color:var(--muted);font-size:12px;line-height:1.4}
-    .quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}.question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}.question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px}.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px}.badge-multi{background:#fff0f6;color:#d63384}.badge-single{background:#e8f5e9;color:#2e7d32}.option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px}.option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0}.submit-wrap{text-align:center;margin:20px 0}.submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}.result{display:none;margin-top:20px}.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}.result-correct{background:#e8f5e9;border:1px solid #a5d6a7}.result-wrong{background:#fce4ec;border:1px solid #ef9a9a}.result-q{font-weight:600;margin-bottom:6px}.result-your{color:#d32f2f}.result-answer{color:#2e7d32;font-weight:600}.result-explain{margin-top:6px;color:#555;font-size:13px}.score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}.footer{text-align:center;padding:16px;font-size:12px;color:#999}.footer .sign{font-size:13px;color:#666;margin-top:6px}
-    .divider{height:1px;background:#e8e8e8;margin:16px 0}.tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}
-    @media (max-width: 980px){.hero,.main-layout{grid-template-columns:1fr}.side-nav{position:static}.hero-board{order:-1}.cards,.formula{grid-template-columns:1fr 1fr}}
-    @media (max-width: 640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px}.cards,.formula{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}
-  </style>
+    :root{--bg:#f6faff;--paper:#fff;--ink:#152033;--muted:#637083;--line:#dbe7f4;--blue:#246bfe;--cyan:#0f9fb6;--green:#159a63;--orange:#f08a24;--red:#d94b5f;--purple:#7657d8;--shadow:0 18px 45px rgba(39,72,114,.11);--radius:8px;--max:1180px}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,rgba(36,107,254,.06),rgba(15,159,182,.03) 38%,transparent 72%),var(--bg);line-height:1.65}a{color:inherit;text-decoration:none}.page-shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,250,255,.86);border-bottom:1px solid rgba(219,231,244,.9)}.topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(36,107,254,.22);position:relative;flex:0 0 auto}.brand-mark::after{content:"";width:14px;height:14px;border:2px solid #fff;border-left:0;border-bottom:0;position:absolute;top:9px;left:8px;transform:rotate(45deg)}.brand-title{font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-subtitle{font-size:12px;color:var(--muted);margin-top:1px}.top-links{display:flex;align-items:center;gap:6px;color:#334158;font-size:13px;white-space:nowrap}.top-links a{padding:7px 9px;border-radius:7px;transition:background 160ms ease,color 160ms ease}.top-links a:hover{background:#eaf2ff;color:var(--blue)}.hero{max-width:var(--max);margin:0 auto;padding:58px 24px 34px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:32px;align-items:stretch}.hero h1{margin:0;font-size:clamp(36px,5vw,68px);line-height:1.05;letter-spacing:0;max-width:850px}.hero-lead{color:#405066;font-size:18px;margin:22px 0 0;max-width:720px}.hero-board{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center;height:100%;min-height:340px}.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:center}.score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:8px;padding:14px;min-height:116px;transition:transform 180ms ease,border-color 180ms ease,background 180ms ease}.score-item:hover{transform:translateY(-4px);border-color:#b7cdfa;background:#fff}.score-number{font-size:28px;font-weight:850;line-height:1}.score-title{margin-top:8px;font-size:15px;font-weight:800}.score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}.main-layout{max-width:900px;margin:0 auto;padding:18px 24px 72px}.content{display:grid;gap:22px}section{scroll-margin-top:96px}.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px}.section-kicker{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:0;margin-bottom:8px}h2{margin:0 0 14px;font-size:clamp(26px,3vw,38px);line-height:1.14}h3{margin:24px 0 9px;font-size:20px;line-height:1.25}p{margin:10px 0;color:#304059}ul,ol{margin:10px 0 0;padding-left:22px;color:#304059}li+li{margin-top:5px}.callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b}.callout.warn{border-left-color:var(--orange);background:#fff5e9;color:#6a3a08}.keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850}.keyword.green{background:#e7f7ef;color:var(--green)}.keyword.orange{background:#fff0dc;color:var(--orange)}.keyword.purple{background:#f0edff;color:var(--purple)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:8px;padding:18px}.card h4{margin:0 0 8px;font-size:16px}.card p{margin:0;font-size:14px}.quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}.question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}.question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px}.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px}.badge-multi{background:#fff0f6;color:#d63384}.badge-single{background:#e8f5e9;color:#2e7d32}.option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px}.option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0}.submit-wrap{text-align:center;margin:20px 0}.submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}.result{display:none;margin-top:20px}.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}.result-correct{background:#e8f5e9;border:1px solid #a5d6a7}.result-wrong{background:#fce4ec;border:1px solid #ef9a9a}.result-q{font-weight:600;margin-bottom:6px}.result-your{color:#d32f2f}.result-answer{color:#2e7d32;font-weight:600}.result-explain{margin-top:6px;color:#555;font-size:13px}.score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}.footer{text-align:center;padding:16px;font-size:12px;color:#999}.footer .sign{font-size:13px;color:#666;margin-top:6px}.tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}.timeline{position:relative;padding-left:24px}.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#e8ecff}.timeline-item{position:relative;margin-bottom:16px}.timeline-item::before{content:'';position:absolute;left:-20px;top:4px;width:12px;height:12px;border-radius:50%;background:#2b6aff;border:2px solid #fff;box-shadow:0 0 0 2px #e8ecff}.timeline-year{font-weight:700;color:#1a52d6;font-size:14px}.timeline-text{font-size:14px;color:#555;margin-top:2px}.six-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:12px 0}.six-item{background:#f8f9fa;border-radius:8px;padding:10px;text-align:center}.six-item .cn{font-size:14px;font-weight:600;color:#333}@media (max-width:980px){.hero,.main-layout{grid-template-columns:1fr}.hero-board{order:-1}.cards,.six-grid{grid-template-columns:1fr 1fr}}@media (max-width:640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px}.cards,.six-grid{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}</style>
 </head>
 <body>
 <div class="page-shell">
@@ -54,7 +26,7 @@
         </span>
       </a>
       <nav class="top-links">
-        <a href="#s1">学科定义</a><a href="#s2">四步法</a><a href="#s3">可靠性管理</a><a href="#quiz">练习题</a>
+        <a href="#s1">与故障斗争</a><a href="#s2">四步法</a><a href="#s3">管理</a><a href="#quiz">练习题</a>
       </nav>
     </div>
   </header>
@@ -62,98 +34,50 @@
   <section class="hero" id="top">
     <div>
       <h1>可靠性工程</h1>
-      <p class="hero-lead">与故障做斗争的学科——产品的可靠性不是算出来的、不是试出来的，而是设计出来、制造出来和管理出来的。</p>
+      <p class="hero-lead">可靠性工程是一门研究产品缺陷或故障的发生和发展的规律，进而解决缺陷或故障的预防和纠正，从而使缺陷或故障不发生或尽可能少发生的学科。可靠性不是算出来的、不是试出来的，而是设计出来、制造出来和管理出来的。</p>
     </div>
     <div class="hero-board">
       <div class="score-grid">
-        <div class="score-item"><div class="score-number" style="color: var(--green);">🛡️</div><div class="score-title">预防(核心第一步)</div><div class="score-text">克劳士比"第一次就把事情做正确"</div></div>
-        <div class="score-item"><div class="score-number" style="color: var(--orange);">🔍</div><div class="score-title">发现(尽早暴露缺陷)</div><div class="score-text">发现得越早损失越小</div></div>
-        <div class="score-item"><div class="score-number" style="color: var(--red);">🔧</div><div class="score-title">纠正(故障归零管理)</div><div class="score-text">技术五归零 + 管理五归零</div></div>
-        <div class="score-item"><div class="score-number" style="color: var(--purple);">✅</div><div class="score-title">验证(确保措施有效)</div><div class="score-text">防止"小改出大错"，牢记"牵一发动全身"</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--blue);">预防</div><div class="score-title">核心第一步</div><div class="score-text">第一次就把事情做正确</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--green);">发现</div><div class="score-title">尽早暴露缺陷</div><div class="score-text">发现得越早损失越小</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--orange);">纠正</div><div class="score-title">故障归零管理</div><div class="score-text">技术五归零 + 管理五归零</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--purple);">验证</div><div class="score-title">确保措施有效</div><div class="score-text">防止“小改出大错”</div></div>
       </div>
     </div>
   </section>
 
   <main class="main-layout">
     <div class="content">
-
-      <!-- Panel 1: 学科定义 -->
-      <section class="panel" id="s1">
-        <div class="section-kicker">1.3</div>
-        <h2>与故障做斗争的学科</h2>
-        <p>可靠性工程是一门研究产品<span class="keyword">缺陷或故障的发生和发展的规律</span>，进而解决缺陷或故障的预防和纠正，从而使缺陷或故障不发生或尽可能少发生的学科。有学者说，可靠性工程是一门<span class="keyword purple">与故障做斗争的学科</span>。</p>
-        <p>产品的可靠性问题是产品使用过程中暴露的影响使用的典型的工程实践问题，而不是有人误称的非常"玄"、难以琢磨的高深的数学问题。数学在可靠性工程中的作用不可否认——它可以用来描述产品故障发生的规律及对可靠性试验和使用信息进行产品可靠性水平的评定。</p>
-        <div class="callout">
-          <strong>核心结论：</strong>产品的可靠性<span class="keyword green">不是算出来的</span>，<span class="keyword green">不是试出来的</span>，而是<span class="keyword">设计出来</span>、<span class="keyword">制造出来</span>和<span class="keyword">管理出来</span>的，是在产品的全寿命周期中坚持与缺陷和故障做斗争的结果。
-        </div>
-        <p>这与人们的健康是与疾病斗争出来的道理一样，与防止火灾保证平安是与火做斗争的道理一样，都必须首先从预防故障或缺陷入手。</p>
-        <h3>与故障做斗争的完整流程</h3>
-        <p>首先从<strong>预防</strong>故障或缺陷入手，继而若存在薄弱环节或隐患能<strong>早发现</strong>，发现后能及时进行<strong>纠正</strong>，采取纠正措施。采取措施后就要对措施进行<strong>验证</strong>并对可靠性指标进行验证。
-        <div class="callout warn">
-          <strong>易错点提醒：</strong>可靠性≠数学计算。数学只是评定工具，可靠性是靠设计、制造和管理干出来的！
-        </div>
+      <section class="panel">
+        <div class="section-kicker">1.3 概念</div><div id="s1"></div>
+        <h2>可靠性工程——与故障做斗争的学科</h2>
+        <p>可靠性工程是一门研究产品缺陷或故障的发生和发展的规律，进而解决缺陷或故障的预防和纠正，从而使缺陷或故障不发生或尽可能少发生的学科。有学者说，可靠性工程是一门与故障做斗争的学科。</p>
+        <p>产品的可靠性问题是产品使用过程中暴露的影响使用的典型工程实践问题。产品的可靠性<span class="keyword">不是算出来的、不是试出来的，而是设计出来、制造出来和管理出来的</span>，是在产品全寿命周期中坚持与缺陷和故障斗争出来的。</p>
+        <div class="callout">这门学科的目标很明确：<span class="keyword purple">把缺陷堵在发生之前，把故障消灭在形成之前</span>。</div>
       </section>
 
-      <!-- Panel 2: 四步法 -->
-      <section class="panel" id="s2">
-        <div class="section-kicker">1.3 核心方法</div>
-        <h2>四步法：预防 · 发现 · 纠正 · 验证</h2>
-        <p>在产品的全寿命周期中，与故障做斗争的完整过程包含四个关键环节：</p>
-
+      <section class="panel">
+        <div class="section-kicker">1.3 四步法</div><div id="s2"></div>
+        <h2>预防、发现、纠正、验证</h2>
         <div class="cards">
-          <article class="card">
-            <h4 style="color: var(--green);">🛡️ 预防（第一步，核心）</h4>
-            <p>重视预防故障和缺陷是斗争的<span class="keyword green">最重要的一步</span>，是可靠性工程的<span class="keyword green">核心</span>。充分体现了质量管理大师<span class="keyword">克劳士比</span>提出的<span class="keyword">"第一次就把事情做正确"</span>的思想。</p>
-            <p style="margin-top:8px;font-size:13px;color:var(--muted);">典型方法：可靠性预计、FMECA、FTA、潜在分析、电路容差分析、可靠性设计准则、元器件选择与控制、有限元分析、耐久性分析等。</p>
-          </article>
-          <article class="card">
-            <h4 style="color: var(--orange);">🔍 发现（尽早暴露）</h4>
-            <p>智者千虑，必有一失。尽管已尽可能采取预防措施，但难免会有疏漏，因此<span class="keyword orange">尽早发现</span>缺陷或故障就显得非常重要——<span class="keyword orange">发现得越早损失越小</span>。</p>
-            <p style="margin-top:8px;font-size:13px;color:var(--muted);">典型方法：FMECA、FTA、可靠性评审、环境应力筛选、可靠性研制试验、可靠性增长试验等。</p>
-          </article>
-          <article class="card">
-            <h4 style="color: var(--red);">🔧 纠正（故障归零）</h4>
-            <p>发现缺陷不是目的，<span class="keyword">解决缺陷才是目的</span>。我国军工行业在实践中形成的<span class="keyword">故障归零管理</span>是十分有效的方法。</p>
-            <p style="margin-top:8px;font-size:13px;color:var(--muted);"><strong>技术五归零：</strong>定位准确、机理清楚、问题复现、措施有效、举一反三。</p>
-            <p style="margin-top:8px;font-size:13px;color:var(--muted);"><strong>管理五归零：</strong>过程清楚、责任明确、措施落实、严肃处理、完善规章。</p>
-          </article>
-          <article class="card">
-            <h4 style="color: var(--purple);">✅ 验证（防止反效果）</h4>
-            <p>纠正措施制定后必须经过工程验证，证明纠正的有效性。要防止工程中常出现的<span class="keyword purple">"小改出大错"</span>。一定要记住<span class="keyword purple">"牵一发动全身"</span>的道理。</p>
-            <p style="margin-top:8px;font-size:13px;color:var(--muted);">典型方法：可靠性鉴定试验、可靠性验收试验、加速寿命试验等。</p>
-          </article>
-        </div>
-
-        <div class="callout" style="margin-top:18px;">
-          <strong>记忆点：</strong>四步法环环相扣——预防是核心第一步 → 发现得越早损失越小 → 纠正要彻底（五归零） → 验证防止"小改出大错"。
+          <article class="card"><h4>🛡️ 预防</h4><p>最重要的一步，也是可靠性工程的核心。教材强调“<span class="keyword green">第一次就把事情做正确</span>”。通过可靠性设计与分析，把隐患消灭在源头。</p></article>
+          <article class="card"><h4>🔍 发现</h4><p>尽早暴露缺陷或故障，<span class="keyword green">发现得越早损失越小</span>。常见手段包括可靠性评审、环境应力筛选、研制试验和增长试验。</p></article>
+          <article class="card"><h4>🔧 纠正</h4><p>发现不是目的，解决才是目的。教材给出的典型方法是<span class="keyword">故障报告、分析和纠正措施系统</span>，以及我国军工行业的故障归零管理。</p></article>
+          <article class="card"><h4>✅ 验证</h4><p>纠正后必须验证，防止“<span class="keyword orange">小改出大错</span>”，牢记“<span class="keyword orange">牵一发动全身</span>”。通过试验确认措施有效，可靠性指标也要验证。</p></article>
         </div>
       </section>
 
-      <!-- Panel 3: 可靠性管理 -->
-      <section class="panel" id="s3">
-        <div class="section-kicker">1.3 管理</div>
-        <h2>可靠性管理：两个轮子缺一不可</h2>
-        <p>在实施"预防、发现、纠正和验证"一系列技术方法的过程中<span class="keyword purple">离不开可靠性管理</span>，缺少系统有效的管理，很多技术活动是难以有效开展的。</p>
-        <div class="callout">
-          <strong>经典比喻：</strong>有人把可靠性技术与管理形容为一部车子的<span class="keyword">两个轮子</span>，<span class="keyword green">缺一不可</span>。
+      <section class="panel">
+        <div class="section-kicker">1.3 故障归零与管理</div><div id="s3"></div>
+        <h2>技术五归零 + 管理五归零</h2>
+        <div class="cards">
+          <article class="card"><h4>技术五归零</h4><p>定位准确、机理清楚、问题复现、措施有效、举一反三。</p></article>
+          <article class="card"><h4>管理五归零</h4><p>过程清楚、责任明确、措施落实、严肃处理、完善规章。</p></article>
         </div>
-        <h3>GJB 450A-2004 可靠性管理工作项目</h3>
-        <p>《装备可靠性工作通用要求》中列出的可靠性管理工作项目包括：</p>
-        <ul>
-          <li><strong>制定可靠性计划</strong></li>
-          <li><strong>制定可靠性工作计划</strong></li>
-          <li><strong>对承制方、转承制方和供应方的监督与控制</strong></li>
-          <li><strong>可靠性评审</strong></li>
-          <li><strong>建立故障报告、分析和纠正措施系统</strong></li>
-          <li><strong>建立故障审查组织</strong></li>
-          <li><strong>可靠性增长管理</strong></li>
-        </ul>
-        <div class="callout warn">
-          <strong>重点提醒：</strong>可靠性技术与管理是一部车子的两个轮子，缺一不可。只有技术没有管理，技术活动难以有效开展；只有管理没有技术，管理就成了空架子。
-        </div>
+        <div class="callout warn">可靠性技术与管理像一部车子的两个轮子，<span class="keyword">缺一不可</span>。</div>
+        <p>GJB 450A-2004《装备可靠性工作通用要求》中列出的可靠性管理工作项目包括：制定可靠性计划、制定可靠性工作计划、对承制方和供应方监督控制、可靠性评审、建立故障报告分析和纠正措施系统、建立故障审查组织、可靠性增长管理等。</p>
       </section>
 
-      <!-- Quiz Section -->
       <section class="panel quiz-section" id="quiz">
         <div class="section-kicker">练习题</div>
         <h2>互动练习题(5道)</h2>
@@ -195,46 +119,35 @@
         </div>
         <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
         <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
-      </section><section class="panel">
-        <div class="section-kicker">提交前自检</div>
-        <h2>自检提示</h2>
-        <div class="tag-list">
-          <span class="tag">与故障做斗争</span>
-          <span class="tag">四步法</span>
-          <span class="tag">克劳士比</span>
-          <span class="tag">技术五归零</span>
-          <span class="tag">管理五归零</span>
-          <span class="tag">两个轮子</span>
-          <span class="tag">GJB 450A-2004</span>
-        </div>
-        <div class="callout">
-          <strong>记忆点：</strong>可靠性不是算出来的，是设计/制造/管理出来的；四步法：预防（核心）→ 发现（越早越好）→ 纠正（五归零）→ 验证（防小改出大错）；可靠性技术与管理是一部车子的两个轮子，缺一不可。
-        </div>
       </section>
 
+      <section class="panel">
+        <div class="section-kicker">提交前自检</div>
+        <h2>自检提示</h2>
+        <div class="tag-list"><span class="tag">预防</span><span class="tag">发现</span><span class="tag">纠正</span><span class="tag">验证</span><span class="tag">五归零</span><span class="tag">FRACAS</span></div>
+        <div class="callout">记忆点：可靠性工程的核心就是预防缺陷、尽早发现、及时纠正、有效验证；技术五归零和管理五归零要一起抓。</div>
+      </section>
     </div>
   </main>
 
   <footer class="footer"><p>© 可靠性工程师手册互动讲解页</p><div class="sign">⚡ 与你同行 AI 浪潮,打造智能工作新范式</div></footer>
 </div>
-
 <script>
 var explanations = {
-  q0: "教材原文：产品的可靠性不是算出来的，不是试出来的，而是设计出来、制造出来和管理出来的，是在产品的全寿命周期中坚持与缺陷和故障做斗争的结果。A和B都是教材中明确否定的说法。",
-  q1: "教材原文：重视预防故障和缺陷是斗争的最重要的一步，是可靠性工程的核心，也充分体现了质量管理大师克劳士比提出的第一次就把事情做正确的思想。预防是四步法中的第一步和核心。",
-  q2: "技术五归零包括：定位准确、机理清楚、问题复现、措施有效、举一反三。B选项'过程清楚'和D选项'责任明确'属于管理五归零的内容，不属于技术五归零。",
-  q3: "教材原文：纠正措施制定后必须经过工程验证，以证明纠正的有效性，要防止工程中常出现的'小改出大错'。一定要记住'牵一发动全身'的道理。某一故障件的改进很可能会引起新的问题，所以必须对纠正进行验证。",
-  q4: "GJB 450A-2004列出的可靠性管理工作项目包括：制定可靠性计划、制定可靠性工作计划、对承制方/转承制方和供应方的监督与控制、可靠性评审、建立故障报告分析和纠正措施系统、建立故障审查组织、可靠性增长管理等。D选项'环境应力筛选试验'属于发现环节的技术方法，不属于管理项目。"
+ q0: "教材明确写到：产品的可靠性不是算出来的，不是试出来的，而是设计出来、制造出来和管理出来的。",
+ q1: "教材强调与故障做斗争的第一步是预防故障或缺陷，预防是可靠性工程的核心。",
+ q2: "技术五归零包括：定位准确、机理清楚、问题复现、措施有效、举一反三。责任明确、过程清楚属于管理五归零。",
+ q3: "教材指出：纠正措施制定后必须经过验证，防止“小改出大错”，避免牵一发动全身。",
+ q4: "教材把可靠性技术与管理比喻为一部车子的两个轮子，缺一不可；GJB 450A-2004列出了计划、评审、FRACAS等管理项目。"
 };
 var questions = [
-  {id: "q0", text: "关于产品可靠性的来源，以下说法正确的是？"},
-  {id: "q1", text: "可靠性工程四步法的核心第一步是什么？"},
-  {id: "q2", text: "以下属于我国军工行业故障归零管理中'技术五归零'内容的有？"},
-  {id: "q3", text: "纠正措施制定后必须进行验证，主要是为了防止什么？"},
-  {id: "q4", text: "根据GJB 450A-2004，以下哪些属于可靠性管理工作项目？"}
+ {id:"q0",text:"关于《1.3 可靠性工程》，下列说法正确的是？"},
+ {id:"q1",text:"可靠性工程与故障做斗争的顺序，教材强调的第一步是？"},
+ {id:"q2",text:"下列哪些属于教材提出的“技术五归零”？"},
+ {id:"q3",text:"纠正缺陷和故障后为什么还要进行验证？"},
+ {id:"q4",text:"关于可靠性管理与技术关系，哪些说法符合教材？"}
 ];
-function submitQuiz(){var score=0,html='';questions.forEach(function(q,idx){var box=document.querySelector('.question[data-id="'+q.id+'"]');var correct=box.getAttribute('data-answer');var checked=[].slice.call(box.querySelectorAll('input:checked')).map(function(x){return x.value}).join('');var ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>';else html+='<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>';html+='<div class="result-explain">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?' 满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(function(inp){inp.disabled=true})}
+function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');const ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>';else html+='<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>';html+='<div class="result-explain">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?'  满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
 </script>
-
 </body>
 </html>
