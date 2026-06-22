@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>可靠性工程师手册|§7-6 可靠性工程知识培训</title>
+  <meta property="og:title" content="可靠性工程师手册|§7-6 可靠性工程知识培训" />
+  <meta property="og:description" content="§7-6 可靠性工程知识培训。包含完整讲解、关键术语、重点提醒与 5 道互动练习题。" />
+  <style>
+    :root {--bg:#f6faff;--paper:#ffffff;--ink:#152033;--muted:#637083;--line:#dbe7f4;--blue:#246bfe;--cyan:#0f9fb6;--green:#159a63;--orange:#f08a24;--red:#d94b5f;--purple:#7657d8;--shadow:0 18px 45px rgba(39,72,114,.11);--radius:8px;--max:1180px;}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,rgba(36,107,254,.06),rgba(15,159,182,.03) 38%,transparent 72%),var(--bg);line-height:1.65}
+    a{color:inherit;text-decoration:none}.page-shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,250,255,.86);border-bottom:1px solid rgba(219,231,244,.9)}
+    .topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(36,107,254,.22);position:relative;flex:0 0 auto}.brand-mark::after{content:"";width:14px;height:14px;border:2px solid #fff;border-left:0;border-bottom:0;position:absolute;top:9px;left:8px;transform:rotate(45deg)}.brand-title{font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-subtitle{font-size:12px;color:var(--muted);margin-top:1px}.top-links{display:flex;align-items:center;gap:6px;color:#334158;font-size:13px;white-space:nowrap}.top-links a{padding:7px 9px;border-radius:7px;transition:background 160ms ease,color 160ms ease}.top-links a:hover{background:#eaf2ff;color:var(--blue)}
+    .hero{max-width:var(--max);margin:0 auto;padding:58px 24px 34px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:32px;align-items:stretch}.hero h1{margin:0;font-size:clamp(36px,5vw,68px);line-height:1.05;letter-spacing:0;max-width:850px}.hero-lead{color:#405066;font-size:18px;margin:22px 0 0;max-width:720px}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 16px;border-radius:8px;border:1px solid var(--line);background:#fff;color:#233047;font-size:14px;font-weight:700;cursor:pointer}.button.primary{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 14px 30px rgba(36,107,254,.22)}
+    .hero-board{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center;height:100%;min-height:340px}.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:center}.score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:8px;padding:14px;min-height:116px;transition:transform 180ms ease,border-color 180ms ease,background 180ms ease}.score-item:hover{transform:translateY(-4px);border-color:#b7cdfa;background:#ffffff}.score-number{font-size:28px;font-weight:850;line-height:1}.score-title{margin-top:8px;font-size:15px;font-weight:800}.score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}
+    .main-layout{max-width:900px;margin:0 auto;padding:18px 24px 72px}.content{display:grid;gap:22px}section{scroll-margin-top:96px}.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px}.section-kicker{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:0;margin-bottom:8px}h2{margin:0 0 14px;font-size:clamp(26px,3vw,38px);line-height:1.14;letter-spacing:0}h3{margin:24px 0 9px;font-size:20px;line-height:1.25;letter-spacing:0}p{margin:10px 0;color:#304059}ul,ol{margin:10px 0 0;padding-left:22px;color:#304059}li+li{margin-top:5px}.callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b}.callout.warn{border-left-color:var(--orange);background:#fff5e9;color:#6a3a08}.keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850}.keyword.green{background:#e7f7ef;color:var(--green)}.keyword.orange{background:#fff0dc;color:var(--orange)}.keyword.purple{background:#f0edff;color:var(--purple)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:8px;padding:18px}.card h4{margin:0 0 8px;font-size:16px;letter-spacing:0}.card p{margin:0;font-size:14px}.formula{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}.formula-step{min-height:104px;border:1px solid #dce8f6;background:#fff;border-radius:8px;padding:14px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:8px}.formula-step strong{font-size:16px}.formula-step span{color:var(--muted);font-size:12px;line-height:1.4}
+    .quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}.question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}.question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px}.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px}.badge-multi{background:#fff0f6;color:#d63384}.badge-single{background:#e8f5e9;color:#2e7d32}.option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px}.option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0}.submit-wrap{text-align:center;margin:20px 0}.submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}.result{display:none;margin-top:20px}.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}.result-correct{background:#e8f5e9;border:1px solid #a5d6a7}.result-wrong{background:#fce4ec;border:1px solid #ef9a9a}.result-q{font-weight:600;margin-bottom:6px}.result-your{color:#d32f2f}.result-answer{color:#2e7d32;font-weight:600}.result-explain{margin-top:6px;color:#555;font-size:13px}.score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}.footer{text-align:center;padding:16px;font-size:12px;color:#999}.footer .sign{font-size:13px;color:#666;margin-top:6px}
+    .divider{height:1px;background:#e8e8e8;margin:16px 0}.tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}.timeline{position:relative;padding-left:24px}.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#e8ecff}.timeline-item{position:relative;margin-bottom:16px}.timeline-item::before{content:'';position:absolute;left:-20px;top:4px;width:12px;height:12px;border-radius:50%;background:#2b6aff;border:2px solid #fff;box-shadow:0 0 0 2px #e8ecff}.timeline-year{font-weight:700;color:#1a52d6;font-size:14px}.timeline-text{font-size:14px;color:#555;margin-top:2px}.six-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:12px 0}.six-item{background:#f8f9fa;border-radius:8px;padding:10px;text-align:center}.six-item .en{font-size:11px;color:#999}.six-item .cn{font-size:14px;font-weight:600;color:#333}
+    @media (max-width: 980px){.hero,.main-layout{grid-template-columns:1fr}.hero-board{order:-1}.cards,.formula,.six-grid{grid-template-columns:1fr 1fr}}
+    @media (max-width: 640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px}.cards,.formula,.six-grid{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}
+  </style>
+</head>
+<body>
+<div class="page-shell">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top" aria-label="返回顶部"><span class="brand-mark" aria-hidden="true"></span><span><span class="brand-title">可靠性工程师手册</span><span class="brand-subtitle">§7-6 可靠性工程知识培训</span></span></a>
+      <nav class="top-links"><a href="#s1">需求</a><a href="#s2">计划</a><a href="#s3">方式</a><a href="#s4">效果</a><a href="#quiz">练习题</a></nav>
+    </div>
+  </header>
+  <section class="hero" id="top">
+    <div>
+      <h1>可靠性工程知识培训</h1>
+      <p class="hero-lead">本节强调：企业要提高产品质量和可靠性，不能只靠少数专家，必须把可靠性知识纳入员工培训计划，让不同岗位的人掌握与自己职责相关的可靠性知识，并在全寿命周期中真正开展起来。</p>
+    </div>
+    <div class="hero-board">
+      <div class="score-grid">
+        <div class="score-item"><div class="score-number" style="color: var(--blue);">需求</div><div class="score-title">先分析再培训</div><div class="score-text">围绕问题、岗位、目标和转岗新员工</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--green);">长期</div><div class="score-title">培训要持续</div><div class="score-text">知识会更新，不能靠一次培训解决</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--orange);">A/B</div><div class="score-title">分层内容</div><div class="score-text">基础知识 + 专门技术</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--purple);">互动</div><div class="score-title">重视效果</div><div class="score-text">理论联系实际，培训后要总结改进</div></div>
+      </div>
+    </div>
+  </section>
+  <main class="main-layout"><div class="content">
+    <section class="panel" id="s1">
+      <div class="section-kicker">7.6 概述</div>
+      <h2>培训不是形式，而是可靠性工作的基础能力建设</h2>
+      <p>教材指出，企业的可靠性意识和可靠性工程技术掌握程度，直接影响产品质量与可靠性。虽然可靠性工程已经发展了半个多世纪，但在我国很多企业里仍处于初级阶段：意识不强、全过程管理未建立、设计与试验技术未普及、会技术但不会结合产品开展工作。</p>
+      <div class="callout">因此，<span class="keyword">可靠性工程师</span>要在领导支持下推动培训，企业人力资源部门要把培训纳入正式计划，使员工在产品全寿命周期里认真开展可靠性工作。</div>
+      <h3>培训要解决什么</h3>
+      <ul>
+        <li>让领导、技术、管理和一线人员理解可靠性的重要性。</li>
+        <li>让不同岗位掌握与职责相关的可靠性知识和方法。</li>
+        <li>支撑企业的质量改进、可靠性增长和安全性提升。</li>
+      </ul>
+      <h3>教材的核心判断</h3>
+      <p>可靠性培训不能停留在“知道概念”，而要落到“会在产品上开展工作”。</p>
+    </section>
+    <section class="panel" id="s2">
+      <div class="section-kicker">7.6.1~7.6.2</div>
+      <h2>培训需求分析与培训计划</h2>
+      <h3>培训需求分析关注的五件事</h3>
+      <div class="cards">
+        <div class="card"><h4>1. 企业问题与挑战</h4><p>先看企业当前面临哪些质量与可靠性问题。</p></div>
+        <div class="card"><h4>2. 所需知识和技能</h4><p>为解决这些问题需要哪些可靠性知识和技能。</p></div>
+        <div class="card"><h4>3. 岗位现状</h4><p>各岗位人员现有知识和技能水平如何。</p></div>
+        <div class="card"><h4>4. 战略目标</h4><p>实现企业目标所需的可靠性知识资料是什么。</p></div>
+      </div>
+      <div class="card" style="margin-top:14px"><h4>5. 转岗与新员工</h4><p>转岗人员和新员工也应纳入培训需求分析。</p></div>
+      <h3>培训计划的种类</h3>
+      <ul>
+        <li><span class="keyword green">长期培训</span>：持续规划，适应可靠性技术发展和新产品开发需要。</li>
+        <li><span class="keyword green">短期培训</span>：围绕当前制约企业的突出问题开展有针对性的培训。</li>
+        <li><span class="keyword orange">基础知识与专门知识</span>：A 是基础概念，B 是具体技术和管理方法。</li>
+      </ul>
+      <div class="callout warn">教材强调：可靠性知识不是上两次课就能掌握的，必须长期、持续、分层推进。</div>
+    </section>
+    <section class="panel" id="s3">
+      <div class="section-kicker">7.6.3</div>
+      <h2>培训方式：派出去，也请进来</h2>
+      <div class="cards">
+        <div class="card"><h4>派出去培训</h4><p>主要用于培养可靠性工程师和技术骨干，如热设计、试验与评价等专业人才。适合少数人深造。</p></div>
+        <div class="card"><h4>请进来培训</h4><p>把老师请到企业内开展培训，效率较高，也更贴近实际产品问题，适合全员参与。</p></div>
+      </div>
+      <p>教材还提出，可以通过专题讲座、可靠性成果交流会、针对某一类故障的专题研讨会等方式，把培训和企业真实问题结合起来。</p>
+    </section>
+    <section class="panel" id="s4">
+      <div class="section-kicker">7.6.4</div>
+      <h2>为什么很多培训“上了课却不会做”</h2>
+      <p>教材直接指出，不少企业存在“为了培训而培训”的情况：有的训了但不会做，有的甚至觉得可靠性工程像玄学，说明培训效果不佳。</p>
+      <h3>提高培训效果的五个抓手</h3>
+      <ol>
+        <li>培训计划要有针对性，每次目的明确。</li>
+        <li>选对老师，既要懂理论，也要有与故障做斗争的工程实践经验。</li>
+        <li>理论联系实际，把技术和具体产品结合起来。</li>
+        <li>重视互动，把讲课变成教与学的互相促进。</li>
+        <li>每次培训后总结改进，持续提高培训质量。</li>
+      </ol>
+      <div class="callout">一句话：培训的终点不是“听过”，而是“会用、能做、做得对”。</div>
+    </section>
+    <section class="panel" id="quiz">
+      <div class="section-kicker">互动练习</div>
+      <h2>5 道练习题</h2>
+      <div class="quiz-section">
+        <div class="question" data-id="q1" data-answer="B" data-type="single">
+          <div class="question-header">第1题：教材认为可靠性培训应该首先围绕什么展开？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q1" value="A"><span>A. 只围绕考试题库</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="B"><span>B. 企业面临的质量与可靠性问题和挑战</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="C"><span>C. 只围绕外部认证证书</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="D"><span>D. 只围绕售后宣传</span></label>
+        </div>
+        <div class="question" data-id="q2" data-answer="ABCD" data-type="multi">
+          <div class="question-header">第2题：培训需求分析应考虑哪些内容？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q2" value="A"><span>A. 企业面临的问题和挑战</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="B"><span>B. 解决问题所需的知识和技能</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="C"><span>C. 不同岗位人员现有水平</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="D"><span>D. 转岗人员和新员工培训</span></label>
+        </div>
+        <div class="question" data-id="q3" data-answer="C" data-type="single">
+          <div class="question-header">第3题：下列哪项最符合教材对“长期培训”的理解？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q3" value="A"><span>A. 一次培训就能解决全部问题</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="B"><span>B. 只面向外部客户</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="C"><span>C. 有长期规划，持续适应新技术和新问题</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="D"><span>D. 仅在出问题后再临时组织</span></label>
+        </div>
+        <div class="question" data-id="q4" data-answer="ABD" data-type="multi">
+          <div class="question-header">第4题：哪些属于教材提到的提升培训效果的做法？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. 目的明确、计划有针对性</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. 选择既懂理论又有工程经验的老师</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. 只追求签到人数，不管能否落地</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. 培训后认真总结并持续改进</span></label>
+        </div>
+        <div class="question" data-id="q5" data-answer="ACD" data-type="multi">
+          <div class="question-header">第5题：关于培训方式，下列哪些说法符合教材？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q5" value="A"><span>A. 派出去培训适合培养骨干人才</span></label>
+          <label class="option-label"><input type="checkbox" name="q5" value="B"><span>B. 请进来培训不适合全员参与</span></label>
+          <label class="option-label"><input type="checkbox" name="q5" value="C"><span>C. 请进来培训效率较高</span></label>
+          <label class="option-label"><input type="checkbox" name="q5" value="D"><span>D. 专题讲座、研讨会、成果交流会都可作为培训形式</span></label>
+        </div>
+        <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
+        <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
+      </div>
+    </section>
+    <section class="panel">
+      <div class="section-kicker">补充记忆</div>
+      <h2>本节抓手</h2>
+      <div class="tag-list"><span class="tag">需求分析</span><span class="tag">长期培训</span><span class="tag">短期培训</span><span class="tag">请进来</span><span class="tag">派出去</span><span class="tag">培训效果</span></div>
+      <div class="callout">一句话总结：可靠性培训不是“把人叫来听一遍”，而是围绕问题、岗位和目标，持续把知识变成做事能力。</div>
+    </section>
+  </div></main>
+  <footer class="footer"><p>© 可靠性工程师手册互动讲解页</p><div class="sign">可靠性工程知识培训 · §7-6</div></footer>
+</div>
+<script>
+const explanations = {
+  q1: '教材要求培训需求分析先看企业面临的质量与可靠性问题和挑战，再确定需要什么知识和技能。',
+  q2: '需求分析应包括问题挑战、所需知识和技能、岗位现有水平、战略目标所需知识资料，以及转岗和新员工培训。',
+  q3: '长期培训不是一次解决问题，而是要有长远规划，适应新技术和新问题。',
+  q4: '提高效果要目的明确、选对老师、理论联系实际、重视互动，并持续总结改进。',
+  q5: '教材认为派出去培训适合骨干人才，请进来培训效率较高，专题讲座和研讨会也是很好的培训形式。'
+};
+const questions = [
+  {id:'q1', text:'教材认为可靠性培训应该首先围绕什么展开？'},
+  {id:'q2', text:'培训需求分析应考虑哪些内容？'},
+  {id:'q3', text:'下列哪项最符合教材对“长期培训”的理解？'},
+  {id:'q4', text:'哪些属于教材提到的提升培训效果的做法？'},
+  {id:'q5', text:'关于培训方式，下列哪些说法符合教材？'}
+];
+function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).sort().join('');const ok=checked===correct; if(ok)score++; html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">'; html+='<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>'; if(!ok)html+='<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>'; else html+='<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>'; html+='<div class="result-explain">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?'  满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
+</script>
+</body>
+</html>

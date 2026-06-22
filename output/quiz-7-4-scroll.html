@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>可靠性工程师手册|§7-4 故障报告、分析和纠正措施系统</title>
+  <meta property="og:title" content="可靠性工程师手册|§7-4 故障报告、分析和纠正措施系统" />
+  <meta property="og:description" content="§7-4 故障报告、分析和纠正措施系统。包含完整讲解、关键术语、重点提醒与 5 道互动练习题。" />
+  <style>
+    :root {--bg:#f6faff;--paper:#ffffff;--ink:#152033;--muted:#637083;--line:#dbe7f4;--blue:#246bfe;--cyan:#0f9fb6;--green:#159a63;--orange:#f08a24;--red:#d94b5f;--purple:#7657d8;--shadow:0 18px 45px rgba(39,72,114,.11);--radius:8px;--max:1180px;}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,rgba(36,107,254,.06),rgba(15,159,182,.03) 38%,transparent 72%),var(--bg);line-height:1.65}
+    a{color:inherit;text-decoration:none}.page-shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,250,255,.86);border-bottom:1px solid rgba(219,231,244,.9)}
+    .topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(36,107,254,.22);position:relative;flex:0 0 auto}.brand-mark::after{content:"";width:14px;height:14px;border:2px solid #fff;border-left:0;border-bottom:0;position:absolute;top:9px;left:8px;transform:rotate(45deg)}.brand-title{font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-subtitle{font-size:12px;color:var(--muted);margin-top:1px}.top-links{display:flex;align-items:center;gap:6px;color:#334158;font-size:13px;white-space:nowrap}.top-links a{padding:7px 9px;border-radius:7px;transition:background 160ms ease,color 160ms ease}.top-links a:hover{background:#eaf2ff;color:var(--blue)}
+    .hero{max-width:var(--max);margin:0 auto;padding:58px 24px 34px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:32px;align-items:stretch}.hero h1{margin:0;font-size:clamp(36px,5vw,68px);line-height:1.05;letter-spacing:0;max-width:850px}.hero-lead{color:#405066;font-size:18px;margin:22px 0 0;max-width:720px}
+    .hero-board{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center;height:100%;min-height:340px}.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:center}.score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:8px;padding:14px;min-height:116px;transition:transform 180ms ease,border-color 180ms ease,background 180ms ease}.score-item:hover{transform:translateY(-4px);border-color:#b7cdfa;background:#ffffff}.score-number{font-size:28px;font-weight:850;line-height:1}.score-title{margin-top:8px;font-size:15px;font-weight:800}.score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}
+    .main-layout{max-width:900px;margin:0 auto;padding:18px 24px 72px}.content{display:grid;gap:22px}section{scroll-margin-top:96px}.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px}.section-kicker{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:0;margin-bottom:8px}h2{margin:0 0 14px;font-size:clamp(26px,3vw,38px);line-height:1.14;letter-spacing:0}h3{margin:24px 0 9px;font-size:20px;line-height:1.25;letter-spacing:0}p{margin:10px 0;color:#304059}ul,ol{margin:10px 0 0;padding-left:22px;color:#304059}li+li{margin-top:5px}.callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b}.callout.warn{border-left-color:var(--orange);background:#fff5e9;color:#6a3a08}.keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850}.keyword.green{background:#e7f7ef;color:var(--green)}.keyword.orange{background:#fff0dc;color:var(--orange)}.keyword.purple{background:#f0edff;color:var(--purple)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:8px;padding:18px}.card h4{margin:0 0 8px;font-size:16px;letter-spacing:0}.card p{margin:0;font-size:14px}
+    .quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}.question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}.question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px}.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px}.badge-multi{background:#fff0f6;color:#d63384}.badge-single{background:#e8f5e9;color:#2e7d32}.option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px}.option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0}.submit-wrap{text-align:center;margin:20px 0}.submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}.result{display:none;margin-top:20px}.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}.result-correct{background:#e8f5e9;border:1px solid #a5d6a7}.result-wrong{background:#fce4ec;border:1px solid #ef9a9a}.result-q{font-weight:600;margin-bottom:6px}.result-your{color:#d32f2f}.result-answer{color:#2e7d32;font-weight:600}.result-explain{margin-top:6px;color:#555;font-size:13px}.score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}.footer{text-align:center;padding:16px;font-size:12px;color:#999}.footer .sign{font-size:13px;color:#666;margin-top:6px}
+    .tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}
+    @media (max-width: 980px){.hero,.main-layout{grid-template-columns:1fr}.hero-board{order:-1}.cards{grid-template-columns:1fr 1fr}}
+    @media (max-width: 640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px}.cards{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}
+  </style>
+</head>
+<body>
+<div class="page-shell">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top" aria-label="返回顶部"><span class="brand-mark" aria-hidden="true"></span><span><span class="brand-title">可靠性工程师手册</span><span class="brand-subtitle">§7-4 故障报告、分析和纠正措施系统</span></span></a>
+      <nav class="top-links"><a href="#s1">FRACAS概念</a><a href="#s2">工作流程</a><a href="#s3">实施步骤</a><a href="#quiz">练习题</a></nav>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div>
+      <h1>故障报告、分析和纠正措施系统</h1>
+      <p class="hero-lead">FRACAS（Failure Reporting, Analysis and Corrective Action System）是对故障进行严格管理的有效方法，通过及早告警和反馈控制原理消除或减少故障影响，防止类似故障相继发生，是实现故障归零、产品可靠性增长的关键。</p>
+    </div>
+    <div class="hero-board">
+      <div class="score-grid">
+        <div class="score-item"><div class="score-number" style="color: var(--blue);">FRACAS</div><div class="score-title">故障管理系统</div><div class="score-text">报告、分析、纠正措施闭环系统</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--green);">闭环</div><div class="score-title">系统特性</div><div class="score-text">收集、传递、反馈、分析、处理、归档</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--orange);">早期建立</div><div class="score-title">建立时机</div><div class="score-text">研发早期就应建立和运行</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--purple);">GJB 841</div><div class="score-title">标准依据</div><div class="score-text">GJB 841-1990规定建立和运行要求</div></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-layout"><div class="content">
+
+    <section class="panel" id="s1">
+      <div class="section-kicker">7.4.1</div>
+      <h2>FRACAS的概念与意义</h2>
+      <p>教材指出：<span class="keyword">可靠性工程的主要任务</span>是防止故障的发生，控制故障发生的概率，纠正已经发生的故障。故障是产品研发、制造和使用过程中不希望发生的事件，必须严肃对待、认真研究并严加管理。</p>
+      <p>建立FRACAS的目的：</p>
+      <ul>
+        <li>通过对产品故障进行<span class="keyword green">报告、分析和采取纠正措施</span>，防止故障的再次发生</li>
+        <li>为其他新产品的研发提供预防故障的借鉴</li>
+        <li>利用<span class="keyword orange">及早告警和反馈控制原理</span>消除或大大减少故障带来的影响</li>
+        <li>防止类似故障的相继发生，给产品的研发和用户带来大的效益</li>
+      </ul>
+      <div class="callout">FRACAS是一个<span class="keyword">闭环系统</span>，应在产品研发的早期就建立和运行，因为在设计开发阶段的纠正措施的方案选择空间较大。</div>
+      <div class="callout warn">重点：建立和运行一个有效的FRACAS是一项必须进行的简单有效的管理工作，是真正做到故障归零、实现产品可靠性增长的关键。</div>
+    </section>
+
+    <section class="panel" id="s2">
+      <div class="section-kicker">7.4.2</div>
+      <h2>FRACAS的工作流程</h2>
+      <p>教材指出：在新产品研发策划阶段，应对如何实施故障报告闭环系统方案进行策划，方案制定应有一套故障报告、分析和纠正措施反馈程序，应有反映故障发生、分析和纠正全过程的<span class="keyword purple">流程图</span>。</p>
+      <p>GJB 841-1990给出了故障报告闭环系统工作流程图，并提供了设计开发过程的故障报告表、故障分析表和纠正措施表的报告格式。</p>
+      <div class="callout">企业可根据自身产品特点，参照标准制定相关的表格。表格的形式应充分考虑填写的简便和信息的完整性，以利于故障信息的追溯，便于所需信息的提取和利用。</div>
+    </section>
+
+    <section class="panel" id="s3">
+      <div class="section-kicker">7.4.3</div>
+      <h2>FRACAS的实施步骤</h2>
+      <p>教材详细描述了FRACAS实施的三个主要步骤：</p>
+      <div class="cards">
+        <div class="card"><h4>步骤1：发现并报告故障</h4><p>观测故障→详细记录（系统、日期、征候、条件等）→故障核实→填写故障报告表。</p></div>
+        <div class="card"><h4>步骤2：分析故障，确定原因</h4><p>隔离故障→更换可疑产品确认→复现故障→测试分析→查找类似故障→确定原因→填写分析报告。</p></div>
+        <div class="card"><h4>步骤3：采取纠正措施，故障归零</h4><p>提出改正措施→纳入系统→试验验证→落实到文件→跟踪验证→举一反三。</p></div>
+      </div>
+      <div class="callout warn">特别注意：不能把产品发生故障后的换件维修作为纠正措施。换件维修可以迅速恢复功能，但不能提高产品的固有可靠性。建立FRACAS的一个重要目的是提高产品的固有可靠性。</div>
+      <h3>FRACAS有效性标志</h3>
+      <p>教材指出FRACAS建立和运行有效性的标志体现在两个方面：</p>
+      <ol>
+        <li>新产品研发结束，即将量产之前，对整个研发过程的所有故障及质量问题是否有完整、准确的故障分析和纠正措施的记录</li>
+        <li>量产后，对批量不大的产品是否有每件产品在出厂后的使用过程发生的故障和正常工作的完整、准确的记录</li>
+      </ol>
+    </section>
+
+    <section class="panel" id="quiz">
+      <div class="section-kicker">互动练习</div>
+      <h2>5 道练习题</h2>
+      <div class="quiz-section">
+        <div class="question" data-id="q1" data-answer="C" data-type="single">
+          <div class="question-header">第1题：FRACAS应在什么时候建立和运行？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q1" value="A"><span>A. 产品量产后</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="B"><span>B. 产品使用阶段</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="C"><span>C. 产品研发的早期</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="D"><span>D. 产品报废时</span></label>
+        </div>
+        <div class="question" data-id="q2" data-answer="ABCD" data-type="multi">
+          <div class="question-header">第2题：FRACAS系统应具有哪些功能？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q2" value="A"><span>A. 故障信息的收集、传递、反馈</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="B"><span>B. 故障分析、处理</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="C"><span>C. 故障信息归档</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="D"><span>D. 以适当形式显示故障信息</span></label>
+        </div>
+        <div class="question" data-id="q3" data-answer="B" data-type="single">
+          <div class="question-header">第3题：关于纠正措施，下列说法错误的是？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q3" value="A"><span>A. 应包括设计更改、工艺更改、程序更改等</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="B"><span>B. 换件维修可以作为纠正措施</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="C"><span>C. 需要验证纠正措施的有效性</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="D"><span>D. 应将纠正措施落实到设计文件和工艺文件上</span></label>
+        </div>
+        <div class="question" data-id="q4" data-answer="ACD" data-type="multi">
+          <div class="question-header">第4题：FRACAS实施步骤中，分析故障和确定原因一般包括哪些工作？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. 隔离故障，定位到尽可能低的产品层次</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. 直接丢弃故障产品</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. 对故障产品进行测试，使故障得以复现</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. 查找类似产品中的类似故障</span></label>
+        </div>
+        <div class="question" data-id="q5" data-answer="D" data-type="single">
+          <div class="question-header">第5题：建立FRACAS的一个重要目的是？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q5" value="A"><span>A. 迅速恢复产品功能</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="B"><span>B. 降低维修成本</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="C"><span>C. 减少维修时间</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="D"><span>D. 提高产品的固有可靠性</span></label>
+        </div>
+        <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
+        <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-kicker">补充记忆</div>
+      <h2>本节抓手</h2>
+      <div class="tag-list"><span class="tag">FRACAS</span><span class="tag">故障归零</span><span class="tag">闭环系统</span><span class="tag">及早告警</span><span class="tag">反馈控制</span><span class="tag">固有可靠性</span></div>
+      <div class="callout">一句话总结：FRACAS是通过故障报告、分析和采取纠正措施的闭环系统，利用及早告警和反馈控制原理防止故障再次发生，应在研发早期建立，核心目的是提高产品固有可靠性。</div>
+    </section>
+
+  </div></main>
+
+  <footer class="footer"><p>© 可靠性工程师手册互动讲解页</p><div class="sign">故障报告、分析和纠正措施系统 · §7-4</div></footer>
+</div>
+<script>
+const explanations = {
+  q1: '教材明确指出FRACAS是一个闭环系统，应在产品研发的早期就建立和运行，因为在设计开发阶段的纠正措施的方案选择空间较大。',
+  q2: '教材指出FRACAS应具有故障信息的收集、传递、反馈、分析、处理、归档，以及以适当形式显示故障信息的功能。',
+  q3: '教材特别强调：不能把产品发生故障后的换件维修作为纠正措施。换件维修可以迅速恢复功能，但不能提高产品的固有可靠性。',
+  q4: '教材描述分析故障和确定原因的步骤包括：隔离故障、更换可疑产品确认、复现故障、测试分析、查找类似故障等。直接丢弃故障产品不符合分析要求。',
+  q5: '教材指出建立FRACAS的一个重要目的是提高产品的固有可靠性，而不仅仅是恢复功能或降低成本。'
+};
+const questions = [
+  {id:'q1', text:'FRACAS应在什么时候建立和运行？'},
+  {id:'q2', text:'FRACAS系统应具有哪些功能？'},
+  {id:'q3', text:'关于纠正措施，下列说法错误的是？'},
+  {id:'q4', text:'FRACAS实施步骤中，分析故障和确定原因一般包括哪些工作？'},
+  {id:'q5', text:'建立FRACAS的一个重要目的是？'}
+];
+function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).sort().join('');const ok=checked===correct; if(ok)score++; html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">'; html+='<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>'; if(!ok)html+='<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>'; else html+='<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>'; html+='<div class="result-explain">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?'  满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
+</script>
+</body>
+</html>

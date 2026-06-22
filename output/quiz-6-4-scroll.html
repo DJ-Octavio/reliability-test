@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>可靠性工程师手册|§6-4 数据管理和应用</title>
+  <meta property="og:title" content="可靠性工程师手册|§6-4 数据管理和应用" />
+  <meta property="og:description" content="§6-4 数据管理和应用。包含完整讲解、关键术语、重点提醒与 5 道互动练习题。" />
+  <style>
+    :root {--bg:#f6faff;--paper:#ffffff;--ink:#152033;--muted:#637083;--line:#dbe7f4;--blue:#246bfe;--cyan:#0f9fb6;--green:#159a63;--orange:#f08a24;--red:#d94b5f;--purple:#7657d8;--shadow:0 18px 45px rgba(39,72,114,.11);--radius:8px;--max:1180px;}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,rgba(36,107,254,.06),rgba(15,159,182,.03) 38%,transparent 72%),var(--bg);line-height:1.65}
+    a{color:inherit;text-decoration:none}.page-shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,250,255,.86);border-bottom:1px solid rgba(219,231,244,.9)}
+    .topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(36,107,254,.22);position:relative;flex:0 0 auto}.brand-mark::after{content:"";width:14px;height:14px;border:2px solid #fff;border-left:0;border-bottom:0;position:absolute;top:9px;left:8px;transform:rotate(45deg)}.brand-title{font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-subtitle{font-size:12px;color:var(--muted);margin-top:1px}.top-links{display:flex;align-items:center;gap:6px;color:#334158;font-size:13px;white-space:nowrap}.top-links a{padding:7px 9px;border-radius:7px;transition:background 160ms ease,color 160ms ease}.top-links a:hover{background:#eaf2ff;color:var(--blue)}
+    .hero{max-width:var(--max);margin:0 auto;padding:58px 24px 34px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:32px;align-items:stretch}.hero h1{margin:0;font-size:clamp(36px,5vw,68px);line-height:1.05;letter-spacing:0;max-width:850px}.hero-lead{color:#405066;font-size:18px;margin:22px 0 0;max-width:720px}.hero-board{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center;height:100%;min-height:340px}.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:center}.score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:8px;padding:14px;min-height:116px;transition:transform 180ms ease,border-color 180ms ease,background 180ms ease}.score-item:hover{transform:translateY(-4px);border-color:#b7cdfa;background:#ffffff}.score-number{font-size:28px;font-weight:850;line-height:1}.score-title{margin-top:8px;font-size:15px;font-weight:800}.score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}
+    .main-layout{max-width:900px;margin:0 auto;padding:18px 24px 72px}.content{display:grid;gap:22px}section{scroll-margin-top:96px}.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px}.section-kicker{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:0;margin-bottom:8px}h2{margin:0 0 14px;font-size:clamp(26px,3vw,38px);line-height:1.14;letter-spacing:0}h3{margin:24px 0 9px;font-size:20px;line-height:1.25;letter-spacing:0}p{margin:10px 0;color:#304059}ul,ol{margin:10px 0 0;padding-left:22px;color:#304059}li+li{margin-top:5px}.callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b}.callout.warn{border-left-color:var(--orange);background:#fff5e9;color:#6a3a08}.keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850}.keyword.green{background:#e7f7ef;color:var(--green)}.keyword.orange{background:#fff0dc;color:var(--orange)}.keyword.purple{background:#f0edff;color:var(--purple)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:8px;padding:18px}.card h4{margin:0 0 8px;font-size:16px;letter-spacing:0}.card p{margin:0;font-size:14px}
+    .quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}.question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}.question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px}.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px}.badge-multi{background:#fff0f6;color:#d63384}.badge-single{background:#e8f5e9;color:#2e7d32}.option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px}.option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0}.submit-wrap{text-align:center;margin:20px 0}.submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}.result{display:none;margin-top:20px}.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}.result-correct{background:#e8f5e9;border:1px solid #a5d6a7}.result-wrong{background:#fce4ec;border:1px solid #ef9a9a}.result-q{font-weight:600;margin-bottom:6px}.result-your{color:#d32f2f}.result-answer{color:#2e7d32;font-weight:600}.result-explain{margin-top:6px;color:#555;font-size:13px}.score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}.footer{text-align:center;padding:16px;font-size:12px;color:#999}.footer .sign{font-size:13px;color:#666;margin-top:6px}
+    .tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}
+    @media (max-width: 980px){.hero,.main-layout{grid-template-columns:1fr}.hero-board{order:-1}.cards{grid-template-columns:1fr 1fr}}
+    @media (max-width: 640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px}.cards{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}
+  </style>
+</head>
+<body>
+<div class="page-shell">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top"><span class="brand-mark"></span><span><span class="brand-title">可靠性工程师手册</span><span class="brand-subtitle">§6-4 数据管理和应用</span></span></a>
+      <nav class="top-links"><a href="#s1">数据管理要求</a><a href="#s2">数据收集</a><a href="#s3">数据应用</a><a href="#quiz">练习题</a></nav>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div>
+      <h1>数据管理和应用</h1>
+      <p class="hero-lead">本节讲解可靠性数据管理的基本要求、数据收集的三大原则（及时性、系统性、完整性），以及可靠性数据在产品全寿命周期各阶段的应用。</p>
+    </div>
+    <div class="hero-board">
+      <div class="score-grid">
+        <div class="score-item"><div class="score-number" style="color:var(--blue);">FRACAS</div><div class="score-title">故障报告系统</div><div class="score-text">故障报告、分析和纠正措施系统</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--green);">3大</div><div class="score-title">管理原则</div><div class="score-text">及时性、系统性、完整性</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--orange);">全周期</div><div class="score-title">数据收集</div><div class="score-text">研发→生产→使用全过程</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--purple);">4阶段</div><div class="score-title">数据应用</div><div class="score-text">论证→研发→试验→使用</div></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-layout"><div class="content">
+
+    <section class="panel" id="s1">
+      <div class="section-kicker">6.4 数据管理和应用</div>
+      <h2>可靠性数据管理的基本要求</h2>
+      <p>企业的可靠性数据管理应与企业的质量信息管理、售后服务信息管理<span class="keyword">密切结合</span>，并统一纳入企业的信息化管理，做到统一规划、统一报表、统一制度。</p>
+      <p>产品的可靠性数据的收集和管理还应与<span class="keyword green">FRACAS</span>（故障报告、分析和纠正措施系统）紧密结合。</p>
+      <h3>数据管理三大原则</h3>
+      <div class="cards">
+        <div class="card"><h4>⏰ 及时性</h4><p>可靠性数据一旦形成，就应及时加以收集和管理。包括试验中的故障数据、用户反馈数据、售后服务数据等。</p></div>
+        <div class="card"><h4>📋 系统性</h4><p>具体产品可靠性数据一定要从研发初期规定的可靠性指标开始收集，对研发过程、生产过程和产品使用过程所产生的数据进行系统的收集。</p></div>
+        <div class="card"><h4>📦 完整性</h4><p>可靠性数据一定要注意全面、完整，至少应包括数据发生的时间、累积试验或工作的时间、数据产生的环境等。</p></div>
+        <div class="card"><h4>🎯 利用价值</h4><p>可靠性数据只有做到及时性、系统性和完整性，才具有最大的利用价值。</p></div>
+      </div>
+      <div class="callout">可靠性数据管理不是独立的信息系统，必须与企业现有的质量、售后信息化体系统一规划，避免信息孤岛。</div>
+    </section>
+
+    <section class="panel" id="s2">
+      <div class="section-kicker">6.4 数据收集</div>
+      <h2>可靠性数据的收集</h2>
+      <p>可靠性数据的收集应覆盖产品全寿命周期，从研发初期开始，贯穿生产过程和产品使用过程。</p>
+      <h3>收集范围</h3>
+      <ul>
+        <li><b>研发过程数据</b>：可靠性预计、分配、FMEA、FTA等分析产生的数据</li>
+        <li><b>生产过程数据</b>：生产验收试验、环境试验、功能试验等数据</li>
+        <li><b>使用过程数据</b>：用户反馈数据、售后服务数据、维修记录等</li>
+        <li><b>试验数据</b>：研制试验、可靠性鉴定与验收试验、寿命试验等</li>
+      </ul>
+      <h3>完整性要求</h3>
+      <p>每条可靠性数据至少应包括以下信息：</p>
+      <ul>
+        <li>数据发生的<span class="keyword orange">时间</span></li>
+        <li>累积试验或工作的<span class="keyword orange">时间</span></li>
+        <li>数据产生的<span class="keyword orange">环境条件</span></li>
+      </ul>
+      <div class="callout warn">数据收集的关键是"从研发初期就开始"，而不是等到产品出了问题才补录数据。早期数据的缺失会严重影响后续分析的准确性。</div>
+    </section>
+
+    <section class="panel" id="s3">
+      <div class="section-kicker">6.4 数据应用</div>
+      <h2>可靠性数据的应用</h2>
+      <p>可靠性数据的应用是收集和管理的<span class="keyword purple">最终目的</span>，收集和管理是为了应用，是为提高产品可靠性提供信息。</p>
+      <h3>各阶段应用</h3>
+      <div class="cards">
+        <div class="card"><h4>论证阶段</h4><p>论证和确定可靠性的定性、定量要求。</p></div>
+        <div class="card"><h4>研发过程</h4><p>用于可靠性设计与分析，及早发现潜在薄弱环节或设计缺陷，特别是用于可靠性预计和分配、FMEA和FTA等。</p></div>
+        <div class="card"><h4>试验阶段</h4><p>在可靠性试验后评价产品的可靠性水平。</p></div>
+        <div class="card"><h4>使用过程</h4><p>评价使用可靠性水平，进行可靠性改进实现可靠性增长，为维修或售后服务提供信息。</p></div>
+      </div>
+      <div class="callout">数据应用的核心逻辑：论证定指标 → 研发找缺陷 → 试验评水平 → 使用促增长，形成闭环。</div>
+    </section>
+
+    <section class="panel" id="quiz">
+      <div class="section-kicker">互动练习</div>
+      <h2>5 道练习题</h2>
+      <div class="quiz-section">
+        <div class="question" data-id="q1" data-answer="D" data-type="single">
+          <div class="question-header">第1题：可靠性数据管理应与哪个系统紧密结合？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q1" value="A"><span>A. ERP系统</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="B"><span>B. MES系统</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="C"><span>C. PDM系统</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="D"><span>D. FRACAS系统</span></label>
+        </div>
+        <div class="question" data-id="q2" data-answer="ABC" data-type="multi">
+          <div class="question-header">第2题：可靠性数据管理的三大原则包括哪些？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q2" value="A"><span>A. 及时性</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="B"><span>B. 系统性</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="C"><span>C. 完整性</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="D"><span>D. 保密性</span></label>
+        </div>
+        <div class="question" data-id="q3" data-answer="B" data-type="single">
+          <div class="question-header">第3题：关于可靠性数据的完整性，以下哪项说法正确？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q3" value="A"><span>A. 只需记录故障现象即可</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="B"><span>B. 至少应包括数据发生的时间、累积试验或工作时间、数据产生的环境</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="C"><span>C. 只需记录故障次数，不需要记录时间信息</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="D"><span>D. 完整性是指数据量越大越好</span></label>
+        </div>
+        <div class="question" data-id="q4" data-answer="ABD" data-type="multi">
+          <div class="question-header">第4题：可靠性数据在研发过程主要用于哪些方面？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. 可靠性设计与分析</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. 及早发现潜在薄弱环节或设计缺陷</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. 评价使用可靠性水平</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. 可靠性预计和分配、FMEA和FTA</span></label>
+        </div>
+        <div class="question" data-id="q5" data-answer="C" data-type="single">
+          <div class="question-header">第5题：关于可靠性数据的应用，以下哪种说法最准确？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q5" value="A"><span>A. 可靠性数据只在产品使用阶段才有应用价值</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="B"><span>B. 可靠性数据的应用主要是为了存档备查</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="C"><span>C. 数据的应用是收集和管理的最终目的，是为提高产品可靠性提供信息</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="D"><span>D. 可靠性数据的应用仅限于可靠性试验评价</span></label>
+        </div>
+        <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
+        <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-kicker">补充记忆</div>
+      <h2>本节抓手</h2>
+      <div class="tag-list"><span class="tag">FRACAS</span><span class="tag">及时性</span><span class="tag">系统性</span><span class="tag">完整性</span><span class="tag">全寿命周期</span><span class="tag">数据应用</span><span class="tag">可靠性增长</span></div>
+      <div class="callout">一句话总结：可靠性数据管理要与质量、售后信息化体系统一规划，做到及时、系统、完整，数据应用贯穿论证→研发→试验→使用全过程。</div>
+    </section>
+
+  </div></main>
+  <footer class="footer"><p>© 可靠性工程师手册互动讲解页</p><div class="sign">数据管理和应用 · §6-4</div></footer>
+</div>
+<script>
+const explanations={
+  q1:'教材明确指出产品的可靠性数据的收集和管理还应与故障报告、分析和纠正措施系统（FRACAS）紧密结合。',
+  q2:'教材指出可靠性数据管理一定要注意可靠性数据的及时性、系统性和完整性，没有提到保密性。',
+  q3:'教材指出完整性是指可靠性数据一定要注意全面、完整，至少应包括数据发生的时间、累积试验或工作的时间、数据产生的环境等。',
+  q4:'教材指出在研发过程主要是为了可靠性设计与分析时及早发现潜在薄弱环节或设计缺陷，特别是用于可靠性预计和分配、FMEA和FTA等。"评价使用可靠性水平"是使用过程中的应用，不属于研发过程。',
+  q5:'教材明确指出可靠性数据的应用是收集和管理的最终目的，收集和管理是为了应用，是为提高产品可靠性提供信息。数据应用贯穿产品全寿命周期，不仅限于某一阶段。'
+};
+const questions=[
+  {id:'q1',text:'可靠性数据管理应与哪个系统紧密结合？'},
+  {id:'q2',text:'可靠性数据管理的三大原则包括哪些？'},
+  {id:'q3',text:'关于可靠性数据的完整性，以下哪项说法正确？'},
+  {id:'q4',text:'可靠性数据在研发过程主要用于哪些方面？'},
+  {id:'q5',text:'关于可靠性数据的应用，以下哪种说法最准确？'}
+];
+function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).sort().join('');const ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>';else html+='<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>';html+='<div class="result-explain">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?'  满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
+</script>
+</body>
+</html>

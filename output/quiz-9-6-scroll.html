@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>可靠性工程师手册|§9-6 工程应用要点</title>
+  <style>
+    :root {--bg:#f6faff;--paper:#ffffff;--ink:#152033;--muted:#637083;--line:#dbe7f4;--blue:#246bfe;--cyan:#0f9fb6;--green:#159a63;--orange:#f08a24;--red:#d94b5f;--purple:#7657d8;--shadow:0 18px 45px rgba(39,72,114,.11);--radius:8px;--max:1180px;}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,rgba(36,107,254,.06),rgba(15,159,182,.03) 38%,transparent 72%),var(--bg);line-height:1.65}
+    a{color:inherit;text-decoration:none}.page-shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,250,255,.86);border-bottom:1px solid rgba(219,231,244,.9)}.topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(36,107,254,.22);position:relative;flex:0 0 auto}.brand-mark::after{content:"";width:14px;height:14px;border:2px solid #fff;border-left:0;border-bottom:0;position:absolute;top:9px;left:8px;transform:rotate(45deg)}.brand-title{font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-subtitle{font-size:12px;color:var(--muted);margin-top:1px}.top-links{display:flex;align-items:center;gap:6px;color:#334158;font-size:13px;white-space:nowrap}.top-links a{padding:7px 9px;border-radius:7px;transition:background 160ms ease,color 160ms ease}.top-links a:hover{background:#eaf2ff;color:var(--blue)}
+    .hero{max-width:var(--max);margin:0 auto;padding:58px 24px 34px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:32px;align-items:stretch}.hero h1{margin:0;font-size:clamp(36px,5vw,68px);line-height:1.05;letter-spacing:0;max-width:850px}.hero-lead{color:#405066;font-size:18px;margin:22px 0 0;max-width:720px}.hero-board{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center;height:100%;min-height:340px}.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:center}.score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:8px;padding:14px;min-height:116px;transition:transform 180ms ease}.score-item:hover{transform:translateY(-4px);border-color:#b7cdfa;background:#fff}.score-number{font-size:28px;font-weight:850;line-height:1}.score-title{margin-top:8px;font-size:15px;font-weight:800}.score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}
+    .main-layout{max-width:900px;margin:0 auto;padding:18px 24px 72px}.content{display:grid;gap:22px}section{scroll-margin-top:96px}.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px}.section-kicker{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:0;margin-bottom:8px}h2{margin:0 0 14px;font-size:clamp(26px,3vw,38px);line-height:1.14}h3{margin:24px 0 9px;font-size:20px;line-height:1.25}p{margin:10px 0;color:#304059}ul,ol{margin:10px 0 0;padding-left:22px;color:#304059}li+li{margin-top:5px}.callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b}.callout.warn{border-left-color:var(--orange);background:#fff5e9;color:#6a3a08}.keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850}.keyword.green{background:#e7f7ef;color:var(--green)}.keyword.orange{background:#fff0dc;color:var(--orange)}.keyword.purple{background:#f0edff;color:var(--purple)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:8px;padding:18px}.card h4{margin:0 0 8px;font-size:16px}.card p{margin:0;font-size:14px}
+    .quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}.question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}.question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px}.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px}.badge-multi{background:#fff0f6;color:#d63384}.badge-single{background:#e8f5e9;color:#2e7d32}.option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px}.option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0}.submit-wrap{text-align:center;margin:20px 0}.submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}.result{display:none;margin-top:20px}.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}.result-correct{background:#e8f5e9;border:1px solid #a5d6a7}.result-wrong{background:#fce4ec;border:1px solid #ef9a9a}.result-q{font-weight:600;margin-bottom:6px}.result-your{color:#d32f2f}.result-answer{color:#2e7d32;font-weight:600}.result-explain{margin-top:6px;color:#555;font-size:13px}.score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}.footer{text-align:center;padding:16px;font-size:12px;color:#999}.footer .sign{font-size:13px;color:#666;margin-top:6px}
+    .tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}
+    @media (max-width:980px){.hero,.main-layout{grid-template-columns:1fr}.hero-board{order:-1}.cards{grid-template-columns:1fr 1fr}}
+    @media (max-width:640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px}.cards{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}
+  </style>
+</head>
+<body>
+<div class="page-shell">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top"><span class="brand-mark"></span><span><span class="brand-title">可靠性工程师手册</span><span class="brand-subtitle">§9-6 工程应用要点</span></span></a>
+      <nav class="top-links"><a href="#s1">应用要点</a><a href="#quiz">练习题</a></nav>
+    </div>
+  </header>
+  <section class="hero" id="top">
+    <div>
+      <h1>工程应用要点</h1>
+      <p class="hero-lead">本节总结测试性工程在实际应用中的关键要点，强调测试性设计应与主设备设计同步进行，综合诊断设计应使故障检测率达到100%，并注重测试性设计准则的贯彻与评审。</p>
+    </div>
+    <div class="hero-board">
+      <div class="score-grid">
+        <div class="score-item"><div class="score-number" style="color:var(--blue)">同步</div><div class="score-title">设计同步</div><div class="score-text">测试性设计与主设备设计同步</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--green)">100%</div><div class="score-title">故障检测率</div><div class="score-text">综合诊断设计目标</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--orange)">准则</div><div class="score-title">设计准则</div><div class="score-text">指导测试性设计工作</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--purple)">评审</div><div class="score-title">设计评审</div><div class="score-text">检查准则落实情况</div></div>
+      </div>
+    </div>
+  </section>
+  <main class="main-layout"><div class="content">
+    <section class="panel" id="s1">
+      <div class="section-kicker">9.6</div>
+      <h2>测试性工程应用要点</h2>
+      <p>测试性工程在实际应用中应把握以下要点：</p>
+      <ul>
+        <li><span class="keyword">测试性设计必须与主设备设计同步进行</span>，不能等设计完成后再作补偿</li>
+        <li>应进行<span class="keyword green">综合诊断设计</span>，使故障检测率达到100%</li>
+        <li>制定并贯彻<span class="keyword orange">测试性设计准则</span>，指导设计人员开展工作</li>
+        <li>在设计评审时应审查<span class="keyword purple">准则的落实情况</span></li>
+        <li>充分利用GJB/Z 91-1997和GJB 2547A-2012等标准中的测试性设计内容</li>
+      </ul>
+      <div class="callout">测试性设计准则是指导产品开展测试性设计的有效工具，应根据研制要求、相关标准和同行经验制定。</div>
+      <div class="callout warn">测试性设计不是事后补救，而是从产品立项论证开始就要考虑的工作。</div>
+    </section>
+    <section class="panel" id="quiz">
+      <div class="section-kicker">互动练习</div>
+      <h2>5 道练习题</h2>
+      <div class="quiz-section">
+        <div class="question" data-id="q1" data-answer="A" data-type="single">
+          <div class="question-header">第1题：测试性设计应该什么时候进行？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q1" value="A"><span>A. 与主设备设计同步进行</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="B"><span>B. 等主设备设计完成后再进行</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="C"><span>C. 只在生产阶段进行</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="D"><span>D. 只在使用阶段进行</span></label>
+        </div>
+        <div class="question" data-id="q2" data-answer="ABCD" data-type="multi">
+          <div class="question-header">第2题：测试性工程应用要点包括哪些？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q2" value="A"><span>A. 测试性设计与主设备设计同步</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="B"><span>B. 综合诊断设计使FDR达到100%</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="C"><span>C. 制定并贯彻测试性设计准则</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="D"><span>D. 设计评审时审查准则落实情况</span></label>
+        </div>
+        <div class="question" data-id="q3" data-answer="B" data-type="single">
+          <div class="question-header">第3题：综合诊断设计的目标是使故障检测率达到多少？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q3" value="A"><span>A. 80%</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="B"><span>B. 100%</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="C"><span>C. 90%</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="D"><span>D. 95%</span></label>
+        </div>
+        <div class="question" data-id="q4" data-answer="AC" data-type="multi">
+          <div class="question-header">第4题：测试性设计准则制定应参考哪些标准？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. GJB/Z 91-1997</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. GB/T 19000-2016</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. GJB 2547A-2012</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. ISO 9001</span></label>
+        </div>
+        <div class="question" data-id="q5" data-answer="D" data-type="single">
+          <div class="question-header">第5题：关于测试性设计，以下说法正确的是？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q5" value="A"><span>A. 测试性设计是事后补救</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="B"><span>B. 测试性设计只在生产阶段考虑</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="C"><span>C. 测试性设计不需要准则指导</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="D"><span>D. 测试性设计从产品立项论证开始就要考虑</span></label>
+        </div>
+        <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
+        <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
+      </div>
+    </section>
+    <section class="panel">
+      <div class="section-kicker">补充记忆</div>
+      <h2>本节抓手</h2>
+      <div class="tag-list"><span class="tag">设计同步</span><span class="tag">综合诊断</span><span class="tag">设计准则</span><span class="tag">设计评审</span><span class="tag">GJB 2547A</span></div>
+      <div class="callout">一句话总结：测试性工程应用的核心是同步设计、综合诊断、准则贯彻和评审检查，从立项开始就要重视测试性。</div>
+    </section>
+  </div></main>
+  <footer class="footer"><p>© 可靠性工程师手册互动讲解页</p><div class="sign">工程应用要点 · §9-6</div></footer>
+</div>
+<script>
+const explanations={q1:'教材明确指出测试性设计必须与主设备设计同步进行，不能等设计完成后再作补偿。',q2:'测试性工程应用要点包括同步设计、综合诊断使FDR达100%、制定准则、评审检查等。',q3:'教材指出应进行综合诊断设计，使故障检测率达到100%。',q4:'教材指出测试性设计准则制定可参考GJB/Z91-1997和GJB2547A-2012。',q5:'教材指出测试性设计不是事后补救，从产品立项论证开始就要考虑。'};
+const questions=[{id:'q1',text:'测试性设计应该什么时候进行？'},{id:'q2',text:'测试性工程应用要点包括哪些？'},{id:'q3',text:'综合诊断设计的目标是使故障检测率达到多少？'},{id:'q4',text:'测试性设计准则制定应参考哪些标准？'},{id:'q5',text:'关于测试性设计，以下说法正确的是？'}];
+function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).sort().join('');const ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>';else html+='<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>';html+='<div class="result-explain">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?'  满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
+</script>
+</body>
+</html>

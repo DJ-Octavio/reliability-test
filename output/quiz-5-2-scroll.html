@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>可靠性工程师手册|§5-2 人一机可靠性</title>
+  <meta property="og:title" content="可靠性工程师手册|§5-2 人一机可靠性" />
+  <meta property="og:description" content="§5-2 人一机可靠性。包含完整讲解、关键术语、重点提醒与 5 道互动练习题。" />
+  <style>
+    :root {--bg:#f6faff;--paper:#ffffff;--ink:#152033;--muted:#637083;--line:#dbe7f4;--blue:#246bfe;--cyan:#0f9fb6;--green:#159a63;--orange:#f08a24;--red:#d94b5f;--purple:#7657d8;--shadow:0 18px 45px rgba(39,72,114,.11);--radius:8px;--max:1180px;}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,rgba(36,107,254,.06),rgba(15,159,182,.03) 38%,transparent 72%),var(--bg);line-height:1.65}
+    a{color:inherit;text-decoration:none}.page-shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,250,255,.86);border-bottom:1px solid rgba(219,231,244,.9)}
+    .topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(36,107,254,.22);position:relative;flex:0 0 auto}.brand-mark::after{content:"";width:14px;height:14px;border:2px solid #fff;border-left:0;border-bottom:0;position:absolute;top:9px;left:8px;transform:rotate(45deg)}.brand-title{font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-subtitle{font-size:12px;color:var(--muted);margin-top:1px}.top-links{display:flex;align-items:center;gap:6px;color:#334158;font-size:13px;white-space:nowrap}.top-links a{padding:7px 9px;border-radius:7px;transition:background 160ms ease,color 160ms ease}.top-links a:hover{background:#eaf2ff;color:var(--blue)}
+    .hero{max-width:var(--max);margin:0 auto;padding:58px 24px 34px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:32px;align-items:stretch}.hero h1{margin:0;font-size:clamp(36px,5vw,68px);line-height:1.05;letter-spacing:0;max-width:850px}.hero-lead{color:#405066;font-size:18px;margin:22px 0 0;max-width:720px}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 16px;border-radius:8px;border:1px solid var(--line);background:#fff;color:#233047;font-size:14px;font-weight:700;cursor:pointer}.button.primary{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 14px 30px rgba(36,107,254,.22)}
+    .hero-board{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center;height:100%;min-height:340px}.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:center}.score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:8px;padding:14px;min-height:116px;transition:transform 180ms ease,border-color 180ms ease,background 180ms ease}.score-item:hover{transform:translateY(-4px);border-color:#b7cdfa;background:#ffffff}.score-number{font-size:28px;font-weight:850;line-height:1}.score-title{margin-top:8px;font-size:15px;font-weight:800}.score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}
+    .main-layout{max-width:900px;margin:0 auto;padding:18px 24px 72px}.content{display:grid;gap:22px}section{scroll-margin-top:96px}.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px}.section-kicker{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:0;margin-bottom:8px}h2{margin:0 0 14px;font-size:clamp(26px,3vw,38px);line-height:1.14;letter-spacing:0}h3{margin:24px 0 9px;font-size:20px;line-height:1.25;letter-spacing:0}p{margin:10px 0;color:#304059}ul,ol{margin:10px 0 0;padding-left:22px;color:#304059}li+li{margin-top:5px}.callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b}.callout.warn{border-left-color:var(--orange);background:#fff5e9;color:#6a3a08}.keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850}.keyword.green{background:#e7f7ef;color:var(--green)}.keyword.orange{background:#fff0dc;color:var(--orange)}.keyword.purple{background:#f0edff;color:var(--purple)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:8px;padding:18px}.card h4{margin:0 0 8px;font-size:16px;letter-spacing:0}.card p{margin:0;font-size:14px}
+    .quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}.question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}.question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px}.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px}.badge-multi{background:#fff0f6;color:#d63384}.badge-single{background:#e8f5e9;color:#2e7d32}.option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px}.option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0}.submit-wrap{text-align:center;margin:20px 0}.submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}.result{display:none;margin-top:20px}.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}.result-correct{background:#e8f5e9;border:1px solid #a5d6a7}.result-wrong{background:#fce4ec;border:1px solid #ef9a9a}.result-q{font-weight:600;margin-bottom:6px}.result-your{color:#d32f2f}.result-answer{color:#2e7d32;font-weight:600}.result-explain{margin-top:6px;color:#555;font-size:13px}.score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}.footer{text-align:center;padding:16px;font-size:12px;color:#999}.footer .sign{font-size:13px;color:#666;margin-top:6px}
+    .tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}
+    @media (max-width: 980px){.hero,.main-layout{grid-template-columns:1fr}.hero-board{order:-1}.cards{grid-template-columns:1fr 1fr}}
+    @media (max-width: 640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px}.cards{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}
+  </style>
+</head>
+<body>
+<div class="page-shell">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top"><span class="brand-mark"></span><span><span class="brand-title">可靠性工程师手册</span><span class="brand-subtitle">§5-2 人一机可靠性</span></span></a>
+      <nav class="top-links"><a href="#s1">概念</a><a href="#s2">因素</a><a href="#s3">设计</a><a href="#quiz">练习题</a></nav>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div>
+      <h1>人一机可靠性</h1>
+      <p class="hero-lead">本节讲解人一机系统的概念、人的可靠性影响因素、人一机可靠性设计方法以及如何通过优化人机界面和提高人员素质来提升系统整体可靠性。</p>
+    </div>
+    <div class="hero-board">
+      <div class="score-grid">
+        <div class="score-item"><div class="score-number" style="color:var(--blue);">70%~90%</div><div class="score-title">人为失误占比</div><div class="score-text">系统故障中由人为失误引起的比例</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--green);">3类</div><div class="score-title">影响因素</div><div class="score-text">心理、生理、环境因素</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--orange);">4项</div><div class="score-title">设计原则</div><div class="score-text">考虑人的特性、减少失误、容错、培训</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--purple);">人机界面</div><div class="score-title">关键接口</div><div class="score-text">信息显示、控制装置、工作环境</div></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-layout"><div class="content">
+
+    <section class="panel" id="s1">
+      <div class="section-kicker">5.2.1</div>
+      <h2>人一机系统的概念</h2>
+      <p>人一机系统是指由<span class="keyword">人</span>、<span class="keyword">机器</span>和<span class="keyword">环境</span>三个要素组成的系统。在这个系统中，人通过感官接收信息，经过大脑处理后发出控制指令，机器执行指令并产生结果，环境则对人和机器都产生影响。</p>
+      <p>教材指出，在系统故障中，由人为失误引起的故障占<span class="keyword orange">70%~90%</span>。因此，提高人的可靠性是提升系统整体可靠性的关键。</p>
+      <div class="callout">人一机可靠性研究的核心是：如何通过合理设计，减少人为失误，提高系统整体的可靠性。</div>
+    </section>
+
+    <section class="panel" id="s2">
+      <div class="section-kicker">5.2.2</div>
+      <h2>影响人的可靠性的因素</h2>
+      <p>影响人的可靠性的因素主要分为三类：<span class="keyword green">心理因素</span>、<span class="keyword green">生理因素</span>和<span class="keyword green">环境因素</span>。</p>
+      <div class="cards">
+        <div class="card"><h4>心理因素</h4><p>包括情绪、动机、注意力、疲劳感、压力等。情绪波动、注意力不集中、压力过大会显著增加失误概率。</p></div>
+        <div class="card"><h4>生理因素</h4><p>包括年龄、性别、体力、视力、听力、生物钟等。不同人的生理特性差异会影响操作准确性和反应速度。</p></div>
+        <div class="card"><h4>环境因素</h4><p>包括温度、湿度、噪声、照明、振动等。恶劣的工作环境会加速疲劳、降低注意力，增加失误风险。</p></div>
+      </div>
+      <div class="callout warn">人的失误是不可避免的，但可以通过合理设计将失误概率降到最低，并在失误发生后能够及时发现和纠正。</div>
+    </section>
+
+    <section class="panel" id="s3">
+      <div class="section-kicker">5.2.3</div>
+      <h2>人一机可靠性设计</h2>
+      <p>人一机可靠性设计的核心是通过优化<span class="keyword purple">人机界面</span>和提高人员素质来减少人为失误。主要设计原则包括：</p>
+      <ol>
+        <li><b>考虑人的特性</b>：设计要符合人的生理和心理特性，如显示装置要易于阅读，控制装置要符合操作习惯</li>
+        <li><b>减少失误机会</b>：通过简化操作、设置防错装置、提供清晰标识等减少失误</li>
+        <li><b>容错设计</b>：即使发生失误，系统也应能容忍或及时纠正，如设置报警装置、联锁装置</li>
+        <li><b>加强培训</b>：通过培训提高操作人员的技能水平和应急处理能力</li>
+      </ol>
+      <h3>人机界面设计要点</h3>
+      <ul>
+        <li><b>信息显示</b>：采用直观、清晰的显示方式，避免信息过载</li>
+        <li><b>控制装置</b>：布局合理，操作方向符合习惯，重要控制装置应有明显标识</li>
+        <li><b>工作环境</b>：控制温度、噪声、照明等在舒适范围内</li>
+      </ul>
+      <div class="callout">人一机可靠性设计的关键是"以人为中心"，让机器适应人，而不是让人适应机器。</div>
+    </section>
+
+    <section class="panel" id="quiz">
+      <div class="section-kicker">互动练习</div>
+      <h2>5 道练习题</h2>
+      <div class="quiz-section">
+        <div class="question" data-id="q1" data-answer="C" data-type="single">
+          <div class="question-header">第1题：在系统故障中，由人为失误引起的故障占比约为多少？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q1" value="A"><span>A. 10%~20%</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="B"><span>B. 30%~50%</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="C"><span>C. 70%~90%</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="D"><span>D. 100%</span></label>
+        </div>
+        <div class="question" data-id="q2" data-answer="ABC" data-type="multi">
+          <div class="question-header">第2题：影响人的可靠性的因素主要包括哪些？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q2" value="A"><span>A. 心理因素</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="B"><span>B. 生理因素</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="C"><span>C. 环境因素</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="D"><span>D. 材料因素</span></label>
+        </div>
+        <div class="question" data-id="q3" data-answer="B" data-type="single">
+          <div class="question-header">第3题：人一机可靠性设计的核心理念是什么？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q3" value="A"><span>A. 让人适应机器的特性</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="B"><span>B. 以人为中心，让机器适应人</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="C"><span>C. 完全消除人为失误</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="D"><span>D. 只依赖自动化，减少人的参与</span></label>
+        </div>
+        <div class="question" data-id="q4" data-answer="ABCD" data-type="multi">
+          <div class="question-header">第4题：人一机可靠性设计的主要原则包括哪些？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. 考虑人的特性</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. 减少失误机会</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. 容错设计</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. 加强培训</span></label>
+        </div>
+        <div class="question" data-id="q5" data-answer="D" data-type="single">
+          <div class="question-header">第5题：以下哪项不属于人机界面设计的要点？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q5" value="A"><span>A. 信息显示要直观清晰</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="B"><span>B. 控制装置布局要合理</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="C"><span>C. 工作环境要舒适</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="D"><span>D. 尽量增加操作步骤以提高准确性</span></label>
+        </div>
+        <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
+        <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-kicker">补充记忆</div>
+      <h2>本节抓手</h2>
+      <div class="tag-list"><span class="tag">人一机系统</span><span class="tag">人为失误</span><span class="tag">心理因素</span><span class="tag">生理因素</span><span class="tag">环境因素</span><span class="tag">人机界面</span><span class="tag">容错设计</span></div>
+      <div class="callout">一句话总结：系统故障中70%~90%由人为失误引起，通过以人为中心的设计、优化人机界面和加强培训来提升系统可靠性。</div>
+    </section>
+
+  </div></main>
+  <footer class="footer"><p>© 可靠性工程师手册互动讲解页</p><div class="sign">人一机可靠性 · §5-2</div></footer>
+</div>
+<script>
+const explanations={
+  q1:'教材指出在系统故障中，由人为失误引起的故障占70%~90%，因此提高人的可靠性是关键。',
+  q2:'影响人的可靠性的因素主要分为三类：心理因素、生理因素和环境因素。材料因素属于硬件范畴。',
+  q3:'教材强调人一机可靠性设计的核心理念是"以人为中心"，让机器适应人，而不是让人适应机器。',
+  q4:'教材列出的人一机可靠性设计原则包括：考虑人的特性、减少失误机会、容错设计、加强培训。',
+  q5:'教材指出人机界面设计要点包括信息显示、控制装置和工作环境，但并未建议增加操作步骤。相反，应简化操作以减少失误。'
+};
+const questions=[
+  {id:'q1',text:'在系统故障中，由人为失误引起的故障占比约为多少？'},
+  {id:'q2',text:'影响人的可靠性的因素主要包括哪些？'},
+  {id:'q3',text:'人一机可靠性设计的核心理念是什么？'},
+  {id:'q4',text:'人一机可靠性设计的主要原则包括哪些？'},
+  {id:'q5',text:'以下哪项不属于人机界面设计的要点？'}
+];
+function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).sort().join('');const ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>';else html+='<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>';html+='<div class="result-explain">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?'  满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
+</script>
+</body>
+</html>

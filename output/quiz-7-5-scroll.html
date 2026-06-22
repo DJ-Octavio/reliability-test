@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>可靠性工程师手册|§7-5 可靠性评审</title>
+  <meta property="og:title" content="可靠性工程师手册|§7-5 可靠性评审" />
+  <meta property="og:description" content="§7-5 可靠性评审。包含完整讲解、关键术语、重点提醒与 5 道互动练习题。" />
+  <style>
+    :root {--bg:#f6faff;--paper:#ffffff;--ink:#152033;--muted:#637083;--line:#dbe7f4;--blue:#246bfe;--cyan:#0f9fb6;--green:#159a63;--orange:#f08a24;--red:#d94b5f;--purple:#7657d8;--shadow:0 18px 45px rgba(39,72,114,.11);--radius:8px;--max:1180px;}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,rgba(36,107,254,.06),rgba(15,159,182,.03) 38%,transparent 72%),var(--bg);line-height:1.65}
+    a{color:inherit;text-decoration:none}.page-shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,250,255,.86);border-bottom:1px solid rgba(219,231,244,.9)}
+    .topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(36,107,254,.22);position:relative;flex:0 0 auto}.brand-mark::after{content:"";width:14px;height:14px;border:2px solid #fff;border-left:0;border-bottom:0;position:absolute;top:9px;left:8px;transform:rotate(45deg)}.brand-title{font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-subtitle{font-size:12px;color:var(--muted);margin-top:1px}.top-links{display:flex;align-items:center;gap:6px;color:#334158;font-size:13px;white-space:nowrap}.top-links a{padding:7px 9px;border-radius:7px;transition:background 160ms ease,color 160ms ease}.top-links a:hover{background:#eaf2ff;color:var(--blue)}
+    .hero{max-width:var(--max);margin:0 auto;padding:58px 24px 34px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:32px;align-items:stretch}.hero h1{margin:0;font-size:clamp(36px,5vw,68px);line-height:1.05;letter-spacing:0;max-width:850px}.hero-lead{color:#405066;font-size:18px;margin:22px 0 0;max-width:720px}
+    .hero-board{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center;height:100%;min-height:340px}.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:center}.score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:8px;padding:14px;min-height:116px;transition:transform 180ms ease,border-color 180ms ease,background 180ms ease}.score-item:hover{transform:translateY(-4px);border-color:#b7cdfa;background:#ffffff}.score-number{font-size:28px;font-weight:850;line-height:1}.score-title{margin-top:8px;font-size:15px;font-weight:800}.score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}
+    .main-layout{max-width:900px;margin:0 auto;padding:18px 24px 72px}.content{display:grid;gap:22px}section{scroll-margin-top:96px}.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px}.section-kicker{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:0;margin-bottom:8px}h2{margin:0 0 14px;font-size:clamp(26px,3vw,38px);line-height:1.14;letter-spacing:0}h3{margin:24px 0 9px;font-size:20px;line-height:1.25;letter-spacing:0}p{margin:10px 0;color:#304059}ul,ol{margin:10px 0 0;padding-left:22px;color:#304059}li+li{margin-top:5px}.callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b}.callout.warn{border-left-color:var(--orange);background:#fff5e9;color:#6a3a08}.keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850}.keyword.green{background:#e7f7ef;color:var(--green)}.keyword.orange{background:#fff0dc;color:var(--orange)}.keyword.purple{background:#f0edff;color:var(--purple)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:8px;padding:18px}.card h4{margin:0 0 8px;font-size:16px;letter-spacing:0}.card p{margin:0;font-size:14px}
+    .quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}.question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}.question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px}.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px}.badge-multi{background:#fff0f6;color:#d63384}.badge-single{background:#e8f5e9;color:#2e7d32}.option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px}.option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0}.submit-wrap{text-align:center;margin:20px 0}.submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}.result{display:none;margin-top:20px}.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}.result-correct{background:#e8f5e9;border:1px solid #a5d6a7}.result-wrong{background:#fce4ec;border:1px solid #ef9a9a}.result-q{font-weight:600;margin-bottom:6px}.result-your{color:#d32f2f}.result-answer{color:#2e7d32;font-weight:600}.result-explain{margin-top:6px;color:#555;font-size:13px}.score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}.footer{text-align:center;padding:16px;font-size:12px;color:#999}.footer .sign{font-size:13px;color:#666;margin-top:6px}
+    .tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}
+    @media (max-width: 980px){.hero,.main-layout{grid-template-columns:1fr}.hero-board{order:-1}.cards{grid-template-columns:1fr 1fr}}
+    @media (max-width: 640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px}.cards{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}
+  </style>
+</head>
+<body>
+<div class="page-shell">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top" aria-label="返回顶部"><span class="brand-mark" aria-hidden="true"></span><span><span class="brand-title">可靠性工程师手册</span><span class="brand-subtitle">§7-5 可靠性评审</span></span></a>
+      <nav class="top-links"><a href="#s1">评审概念</a><a href="#s2">评审有效性</a><a href="#quiz">练习题</a></nav>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div>
+      <h1>可靠性评审</h1>
+      <p class="hero-lead">可靠性评审是运用及早告警原理和同行专家评议原则，充分利用专家群体的智慧和经验，对产品研发过程中的可靠性设计、制造、试验等工作进行监控的管理手段。核心目的是发现潜在缺陷，提高设计成熟度，降低决策风险。</p>
+    </div>
+    <div class="hero-board">
+      <div class="score-grid">
+        <div class="score-item"><div class="score-number" style="color: var(--blue);">及早告警</div><div class="score-title">原理</div><div class="score-text">运用及早告警+同行专家评议</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--green);">4项</div><div class="score-title">评审作用</div><div class="score-text">评价设计、发现薄弱环节、检查大纲、减少更改</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--orange);">6条</div><div class="score-title">有效性措施</div><div class="score-text">提高评审有效性的具体着手方面</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--purple);">不代替</div><div class="score-title">评审边界</div><div class="score-text">不改变技术责任制度，不代替设计师决策</div></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-layout"><div class="content">
+
+    <section class="panel" id="s1">
+      <div class="section-kicker">7.5.1</div>
+      <h2>可靠性评审的概念与作用</h2>
+      <p>教材定义：可靠性评审是一种运用<span class="keyword">及早告警的原理</span>和<span class="keyword green">同行专家评议的原则</span>，充分利用专家群体的智慧和经验弥补开发团队和个人可能的不足和局限，对产品研发过程中的可靠性设计、制造、试验等各项工作进行监控的管理手段。</p>
+      <p>在产品设计开发的策划或产品可靠性保证大纲中应事先规定若干关键的<span class="keyword orange">评审控制点</span>，组织非直接参加研发的同行专家和有关部分的代表，对设计、制造和试验中的可靠性工作进行详细的审查。</p>
+      <h3>可靠性评审的四大作用</h3>
+      <ol>
+        <li>评价产品设计是否满足规定的可靠性、维修性、安全性等要求，是否符合可靠性设计准则、规范及有关标准的要求</li>
+        <li>发现和确定薄弱环节和可靠性风险较高的部位，研讨并提出改进意见</li>
+        <li>全面检查产品可靠性保证大纲实施的效果</li>
+        <li>减少设计更改，缩短开发周期，减少寿命周期费用</li>
+      </ol>
+      <div class="callout warn">重要边界：可靠性评审不能改变"谁设计谁负责"和"谁总抓谁负责"的技术责任制度，更不能代替设计师决策。</div>
+    </section>
+
+    <section class="panel" id="s2">
+      <div class="section-kicker">7.5.2</div>
+      <h2>评审的有效性与提高措施</h2>
+      <p>教材强调：可靠性评审一定要强调评审的<span class="keyword purple">有效性</span>。绝对不能因为规定要评审而评审，为评审而评审，一定要克服评审"走过场"，严防"认认真真走过场"。</p>
+      <p><b>评审有效性的标志</b>：薄弱环节或设计缺陷是否被发现，是否针对发现的问题提出并实施了改进。</p>
+      <h3>提高评审有效性的六个方面</h3>
+      <div class="cards">
+        <div class="card"><h4>①充分准备资料</h4><p>被评审者应充分准备详细的评审资料，防止以保密为借口不提供真实数据。</p></div>
+        <div class="card"><h4>②制定评审提纲</h4><p>根据评审内容认真制定评审提纲和具体要求，防止泛泛而论。</p></div>
+        <div class="card"><h4>③选好评审专家</h4><p>专家应有丰富工程经验并敢于直言，注意吸收不同观点的专家参加。</p></div>
+        <div class="card"><h4>④提前送资料</h4><p>评审资料要在评审会前送给专家审阅，保证有时间审查、复算。</p></div>
+        <div class="card"><h4>⑤保证评审时间</h4><p>让专家有充分时间发表意见和讨论，进行技术质疑。</p></div>
+        <div class="card"><h4>⑥客观公正结论</h4><p>评审结论应客观公正，所提建议应注意针对性和可操作性。</p></div>
+      </div>
+      <div class="callout">质量与可靠性管理部门应对评审结论的执行情况全过程进行跟踪和监督。</div>
+    </section>
+
+    <section class="panel" id="quiz">
+      <div class="section-kicker">互动练习</div>
+      <h2>5 道练习题</h2>
+      <div class="quiz-section">
+        <div class="question" data-id="q1" data-answer="B" data-type="single">
+          <div class="question-header">第1题：可靠性评审运用的原理和原则是？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q1" value="A"><span>A. 事后检验和领导审批</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="B"><span>B. 及早告警原理和同行专家评议原则</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="C"><span>C. 统计抽样和用户反馈</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="D"><span>D. 试验验证和数据分析</span></label>
+        </div>
+        <div class="question" data-id="q2" data-answer="ACD" data-type="multi">
+          <div class="question-header">第2题：关于可靠性评审，下列说法正确的有？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q2" value="A"><span>A. 评审不能改变"谁设计谁负责"的技术责任制度</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="B"><span>B. 评审可以代替设计师做决策</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="C"><span>C. 评审结论具有严肃性和权威性</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="D"><span>D. 质量与可靠性管理部门应跟踪评审结论执行情况</span></label>
+        </div>
+        <div class="question" data-id="q3" data-answer="C" data-type="single">
+          <div class="question-header">第3题：评审有效性的标志是什么？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q3" value="A"><span>A. 评审会开了多长时间</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="B"><span>B. 参加评审的专家数量</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="C"><span>C. 薄弱环节或设计缺陷是否被发现并提出改进</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="D"><span>D. 评审报告的页数</span></label>
+        </div>
+        <div class="question" data-id="q4" data-answer="ABCD" data-type="multi">
+          <div class="question-header">第4题：提高评审有效性可从哪些方面着手？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. 被评审者充分准备详细评审资料</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. 认真制定评审提纲和具体要求</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. 评审资料提前送给专家审阅</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. 保证评审时间，让专家充分发表意见</span></label>
+        </div>
+        <div class="question" data-id="q5" data-answer="D" data-type="single">
+          <div class="question-header">第5题：可靠性评审应在什么时候规定评审控制点？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q5" value="A"><span>A. 产品量产后</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="B"><span>B. 产品出现故障时</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="C"><span>C. 用户投诉后</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="D"><span>D. 在产品设计开发的策划或产品可靠性保证大纲中事先规定</span></label>
+        </div>
+        <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
+        <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-kicker">补充记忆</div>
+      <h2>本节抓手</h2>
+      <div class="tag-list"><span class="tag">可靠性评审</span><span class="tag">及早告警</span><span class="tag">同行专家评议</span><span class="tag">评审有效性</span><span class="tag">评审控制点</span><span class="tag">不代替决策</span></div>
+      <div class="callout">一句话总结：可靠性评审运用及早告警和同行专家评议原理，通过事先规定的评审控制点发现潜在缺陷，关键是评审要有效——严防"认认真真走过场"。</div>
+    </section>
+
+  </div></main>
+
+  <footer class="footer"><p>© 可靠性工程师手册互动讲解页</p><div class="sign">可靠性评审 · §7-5</div></footer>
+</div>
+<script>
+const explanations = {
+  q1: '教材定义可靠性评审是运用及早告警的原理和同行专家评议的原则。',
+  q2: '教材指出评审不能改变技术责任制度，更不能代替设计师决策；评审结论具有严肃性和权威性；管理部门应跟踪执行情况。',
+  q3: '教材明确指出评审有效性的标志是薄弱环节或设计缺陷是否被发现，是否针对发现的问题提出并实施了改进。',
+  q4: '教材列出了提高评审有效性的六个方面，ABCD四项均在列举之中。',
+  q5: '教材指出在产品设计开发的策划或产品可靠性保证大纲中应事先规定若干关键的评审控制点。'
+};
+const questions = [
+  {id:'q1', text:'可靠性评审运用的原理和原则是？'},
+  {id:'q2', text:'关于可靠性评审，下列说法正确的有？'},
+  {id:'q3', text:'评审有效性的标志是什么？'},
+  {id:'q4', text:'提高评审有效性可从哪些方面着手？'},
+  {id:'q5', text:'可靠性评审应在什么时候规定评审控制点？'}
+];
+function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).sort().join('');const ok=checked===correct; if(ok)score++; html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">'; html+='<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>'; if(!ok)html+='<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>'; else html+='<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>'; html+='<div class="result-explain">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?'  满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
+</script>
+</body>
+</html>

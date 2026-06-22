@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>可靠性工程师手册|§10-6 规划与研制保障资源</title>
+  <style>
+    :root {--bg:#f6faff;--paper:#ffffff;--ink:#152033;--muted:#637083;--line:#dbe7f4;--blue:#246bfe;--cyan:#0f9fb6;--green:#159a63;--orange:#f08a24;--red:#d94b5f;--purple:#7657d8;--shadow:0 18px 45px rgba(39,72,114,.11);--radius:8px;--max:1180px;}*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,rgba(36,107,254,.06),rgba(15,159,182,.03) 38%,transparent 72%),var(--bg);line-height:1.65}a{color:inherit;text-decoration:none}.page-shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,250,255,.86);border-bottom:1px solid rgba(219,231,244,.9)}.topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(36,107,254,.22);position:relative;flex:0 0 auto}.brand-mark::after{content:"";width:14px;height:14px;border:2px solid #fff;border-left:0;border-bottom:0;position:absolute;top:9px;left:8px;transform:rotate(45deg)}.brand-title{font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-subtitle{font-size:12px;color:var(--muted);margin-top:1px}.top-links{display:flex;align-items:center;gap:6px;color:#334158;font-size:13px;white-space:nowrap}.top-links a{padding:7px 9px;border-radius:7px;transition:background 160ms ease,color 160ms ease}.top-links a:hover{background:#eaf2ff;color:var(--blue)}.hero{max-width:var(--max);margin:0 auto;padding:58px 24px 34px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:32px;align-items:stretch}.hero h1{margin:0;font-size:clamp(36px,5vw,68px);line-height:1.05;letter-spacing:0;max-width:850px}.hero-lead{color:#405066;font-size:18px;margin:22px 0 0;max-width:720px}.hero-board{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center;height:100%;min-height:340px}.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:center}.score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:8px;padding:14px;min-height:116px;transition:transform 180ms ease}.score-item:hover{transform:translateY(-4px);border-color:#b7cdfa;background:#fff}.score-number{font-size:28px;font-weight:850;line-height:1}.score-title{margin-top:8px;font-size:15px;font-weight:800}.score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}.main-layout{max-width:900px;margin:0 auto;padding:18px 24px 72px}.content{display:grid;gap:22px}section{scroll-margin-top:96px}.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px}.section-kicker{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:0;margin-bottom:8px}h2{margin:0 0 14px;font-size:clamp(26px,3vw,38px);line-height:1.14}h3{margin:24px 0 9px;font-size:20px;line-height:1.25}p{margin:10px 0;color:#304059}ul,ol{margin:10px 0 0;padding-left:22px;color:#304059}li+li{margin-top:5px}.callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b}.callout.warn{border-left-color:var(--orange);background:#fff5e9;color:#6a3a08}.keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850}.keyword.green{background:#e7f7ef;color:var(--green)}.keyword.orange{background:#fff0dc;color:var(--orange)}.keyword.purple{background:#f0edff;color:var(--purple)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:8px;padding:18px}.card h4{margin:0 0 8px;font-size:16px}.card p{margin:0;font-size:14px}.quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}.question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}.question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px}.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px}.badge-multi{background:#fff0f6;color:#d63384}.badge-single{background:#e8f5e9;color:#2e7d32}.option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px}.option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0}.submit-wrap{text-align:center;margin:20px 0}.submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}.result{display:none;margin-top:20px}.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}.result-correct{background:#e8f5e9;border:1px solid #a5d6a7}.result-wrong{background:#fce4ec;border:1px solid #ef9a9a}.result-q{font-weight:600;margin-bottom:6px}.result-your{color:#d32f2f}.result-answer{color:#2e7d32;font-weight:600}.result-explain{margin-top:6px;color:#555;font-size:13px}.score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}.footer{text-align:center;padding:16px;font-size:12px;color:#999}.footer .sign{font-size:13px;color:#666;margin-top:6px}.tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}@media (max-width:980px){.hero,.main-layout{grid-template-columns:1fr}.hero-board{order:-1}.cards{grid-template-columns:1fr 1fr}}@media (max-width:640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px}.cards{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}
+  </style>
+</head>
+<body>
+<div class="page-shell">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top"><span class="brand-mark"></span><span><span class="brand-title">可靠性工程师手册</span><span class="brand-subtitle">§10-6 规划与研制保障资源</span></span></a>
+      <nav class="top-links"><a href="#s1">保障资源</a><a href="#quiz">练习题</a></nav>
+    </div>
+  </header>
+  <section class="hero" id="top">
+    <div>
+      <h1>规划与研制保障资源</h1>
+      <p class="hero-lead">保障资源是保障系统运行的物质基础。规划与研制保障资源包括人力和人员、供应保障、保障设备、技术资料、训练与训练保障、保障设施等，需要与装备研制同步规划、及时提供。</p>
+    </div>
+    <div class="hero-board">
+      <div class="score-grid">
+        <div class="score-item"><div class="score-number" style="color:var(--blue)">人力</div><div class="score-title">人力和人员</div><div class="score-text">数量、专业和技术等级</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--green)">供应</div><div class="score-title">供应保障</div><div class="score-text">备件、消耗品的规划与获取</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--orange)">设备</div><div class="score-title">保障设备</div><div class="score-text">测试、维修、试验等设备</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--purple)">资料</div><div class="score-title">技术资料</div><div class="score-text">说明书、手册、规程等</div></div>
+      </div>
+    </div>
+  </section>
+  <main class="main-layout"><div class="content">
+    <section class="panel" id="s1">
+      <div class="section-kicker">10.6</div>
+      <h2>保障资源的规划与研制</h2>
+      <p>保障资源是保障系统运行的物质基础，主要包括：</p>
+      <div class="cards">
+        <div class="card"><h4>人力和人员</h4><p>平时和战时使用与维修装备所需人员的数量、专业和技术等级。</p></div>
+        <div class="card"><h4>供应保障</h4><p>规划、确定并获得备件、消耗品的过程。</p></div>
+        <div class="card"><h4>保障设备</h4><p>使用与维修装备所需的测试设备、维修设备、试验设备、计量与校准设备、搬运设备、拆装设备、工具等。</p></div>
+        <div class="card"><h4>技术资料</h4><p>使用与维修装备所需的说明书、手册、规程、细则、清单、工程图样的统称。</p></div>
+        <div class="card"><h4>训练与训练保障</h4><p>训练装备使用与维修人员的活动与所需的程序、方法、技术、教材和器材等。</p></div>
+        <div class="card"><h4>保障设施与其他</h4><p>保障设施（永久性和半永久性建筑及配套设备）、包装装卸贮存运输保障、计算机资源保障等。</p></div>
+      </div>
+      <div class="callout">保障资源的规划应与装备研制同步进行，在装备论证阶段就开始考虑，确保装备交付时保障资源及时到位。</div>
+      <div class="callout warn">在规划保障资源过程中应充分考虑现有保障资源（包括满足要求的民品），并强调标准化要求。</div>
+    </section>
+    <section class="panel" id="quiz">
+      <div class="section-kicker">互动练习</div>
+      <h2>5 道练习题</h2>
+      <div class="quiz-section">
+        <div class="question" data-id="q1" data-answer="C" data-type="single">
+          <div class="question-header">第1题：保障资源规划应与什么同步进行？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q1" value="A"><span>A. 产品销售</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="B"><span>B. 产品报废</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="C"><span>C. 装备研制</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="D"><span>D. 产品宣传</span></label>
+        </div>
+        <div class="question" data-id="q2" data-answer="ABCD" data-type="multi">
+          <div class="question-header">第2题：保障资源包括以下哪些？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q2" value="A"><span>A. 人力和人员</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="B"><span>B. 供应保障</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="C"><span>C. 保障设备</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="D"><span>D. 技术资料</span></label>
+        </div>
+        <div class="question" data-id="q3" data-answer="B" data-type="single">
+          <div class="question-header">第3题：技术资料包括哪些？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q3" value="A"><span>A. 销售合同</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="B"><span>B. 说明书、手册、规程、细则、清单、工程图样</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="C"><span>C. 广告宣传材料</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="D"><span>D. 财务报表</span></label>
+        </div>
+        <div class="question" data-id="q4" data-answer="ABD" data-type="multi">
+          <div class="question-header">第4题：规划保障资源时应注意什么？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. 充分考虑现有保障资源</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. 强调标准化要求</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. 只考虑全新资源</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. 包括满足要求的民品</span></label>
+        </div>
+        <div class="question" data-id="q5" data-answer="D" data-type="single">
+          <div class="question-header">第5题：供应保障是指什么？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q5" value="A"><span>A. 产品制造</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="B"><span>B. 产品销售</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="C"><span>C. 产品设计</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="D"><span>D. 规划、确定并获得备件、消耗品的过程</span></label>
+        </div>
+        <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
+        <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
+      </div>
+    </section>
+    <section class="panel">
+      <div class="section-kicker">补充记忆</div>
+      <h2>本节抓手</h2>
+      <div class="tag-list"><span class="tag">保障资源</span><span class="tag">人力和人员</span><span class="tag">供应保障</span><span class="tag">保障设备</span><span class="tag">技术资料</span><span class="tag">标准化</span></div>
+      <div class="callout">一句话总结：保障资源涵盖人力、供应、设备、资料、训练、设施等，应与装备研制同步规划，充分利用现有资源并强调标准化。</div>
+    </section>
+  </div></main>
+  <footer class="footer"><p>© 可靠性工程师手册互动讲解页</p><div class="sign">规划与研制保障资源 · §10-6</div></footer>
+</div>
+<script>
+const explanations={q1:'教材指出保障资源的规划应与装备研制同步进行，在装备论证阶段就开始考虑。',q2:'保障资源包括人力和人员、供应保障、保障设备、技术资料、训练与训练保障、保障设施等。',q3:'教材指出技术资料是使用与维修装备所需的说明书、手册、规程、细则、清单、工程图样的统称。',q4:'教材指出在规划保障资源过程中应充分考虑现有保障资源（包括满足要求的民品），并强调标准化要求。',q5:'教材指出供应保障是指规划、确定并获得备件、消耗品的过程。'};
+const questions=[{id:'q1',text:'保障资源规划应与什么同步进行？'},{id:'q2',text:'保障资源包括以下哪些？'},{id:'q3',text:'技术资料包括哪些？'},{id:'q4',text:'规划保障资源时应注意什么？'},{id:'q5',text:'供应保障是指什么？'}];
+function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).sort().join('');const ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>';else html+='<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>';html+='<div class="result-explain">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?'  满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
+</script>
+</body>
+</html>

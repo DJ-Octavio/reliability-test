@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>可靠性工程师手册|§9-1 概述</title>
+  <meta property="og:title" content="可靠性工程师手册|§9-1 概述" />
+  <meta property="og:description" content="§9-1 概述：测试性工程基础。包含完整讲解、关键术语、重点提醒与 5 道互动练习题。" />
+  <style>
+    :root {--bg:#f6faff;--paper:#ffffff;--ink:#152033;--muted:#637083;--line:#dbe7f4;--blue:#246bfe;--cyan:#0f9fb6;--green:#159a63;--orange:#f08a24;--red:#d94b5f;--purple:#7657d8;--shadow:0 18px 45px rgba(39,72,114,.11);--radius:8px;--max:1180px;}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,rgba(36,107,254,.06),rgba(15,159,182,.03) 38%,transparent 72%),var(--bg);line-height:1.65}
+    a{color:inherit;text-decoration:none}.page-shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,250,255,.86);border-bottom:1px solid rgba(219,231,244,.9)}
+    .topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(36,107,254,.22);position:relative;flex:0 0 auto}.brand-mark::after{content:"";width:14px;height:14px;border:2px solid #fff;border-left:0;border-bottom:0;position:absolute;top:9px;left:8px;transform:rotate(45deg)}.brand-title{font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-subtitle{font-size:12px;color:var(--muted);margin-top:1px}.top-links{display:flex;align-items:center;gap:6px;color:#334158;font-size:13px;white-space:nowrap}.top-links a{padding:7px 9px;border-radius:7px;transition:background 160ms ease,color 160ms ease}.top-links a:hover{background:#eaf2ff;color:var(--blue)}
+    .hero{max-width:var(--max);margin:0 auto;padding:58px 24px 34px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:32px;align-items:stretch}.hero h1{margin:0;font-size:clamp(36px,5vw,68px);line-height:1.05;letter-spacing:0;max-width:850px}.hero-lead{color:#405066;font-size:18px;margin:22px 0 0;max-width:720px}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 16px;border-radius:8px;border:1px solid var(--line);background:#fff;color:#233047;font-size:14px;font-weight:700;cursor:pointer}.button.primary{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 14px 30px rgba(36,107,254,.22)}
+    .hero-board{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center;height:100%;min-height:340px}.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:center}.score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:8px;padding:14px;min-height:116px;transition:transform 180ms ease,border-color 180ms ease,background 180ms ease}.score-item:hover{transform:translateY(-4px);border-color:#b7cdfa;background:#ffffff}.score-number{font-size:28px;font-weight:850;line-height:1}.score-title{margin-top:8px;font-size:15px;font-weight:800}.score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}
+    .main-layout{max-width:900px;margin:0 auto;padding:18px 24px 72px}.content{display:grid;gap:22px}section{scroll-margin-top:96px}.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px}.section-kicker{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:0;margin-bottom:8px}h2{margin:0 0 14px;font-size:clamp(26px,3vw,38px);line-height:1.14;letter-spacing:0}h3{margin:24px 0 9px;font-size:20px;line-height:1.25;letter-spacing:0}p{margin:10px 0;color:#304059}ul,ol{margin:10px 0 0;padding-left:22px;color:#304059}li+li{margin-top:5px}.callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b}.callout.warn{border-left-color:var(--orange);background:#fff5e9;color:#6a3a08}.keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850}.keyword.green{background:#e7f7ef;color:var(--green)}.keyword.orange{background:#fff0dc;color:var(--orange)}.keyword.purple{background:#f0edff;color:var(--purple)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:8px;padding:18px}.card h4{margin:0 0 8px;font-size:16px;letter-spacing:0}.card p{margin:0;font-size:14px}
+    .quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}.question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}.question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px}.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px}.badge-multi{background:#fff0f6;color:#d63384}.badge-single{background:#e8f5e9;color:#2e7d32}.option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px}.option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0}.submit-wrap{text-align:center;margin:20px 0}.submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}.result{display:none;margin-top:20px}.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}.result-correct{background:#e8f5e9;border:1px solid #a5d6a7}.result-wrong{background:#fce4ec;border:1px solid #ef9a9a}.result-q{font-weight:600;margin-bottom:6px}.result-your{color:#d32f2f}.result-answer{color:#2e7d32;font-weight:600}.result-explain{margin-top:6px;color:#555;font-size:13px}.score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}.footer{text-align:center;padding:16px;font-size:12px;color:#999}.footer .sign{font-size:13px;color:#666;margin-top:6px}
+    .tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}
+    @media (max-width: 980px){.hero,.main-layout{grid-template-columns:1fr}.hero-board{order:-1}.cards{grid-template-columns:1fr 1fr}}
+    @media (max-width: 640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px}.cards{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}
+  </style>
+</head>
+<body>
+<div class="page-shell">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top"><span class="brand-mark"></span><span><span class="brand-title">可靠性工程师手册</span><span class="brand-subtitle">§9-1 概述</span></span></a>
+      <nav class="top-links"><a href="#s1">测试与测试性</a><a href="#s2">常用术语</a><a href="#quiz">练习题</a></nav>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div>
+      <h1>测试性工程基础·概述</h1>
+      <p class="hero-lead">本节介绍测试性工程的基本概念与发展历程。测试性是产品的一种设计特性，通过设计赋予产品及时、准确确定状态并隔离故障的能力，是与可靠性、维修性并列的重要学科。</p>
+    </div>
+    <div class="hero-board">
+      <div class="score-grid">
+        <div class="score-item"><div class="score-number" style="color:var(--blue)">BIT</div><div class="score-title">机内测试</div><div class="score-text">系统内部提供的自动检测与隔离故障能力</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--green)">PHM</div><div class="score-title">故障预测与健康管理</div><div class="score-text">新一代武器装备的关键技术</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--orange)">UUT</div><div class="score-title">被测单元</div><div class="score-text">被测试的系统、设备、组件等的总称</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--purple)">GJB 2547A</div><div class="score-title">国军标</div><div class="score-text">装备测试性工作通用要求</div></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-layout"><div class="content">
+
+    <section class="panel" id="s1">
+      <div class="section-kicker">9.1.1</div>
+      <h2>测试与测试性</h2>
+      <p><span class="keyword">测试</span>是指对给定的产品、材料、设备、系统、物理现象和过程，按照规定程序确定一种或多种特性的技术操作。测试结果的量值是<span class="keyword green">确定性的</span>，不是随机的。</p>
+      <p><span class="keyword">测试性</span>（testability）是指产品能够及时、准确地确定其状态（可工作、不可工作或性能下降程度），并隔离其内部故障的能力。它是产品的一种<span class="keyword orange">设计特性</span>，是通过设计赋予产品的固有属性，也是产品通用质量特性的一种。</p>
+      <div class="callout">测试性可以理解为设计产品时为故障诊断提供方便的特性。它将机内测试、性能监测、状态监测及外部测试有机结合，便于用自动测试设备或人工进行测试。</div>
+      <h3>测试性与故障修复的关系</h3>
+      <p>故障检测与故障隔离的难易程度直接影响产品发生故障时的<span class="keyword purple">修复时间</span>。产品越复杂，故障检测与隔离时间占总维修时间的比例越大。提高产品可用性需要：</p>
+      <ul>
+        <li>提高产品本身的<span class="keyword">固有测试性</span>，使产品具有可测试的特性</li>
+        <li>采用<span class="keyword green">BIT</span>（机内测试）、<span class="keyword green">ATE</span>（自动测试设备）和<span class="keyword green">CTS</span>（中央测试系统）等诊断技术</li>
+      </ul>
+      <div class="callout warn">测试性不是军用领域专有的，只要是产品一般都有测试性问题。测试性技术是一种军民两用的通用技术。</div>
+    </section>
+
+    <section class="panel" id="s2">
+      <div class="section-kicker">9.1.2</div>
+      <h2>测试性常用术语</h2>
+      <div class="cards">
+        <div class="card"><h4>被测单元（UUT）</h4><p>被测试的任何系统、分系统、设备、组件、零件或元器件等的总称。</p></div>
+        <div class="card"><h4>测试点（TP）</h4><p>UUT中用于测量或注入信号的电气连接点。</p></div>
+        <div class="card"><h4>故障检测（FD）</h4><p>发现故障存在的过程。</p></div>
+        <div class="card"><h4>故障隔离（FI）</h4><p>把故障确定到实施修理所要求的产品层次的过程。</p></div>
+        <div class="card"><h4>固有测试性</h4><p>仅取决于产品设计，不受测试激励数据和响应数据影响的测试性。反映设计对测试过程的支撑程度。</p></div>
+        <div class="card"><h4>机内测试（BIT）</h4><p>系统或设备内部提供的检测和隔离故障的自动测试能力。</p></div>
+        <div class="card"><h4>虚警（FA）</h4><p>BIT或其他监测电路指示有故障而实际上不存在故障的现象。</p></div>
+        <div class="card"><h4>综合诊断</h4><p>综合测试性、自动和人工测试、维修辅助手段等所有要素，使系统诊断能力达到最佳的设计与管理过程。</p></div>
+      </div>
+      <div class="callout">嵌入式诊断包括BITE、性能监测装置、故障信息存储与显示设备、中央测试系统等，它们安装在装备内部或与装备永久连接。</div>
+    </section>
+
+    <section class="panel" id="quiz">
+      <div class="section-kicker">互动练习</div>
+      <h2>5 道练习题</h2>
+      <div class="quiz-section">
+        <div class="question" data-id="q1" data-answer="C" data-type="single">
+          <div class="question-header">第1题：关于测试性，以下说法最准确的是？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q1" value="A"><span>A. 测试性是产品出厂后的检测能力</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="B"><span>B. 测试性仅取决于测试设备的精度</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="C"><span>C. 测试性是产品的一种设计特性，通过设计赋予产品</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="D"><span>D. 测试性只适用于军用产品</span></label>
+        </div>
+        <div class="question" data-id="q2" data-answer="ABD" data-type="multi">
+          <div class="question-header">第2题：以下哪些属于测试性常用术语？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q2" value="A"><span>A. 被测单元（UUT）</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="B"><span>B. 虚警（FA）</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="C"><span>C. 平均故障间隔时间（MTBF）</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="D"><span>D. 机内测试（BIT）</span></label>
+        </div>
+        <div class="question" data-id="q3" data-answer="B" data-type="single">
+          <div class="question-header">第3题：固有测试性取决于什么？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q3" value="A"><span>A. 测试激励数据</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="B"><span>B. 产品设计本身</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="C"><span>C. 响应数据</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="D"><span>D. 外部测试设备</span></label>
+        </div>
+        <div class="question" data-id="q4" data-answer="ACD" data-type="multi">
+          <div class="question-header">第4题：提高产品可用性，需要采取哪些措施？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. 提高产品本身的固有测试性</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. 增大产品体积以便检测</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. 采用机内测试（BIT）技术</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. 采用自动测试设备（ATE）</span></label>
+        </div>
+        <div class="question" data-id="q5" data-answer="D" data-type="single">
+          <div class="question-header">第5题：虚警（FA）是指什么现象？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q5" value="A"><span>A. 产品确实发生了故障</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="B"><span>B. 测试设备自身损坏</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="C"><span>C. 操作人员误读测试结果</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="D"><span>D. BIT指示有故障但实际不存在故障</span></label>
+        </div>
+        <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
+        <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-kicker">补充记忆</div>
+      <h2>本节抓手</h2>
+      <div class="tag-list"><span class="tag">测试性</span><span class="tag">设计特性</span><span class="tag">UUT</span><span class="tag">BIT</span><span class="tag">虚警</span><span class="tag">固有测试性</span><span class="tag">综合诊断</span></div>
+      <div class="callout">一句话总结：测试性是产品通过设计赋予的固有属性，使产品能及时、准确地确定自身状态并隔离故障，是提高可用性的重要基础。</div>
+    </section>
+
+  </div></main>
+
+  <footer class="footer"><p>© 可靠性工程师手册互动讲解页</p><div class="sign">测试性工程基础·概述 · §9-1</div></footer>
+</div>
+<script>
+const explanations = {
+  q1: '教材明确指出测试性是产品的一种设计特性，是通过设计赋予产品的固有属性，不是出厂后的检测能力，也不仅限于军用产品。',
+  q2: 'UUT、FA、BIT均为教材9.1.2列出的测试性常用术语。MTBF是可靠性参数，不属于测试性术语。',
+  q3: '教材定义固有测试性"仅取决于产品设计，不受测试激励数据和响应数据影响"。',
+  q4: '教材指出提高可用性需提高固有测试性，并采用BIT、ATE和CTS等诊断技术。增大产品体积不是正确方法。',
+  q5: '教材定义虚警（FA）为"BIT或其他监测电路指示有故障而实际上不存在故障的现象"。'
+};
+const questions = [
+  {id:'q1', text:'关于测试性，以下说法最准确的是？'},
+  {id:'q2', text:'以下哪些属于测试性常用术语？'},
+  {id:'q3', text:'固有测试性取决于什么？'},
+  {id:'q4', text:'提高产品可用性，需要采取哪些措施？'},
+  {id:'q5', text:'虚警（FA）是指什么现象？'}
+];
+function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).sort().join('');const ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>';else html+='<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>';html+='<div class="result-explain">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?'  满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
+</script>
+</body>
+</html>

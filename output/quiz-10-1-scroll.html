@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>可靠性工程师手册|§10-1 概述</title>
+  <style>
+    :root {--bg:#f6faff;--paper:#ffffff;--ink:#152033;--muted:#637083;--line:#dbe7f4;--blue:#246bfe;--cyan:#0f9fb6;--green:#159a63;--orange:#f08a24;--red:#d94b5f;--purple:#7657d8;--shadow:0 18px 45px rgba(39,72,114,.11);--radius:8px;--max:1180px;}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,rgba(36,107,254,.06),rgba(15,159,182,.03) 38%,transparent 72%),var(--bg);line-height:1.65}
+    a{color:inherit;text-decoration:none}.page-shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,250,255,.86);border-bottom:1px solid rgba(219,231,244,.9)}.topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(36,107,254,.22);position:relative;flex:0 0 auto}.brand-mark::after{content:"";width:14px;height:14px;border:2px solid #fff;border-left:0;border-bottom:0;position:absolute;top:9px;left:8px;transform:rotate(45deg)}.brand-title{font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-subtitle{font-size:12px;color:var(--muted);margin-top:1px}.top-links{display:flex;align-items:center;gap:6px;color:#334158;font-size:13px;white-space:nowrap}.top-links a{padding:7px 9px;border-radius:7px;transition:background 160ms ease,color 160ms ease}.top-links a:hover{background:#eaf2ff;color:var(--blue)}
+    .hero{max-width:var(--max);margin:0 auto;padding:58px 24px 34px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:32px;align-items:stretch}.hero h1{margin:0;font-size:clamp(36px,5vw,68px);line-height:1.05;letter-spacing:0;max-width:850px}.hero-lead{color:#405066;font-size:18px;margin:22px 0 0;max-width:720px}.hero-board{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center;height:100%;min-height:340px}.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:center}.score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:8px;padding:14px;min-height:116px;transition:transform 180ms ease}.score-item:hover{transform:translateY(-4px);border-color:#b7cdfa;background:#fff}.score-number{font-size:28px;font-weight:850;line-height:1}.score-title{margin-top:8px;font-size:15px;font-weight:800}.score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}
+    .main-layout{max-width:900px;margin:0 auto;padding:18px 24px 72px}.content{display:grid;gap:22px}section{scroll-margin-top:96px}.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px}.section-kicker{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:0;margin-bottom:8px}h2{margin:0 0 14px;font-size:clamp(26px,3vw,38px);line-height:1.14}h3{margin:24px 0 9px;font-size:20px;line-height:1.25}p{margin:10px 0;color:#304059}ul,ol{margin:10px 0 0;padding-left:22px;color:#304059}li+li{margin-top:5px}.callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b}.callout.warn{border-left-color:var(--orange);background:#fff5e9;color:#6a3a08}.keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850}.keyword.green{background:#e7f7ef;color:var(--green)}.keyword.orange{background:#fff0dc;color:var(--orange)}.keyword.purple{background:#f0edff;color:var(--purple)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:8px;padding:18px}.card h4{margin:0 0 8px;font-size:16px}.card p{margin:0;font-size:14px}
+    .quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}.question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}.question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px}.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px}.badge-multi{background:#fff0f6;color:#d63384}.badge-single{background:#e8f5e9;color:#2e7d32}.option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px}.option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0}.submit-wrap{text-align:center;margin:20px 0}.submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}.result{display:none;margin-top:20px}.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}.result-correct{background:#e8f5e9;border:1px solid #a5d6a7}.result-wrong{background:#fce4ec;border:1px solid #ef9a9a}.result-q{font-weight:600;margin-bottom:6px}.result-your{color:#d32f2f}.result-answer{color:#2e7d32;font-weight:600}.result-explain{margin-top:6px;color:#555;font-size:13px}.score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}.footer{text-align:center;padding:16px;font-size:12px;color:#999}.footer .sign{font-size:13px;color:#666;margin-top:6px}
+    .tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}
+    @media (max-width:980px){.hero,.main-layout{grid-template-columns:1fr}.hero-board{order:-1}.cards{grid-template-columns:1fr 1fr}}
+    @media (max-width:640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px}.cards{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}
+  </style>
+</head>
+<body>
+<div class="page-shell">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top"><span class="brand-mark"></span><span><span class="brand-title">可靠性工程师手册</span><span class="brand-subtitle">§10-1 概述</span></span></a>
+      <nav class="top-links"><a href="#s1">保障性</a><a href="#s2">综合保障</a><a href="#s3">保障系统</a><a href="#quiz">练习题</a></nav>
+    </div>
+  </header>
+  <section class="hero" id="top">
+    <div>
+      <h1>保障性工程基础·概述</h1>
+      <p class="hero-lead">保障性是装备的设计特性和计划的保障资源满足平时战备和战时使用要求的能力。综合保障（ILS）是在装备寿命期内，为满足战备完好性要求、降低寿命周期费用，综合考虑保障问题的一系列管理和技术活动。</p>
+    </div>
+    <div class="hero-board">
+      <div class="score-grid">
+        <div class="score-item"><div class="score-number" style="color:var(--blue)">ILS</div><div class="score-title">综合保障</div><div class="score-text">综合考虑保障的管理和技术活动</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--green)">10项</div><div class="score-title">保障要素</div><div class="score-text">综合保障的各组成部分</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--orange)">3级</div><div class="score-title">维修级别</div><div class="score-text">保障组织的层级结构</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--purple)">1973年</div><div class="score-title">起源</div><div class="score-text">美国国防部颁发MIL-STD-1388</div></div>
+      </div>
+    </div>
+  </section>
+  <main class="main-layout"><div class="content">
+    <section class="panel" id="s1">
+      <div class="section-kicker">10.1.1</div>
+      <h2>保障性</h2>
+      <p><span class="keyword">保障性</span>（supportability）是指装备的设计特性和计划的保障资源满足平时战备和战时使用要求的能力。理解保障性要抓住三个要点：</p>
+      <ul>
+        <li><span class="keyword green">产品保障性设计特性</span>：与保障有关的设计特性，包括可靠性、维修性、测试性等</li>
+        <li><span class="keyword orange">保障资源</span>：包括人员、备件、训练器材、工具设备、保障设施等</li>
+        <li><span class="keyword purple">平时战备和战时使用要求</span>：平时用战备完好性度量，民品用可用性度量</li>
+      </ul>
+      <div class="callout">有了保障资源还不能直接形成保障能力，只有将各种保障资源有机组合、相互配合，形成保障系统，才能高效发挥作用。</div>
+    </section>
+    <section class="panel" id="s2">
+      <div class="section-kicker">10.1.2</div>
+      <h2>综合保障（ILS）</h2>
+      <p><span class="keyword">综合保障</span>（integrated logistics support）是在装备寿命期内，为满足系统战备完好性要求、降低寿命周期费用，综合考虑装备保障问题的一系列管理和技术活动。</p>
+      <h3>综合保障十大要素</h3>
+      <div class="cards">
+        <div class="card"><h4>1. 规划维修</h4><p>从确定维修方案到制定维修保障计划的工作过程</p></div>
+        <div class="card"><h4>2. 人力和人员</h4><p>使用与维修装备所需人员的数量、专业和技术等级</p></div>
+        <div class="card"><h4>3. 供应保障</h4><p>规划、确定并获得备件、消耗品的过程</p></div>
+        <div class="card"><h4>4. 保障设备</h4><p>使用与维修所需的测试、维修、试验、计量等设备</p></div>
+        <div class="card"><h4>5. 技术资料</h4><p>说明书、手册、规程、细则、清单等</p></div>
+        <div class="card"><h4>6. 训练与训练保障</h4><p>训练使用与维修人员的活动及所需教材器材</p></div>
+      </div>
+      <div class="callout">综合保障的实质是把保障系统的工作尽早落实到装备的论证和研制过程中，建立保障系统设计与装备设计并行、迭代和反馈的关系。</div>
+    </section>
+    <section class="panel" id="s3">
+      <div class="section-kicker">10.1.3~10.1.5</div>
+      <h2>任务原则与保障系统</h2>
+      <h3>综合保障的任务</h3>
+      <ol>
+        <li>确定装备系统的保障性要求</li>
+        <li>在装备设计过程中进行保障性设计</li>
+        <li>规划并及时研制所需的保障资源</li>
+        <li>建立经济、有效的保障系统</li>
+      </ol>
+      <h3>保障系统</h3>
+      <p><span class="keyword">保障系统</span>是由保障资源、保障活动和保障组织构成的有机整体。保障系统应努力达到<span class="keyword green">及时性、有效性、部署性、经济性、可用性和通用性</span>。</p>
+      <div class="callout warn">保障性要求不可能只用一个参数指标来描述，必须用一组定量参数和一组定性描述来表示。</div>
+    </section>
+    <section class="panel" id="quiz">
+      <div class="section-kicker">互动练习</div>
+      <h2>5 道练习题</h2>
+      <div class="quiz-section">
+        <div class="question" data-id="q1" data-answer="C" data-type="single">
+          <div class="question-header">第1题：保障性（supportability）的定义是？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q1" value="A"><span>A. 产品的制造质量</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="B"><span>B. 产品的原材料供应能力</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="C"><span>C. 装备的设计特性和计划的保障资源满足平时战备和战时使用要求的能力</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="D"><span>D. 产品的生产人员持证上岗</span></label>
+        </div>
+        <div class="question" data-id="q2" data-answer="ABCD" data-type="multi">
+          <div class="question-header">第2题：综合保障要素包括以下哪些？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q2" value="A"><span>A. 规划维修</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="B"><span>B. 供应保障</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="C"><span>C. 技术资料</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="D"><span>D. 训练与训练保障</span></label>
+        </div>
+        <div class="question" data-id="q3" data-answer="B" data-type="single">
+          <div class="question-header">第3题：综合保障的实质是什么？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q3" value="A"><span>A. 增加保障人员数量</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="B"><span>B. 保障系统设计与装备设计并行、迭代和反馈</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="C"><span>C. 提高产品售价</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="D"><span>D. 减少产品功能</span></label>
+        </div>
+        <div class="question" data-id="q4" data-answer="ABD" data-type="multi">
+          <div class="question-header">第4题：理解保障性要抓住哪三个要点？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. 产品保障性设计特性</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. 保障资源</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. 产品售价</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. 平时战备和战时使用要求</span></label>
+        </div>
+        <div class="question" data-id="q5" data-answer="C" data-type="single">
+          <div class="question-header">第5题：保障系统应由什么构成？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q5" value="A"><span>A. 仅保障资源</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="B"><span>B. 仅保障活动</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="C"><span>C. 保障资源、保障活动和保障组织的有机整体</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="D"><span>D. 仅保障组织</span></label>
+        </div>
+        <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
+        <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
+      </div>
+    </section>
+    <section class="panel">
+      <div class="section-kicker">补充记忆</div>
+      <h2>本节抓手</h2>
+      <div class="tag-list"><span class="tag">保障性</span><span class="tag">ILS</span><span class="tag">综合保障</span><span class="tag">保障系统</span><span class="tag">战备完好性</span><span class="tag">保障要素</span></div>
+      <div class="callout">一句话总结：保障性是设计特性和保障资源满足使用要求的能力，综合保障通过并行设计实现保障系统与装备设计协调发展。</div>
+    </section>
+  </div></main>
+  <footer class="footer"><p>© 可靠性工程师手册互动讲解页</p><div class="sign">保障性工程基础·概述 · §10-1</div></footer>
+</div>
+<script>
+const explanations={q1:'教材定义保障性为装备的设计特性和计划的保障资源满足平时战备和战时使用要求的能力。',q2:'综合保障要素包括规划维修、人力和人员、供应保障、保障设备、技术资料、训练与训练保障等。',q3:'综合保障的实质是保障系统设计与装备设计并行、迭代和反馈的关系。',q4:'理解保障性要抓住三个要点：产品保障性设计特性、保障资源、平时战备和战时使用要求。',q5:'保障系统是由保障资源、保障活动和保障组织构成的有机整体。'};
+const questions=[{id:'q1',text:'保障性（supportability）的定义是？'},{id:'q2',text:'综合保障要素包括以下哪些？'},{id:'q3',text:'综合保障的实质是什么？'},{id:'q4',text:'理解保障性要抓住哪三个要点？'},{id:'q5',text:'保障系统应由什么构成？'}];
+function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).sort().join('');const ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>';else html+='<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>';html+='<div class="result-explain">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?'  满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
+</script>
+</body>
+</html>

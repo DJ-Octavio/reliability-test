@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>可靠性工程师手册|§10-2 可用性</title>
+  <style>
+    :root {--bg:#f6faff;--paper:#ffffff;--ink:#152033;--muted:#637083;--line:#dbe7f4;--blue:#246bfe;--cyan:#0f9fb6;--green:#159a63;--orange:#f08a24;--red:#d94b5f;--purple:#7657d8;--shadow:0 18px 45px rgba(39,72,114,.11);--radius:8px;--max:1180px;}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,rgba(36,107,254,.06),rgba(15,159,182,.03) 38%,transparent 72%),var(--bg);line-height:1.65}
+    a{color:inherit;text-decoration:none}.page-shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,250,255,.86);border-bottom:1px solid rgba(219,231,244,.9)}.topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(36,107,254,.22);position:relative;flex:0 0 auto}.brand-mark::after{content:"";width:14px;height:14px;border:2px solid #fff;border-left:0;border-bottom:0;position:absolute;top:9px;left:8px;transform:rotate(45deg)}.brand-title{font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-subtitle{font-size:12px;color:var(--muted);margin-top:1px}.top-links{display:flex;align-items:center;gap:6px;color:#334158;font-size:13px;white-space:nowrap}.top-links a{padding:7px 9px;border-radius:7px;transition:background 160ms ease,color 160ms ease}.top-links a:hover{background:#eaf2ff;color:var(--blue)}
+    .hero{max-width:var(--max);margin:0 auto;padding:58px 24px 34px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:32px;align-items:stretch}.hero h1{margin:0;font-size:clamp(36px,5vw,68px);line-height:1.05;letter-spacing:0;max-width:850px}.hero-lead{color:#405066;font-size:18px;margin:22px 0 0;max-width:720px}.hero-board{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center;height:100%;min-height:340px}.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:center}.score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:8px;padding:14px;min-height:116px;transition:transform 180ms ease}.score-item:hover{transform:translateY(-4px);border-color:#b7cdfa;background:#fff}.score-number{font-size:28px;font-weight:850;line-height:1}.score-title{margin-top:8px;font-size:15px;font-weight:800}.score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}
+    .main-layout{max-width:900px;margin:0 auto;padding:18px 24px 72px}.content{display:grid;gap:22px}section{scroll-margin-top:96px}.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px}.section-kicker{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:0;margin-bottom:8px}h2{margin:0 0 14px;font-size:clamp(26px,3vw,38px);line-height:1.14}h3{margin:24px 0 9px;font-size:20px;line-height:1.25}p{margin:10px 0;color:#304059}ul,ol{margin:10px 0 0;padding-left:22px;color:#304059}li+li{margin-top:5px}.callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b}.callout.warn{border-left-color:var(--orange);background:#fff5e9;color:#6a3a08}.keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850}.keyword.green{background:#e7f7ef;color:var(--green)}.keyword.orange{background:#fff0dc;color:var(--orange)}.keyword.purple{background:#f0edff;color:var(--purple)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:8px;padding:18px}.card h4{margin:0 0 8px;font-size:16px}.card p{margin:0;font-size:14px}
+    .quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}.question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}.question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px}.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px}.badge-multi{background:#fff0f6;color:#d63384}.badge-single{background:#e8f5e9;color:#2e7d32}.option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px}.option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0}.submit-wrap{text-align:center;margin:20px 0}.submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}.result{display:none;margin-top:20px}.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}.result-correct{background:#e8f5e9;border:1px solid #a5d6a7}.result-wrong{background:#fce4ec;border:1px solid #ef9a9a}.result-q{font-weight:600;margin-bottom:6px}.result-your{color:#d32f2f}.result-answer{color:#2e7d32;font-weight:600}.result-explain{margin-top:6px;color:#555;font-size:13px}.score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}.footer{text-align:center;padding:16px;font-size:12px;color:#999}.footer .sign{font-size:13px;color:#666;margin-top:6px}
+    .tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}
+    @media (max-width:980px){.hero,.main-layout{grid-template-columns:1fr}.hero-board{order:-1}.cards{grid-template-columns:1fr 1fr}}
+    @media (max-width:640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px}.cards{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}
+  </style>
+</head>
+<body>
+<div class="page-shell">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top"><span class="brand-mark"></span><span><span class="brand-title">可靠性工程师手册</span><span class="brand-subtitle">§10-2 可用性</span></span></a>
+      <nav class="top-links"><a href="#s1">可用性概念</a><a href="#s2">三种可用度</a><a href="#quiz">练习题</a></nav>
+    </div>
+  </header>
+  <section class="hero" id="top">
+    <div>
+      <h1>可用性</h1>
+      <p class="hero-lead">可用性是产品在任意时刻需要和开始执行任务时，处于可工作或可使用状态的程度。它是可靠性、维修性和综合保障水平的综合反映，在军品和民品都广泛使用。</p>
+    </div>
+    <div class="hero-board">
+      <div class="score-grid">
+        <div class="score-item"><div class="score-number" style="color:var(--blue)">A</div><div class="score-title">可用度</div><div class="score-text">能工作时间与总时间之比</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--green)">MTBF</div><div class="score-title">平均故障间隔</div><div class="score-text">能工作时间的度量</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--orange)">MTTR</div><div class="score-title">平均修复时间</div><div class="score-text">修复性维修时间</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--purple)">3种</div><div class="score-title">可用度类型</div><div class="score-text">固有、可达、使用可用度</div></div>
+      </div>
+    </div>
+  </section>
+  <main class="main-layout"><div class="content">
+    <section class="panel" id="s1">
+      <div class="section-kicker">10.2</div>
+      <h2>可用性的概念</h2>
+      <p><span class="keyword">可用性</span>（availability）是指产品在任意时刻需要和开始执行任务时，处于可工作或可使用状态的程度。可用性的概率度量称为<span class="keyword green">可用度</span>。</p>
+      <p>可用度A用公式表示为：</p>
+      <p style="text-align:center;font-weight:700;color:var(--blue);font-size:18px;margin:16px 0">A = UT / (UT + DT)</p>
+      <p>其中：</p>
+      <ul>
+        <li><span class="keyword">UT</span>（能工作时间）：包括工作时间、不工作时间（能工作）、待命时间</li>
+        <li><span class="keyword orange">DT</span>（不能工作时间）：包括预防性维修时间、修复性维修时间、管理和保障资源延误时间</li>
+      </ul>
+      <div class="callout">在军品里，可用性就是战备完好性的另一种描述。在民品中，很多行业也极为重视。</div>
+    </section>
+    <section class="panel" id="s2">
+      <div class="section-kicker">10.2</div>
+      <h2>三种可用度</h2>
+      <div class="cards">
+        <div class="card"><h4>固有可用度 Ai</h4><p>仅与MTBF和MTTR有关，是研制方能够通过设计控制的。提高固有可用度只能从延长MTBF（提高可靠性）和缩短MTTR（提高维修性）两方面努力。</p></div>
+        <div class="card"><h4>可达可用度 Aa</h4><p>在固有可用度基础上增加考虑预防性维修时间（MTTP）的因素。</p></div>
+        <div class="card"><h4>使用可用度 Ao</h4><p>在可达可用度基础上增加考虑管理和保障资源延误时间（MTMLD），是产品在实际使用条件下表现出的真实可用性水平。</p></div>
+      </div>
+      <div class="callout warn">提高可用性一是提高可靠性，延长MTBF；二是提高维修性和保障性，缩短MTTR、MTTP和MTMLD。</div>
+    </section>
+    <section class="panel" id="quiz">
+      <div class="section-kicker">互动练习</div>
+      <h2>5 道练习题</h2>
+      <div class="quiz-section">
+        <div class="question" data-id="q1" data-answer="B" data-type="single">
+          <div class="question-header">第1题：可用性是什么的综合反映？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q1" value="A"><span>A. 仅可靠性</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="B"><span>B. 可靠性、维修性和综合保障水平</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="C"><span>C. 仅维修性</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="D"><span>D. 仅保障性</span></label>
+        </div>
+        <div class="question" data-id="q2" data-answer="AC" data-type="multi">
+          <div class="question-header">第2题：可用度公式A=UT/(UT+DT)中，DT包括哪些？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q2" value="A"><span>A. 预防性维修时间</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="B"><span>B. 工作时间</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="C"><span>C. 修复性维修时间</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="D"><span>D. 待命时间</span></label>
+        </div>
+        <div class="question" data-id="q3" data-answer="A" data-type="single">
+          <div class="question-header">第3题：哪种可用度仅与MTBF和MTTR有关？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q3" value="A"><span>A. 固有可用度</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="B"><span>B. 可达可用度</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="C"><span>C. 使用可用度</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="D"><span>D. 综合可用度</span></label>
+        </div>
+        <div class="question" data-id="q4" data-answer="ABD" data-type="multi">
+          <div class="question-header">第4题：提高可用度的途径包括？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. 提高可靠性，延长MTBF</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. 提高维修性，缩短MTTR</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. 增加产品体积</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. 缩短管理和保障资源延误时间</span></label>
+        </div>
+        <div class="question" data-id="q5" data-answer="C" data-type="single">
+          <div class="question-header">第5题：使用可用度是什么的真实水平？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q5" value="A"><span>A. 理论设计水平</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="B"><span>B. 实验室测试水平</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="C"><span>C. 实际使用条件下的真实可用性水平</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="D"><span>D. 制造水平</span></label>
+        </div>
+        <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
+        <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
+      </div>
+    </section>
+    <section class="panel">
+      <div class="section-kicker">补充记忆</div>
+      <h2>本节抓手</h2>
+      <div class="tag-list"><span class="tag">可用性</span><span class="tag">可用度</span><span class="tag">固有可用度</span><span class="tag">可达可用度</span><span class="tag">使用可用度</span><span class="tag">MTBF</span><span class="tag">MTTR</span></div>
+      <div class="callout">一句话总结：可用性是可靠性、维修性和保障水平的综合反映，三种可用度从不同角度度量产品的可用程度。</div>
+    </section>
+  </div></main>
+  <footer class="footer"><p>© 可靠性工程师手册互动讲解页</p><div class="sign">可用性 · §10-2</div></footer>
+</div>
+<script>
+const explanations={q1:'教材指出可用性是产品可靠性、维修性和综合保障水平的综合反映。',q2:'DT（不能工作时间）包括预防性维修时间、修复性维修时间和管理保障资源延误时间。工作时间和待命时间属于UT。',q3:'固有可用度仅与MTBF和MTTR有关，是研制方能够通过设计控制的。',q4:'提高可用性的途径包括提高可靠性延长MTBF、提高维修性缩短MTTR、缩短管理和保障资源延误时间。',q5:'使用可用度是在可达可用度基础上增加考虑管理和保障资源延误时间，是实际使用条件下的真实可用性水平。'};
+const questions=[{id:'q1',text:'可用性是什么的综合反映？'},{id:'q2',text:'可用度公式A=UT/(UT+DT)中，DT包括哪些？'},{id:'q3',text:'哪种可用度仅与MTBF和MTTR有关？'},{id:'q4',text:'提高可用度的途径包括？'},{id:'q5',text:'使用可用度是什么的真实水平？'}];
+function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).sort().join('');const ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>';else html+='<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>';html+='<div class="result-explain">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?'  满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
+</script>
+</body>
+</html>

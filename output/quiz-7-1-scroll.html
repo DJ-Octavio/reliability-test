@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>可靠性工程师手册|§7-1 概述</title>
+  <meta property="og:title" content="可靠性工程师手册|§7-1 概述" />
+  <meta property="og:description" content="§7-1 概述。包含完整讲解、关键术语、重点提醒与 5 道互动练习题。" />
+  <style>
+    :root {--bg:#f6faff;--paper:#ffffff;--ink:#152033;--muted:#637083;--line:#dbe7f4;--blue:#246bfe;--cyan:#0f9fb6;--green:#159a63;--orange:#f08a24;--red:#d94b5f;--purple:#7657d8;--shadow:0 18px 45px rgba(39,72,114,.11);--radius:8px;--max:1180px;}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,rgba(36,107,254,.06),rgba(15,159,182,.03) 38%,transparent 72%),var(--bg);line-height:1.65}
+    a{color:inherit;text-decoration:none}.page-shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,250,255,.86);border-bottom:1px solid rgba(219,231,244,.9)}
+    .topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(36,107,254,.22);position:relative;flex:0 0 auto}.brand-mark::after{content:"";width:14px;height:14px;border:2px solid #fff;border-left:0;border-bottom:0;position:absolute;top:9px;left:8px;transform:rotate(45deg)}.brand-title{font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-subtitle{font-size:12px;color:var(--muted);margin-top:1px}.top-links{display:flex;align-items:center;gap:6px;color:#334158;font-size:13px;white-space:nowrap}.top-links a{padding:7px 9px;border-radius:7px;transition:background 160ms ease,color 160ms ease}.top-links a:hover{background:#eaf2ff;color:var(--blue)}
+    .hero{max-width:var(--max);margin:0 auto;padding:58px 24px 34px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:32px;align-items:stretch}.hero h1{margin:0;font-size:clamp(36px,5vw,68px);line-height:1.05;letter-spacing:0;max-width:850px}.hero-lead{color:#405066;font-size:18px;margin:22px 0 0;max-width:720px}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 16px;border-radius:8px;border:1px solid var(--line);background:#fff;color:#233047;font-size:14px;font-weight:700;cursor:pointer}.button.primary{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 14px 30px rgba(36,107,254,.22)}
+    .hero-board{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center;height:100%;min-height:340px}.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:center}.score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:8px;padding:14px;min-height:116px;transition:transform 180ms ease,border-color 180ms ease,background 180ms ease}.score-item:hover{transform:translateY(-4px);border-color:#b7cdfa;background:#ffffff}.score-number{font-size:28px;font-weight:850;line-height:1}.score-title{margin-top:8px;font-size:15px;font-weight:800}.score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}
+    .main-layout{max-width:900px;margin:0 auto;padding:18px 24px 72px}.content{display:grid;gap:22px}section{scroll-margin-top:96px}.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px}.section-kicker{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:0;margin-bottom:8px}h2{margin:0 0 14px;font-size:clamp(26px,3vw,38px);line-height:1.14;letter-spacing:0}h3{margin:24px 0 9px;font-size:20px;line-height:1.25;letter-spacing:0}p{margin:10px 0;color:#304059}ul,ol{margin:10px 0 0;padding-left:22px;color:#304059}li+li{margin-top:5px}.callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b}.callout.warn{border-left-color:var(--orange);background:#fff5e9;color:#6a3a08}.keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850}.keyword.green{background:#e7f7ef;color:var(--green)}.keyword.orange{background:#fff0dc;color:var(--orange)}.keyword.purple{background:#f0edff;color:var(--purple)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:8px;padding:18px}.card h4{margin:0 0 8px;font-size:16px;letter-spacing:0}.card p{margin:0;font-size:14px}.formula{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}.formula-step{min-height:104px;border:1px solid #dce8f6;background:#fff;border-radius:8px;padding:14px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:8px}.formula-step strong{font-size:16px}.formula-step span{color:var(--muted);font-size:12px;line-height:1.4}
+    .quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}.question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}.question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px}.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px}.badge-multi{background:#fff0f6;color:#d63384}.badge-single{background:#e8f5e9;color:#2e7d32}.option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px}.option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0}.submit-wrap{text-align:center;margin:20px 0}.submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}.result{display:none;margin-top:20px}.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}.result-correct{background:#e8f5e9;border:1px solid #a5d6a7}.result-wrong{background:#fce4ec;border:1px solid #ef9a9a}.result-q{font-weight:600;margin-bottom:6px}.result-your{color:#d32f2f}.result-answer{color:#2e7d32;font-weight:600}.result-explain{margin-top:6px;color:#555;font-size:13px}.score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}.footer{text-align:center;padding:16px;font-size:12px;color:#999}.footer .sign{font-size:13px;color:#666;margin-top:6px}
+    .divider{height:1px;background:#e8e8e8;margin:16px 0}.tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}.timeline{position:relative;padding-left:24px}.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#e8ecff}.timeline-item{position:relative;margin-bottom:16px}.timeline-item::before{content:'';position:absolute;left:-20px;top:4px;width:12px;height:12px;border-radius:50%;background:#2b6aff;border:2px solid #fff;box-shadow:0 0 0 2px #e8ecff}.timeline-year{font-weight:700;color:#1a52d6;font-size:14px}.timeline-text{font-size:14px;color:#555;margin-top:2px}.six-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:12px 0}.six-item{background:#f8f9fa;border-radius:8px;padding:10px;text-align:center}.six-item .en{font-size:11px;color:#999}.six-item .cn{font-size:14px;font-weight:600;color:#333}
+    @media (max-width: 980px){.hero,.main-layout{grid-template-columns:1fr}.hero-board{order:-1}.cards,.formula,.six-grid{grid-template-columns:1fr 1fr}}
+    @media (max-width: 640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px}.cards,.formula,.six-grid{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}
+  </style>
+</head>
+<body>
+<div class="page-shell">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top" aria-label="返回顶部"><span class="brand-mark" aria-hidden="true"></span><span><span class="brand-title">可靠性工程师手册</span><span class="brand-subtitle">§7-1 概述</span></span></a>
+      <nav class="top-links"><a href="#s1">管理概念</a><a href="#s2">管理范围</a><a href="#quiz">练习题</a></nav>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div>
+      <h1>可靠性管理概述</h1>
+      <p class="hero-lead">本节介绍可靠性管理的基本概念：产品可靠性是设计出来的、制造出来的、更是管理出来的。可靠性管理从系统工程观点出发，对产品全寿命周期各阶段的可靠性活动进行策划、组织、监督和控制。</p>
+    </div>
+    <div class="hero-board">
+      <div class="score-grid">
+        <div class="score-item"><div class="score-number" style="color: var(--blue);">4项</div><div class="score-title">基本职能</div><div class="score-text">策划、组织、监督、控制</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--green);">全周期</div><div class="score-title">管理范围</div><div class="score-text">设计、开发、生产、使用各阶段</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--orange);">2层</div><div class="score-title">管理层次</div><div class="score-text">企业整体 + 具体产品研发生产</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--purple);">系统工程</div><div class="score-title">观点方法</div><div class="score-text">以尽可能少的资源实现可靠性要求</div></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-layout"><div class="content">
+
+    <section class="panel" id="s1">
+      <div class="section-kicker">7.1.1</div>
+      <h2>可靠性管理的定义与基本职能</h2>
+      <p>教材指出：产品可靠性是<span class="keyword">设计出来的</span>、<span class="keyword">制造出来的</span>、<span class="keyword">管理出来的</span>。因此，可靠性管理必须从产品的设计和开发阶段抓起。可靠性是在设计中赋予，在生产制造中加以保证，在使用中发挥，这些活动的开展都离不开可靠性管理。</p>
+      <p>可靠性管理就是从<span class="keyword green">系统工程的观点</span>出发，对产品设计、开发、生产、使用各个阶段应开展的各项可靠性活动进行<span class="keyword orange">策划、组织、监督和控制</span>，以尽可能少的资源投入实现产品的可靠性要求。</p>
+      <div class="callout">可靠性管理的基本职能：策划、组织、监督、控制——这四项职能贯穿产品全寿命周期。</div>
+      <h3>企业可靠性管理 vs 产品研发可靠性管理</h3>
+      <p>教材指出，可靠性管理一般包括两个层次：</p>
+      <div class="cards">
+        <div class="card"><h4>企业整体可靠性管理</h4><p>是整个组织管理工作的一部分，需制定企业可靠性发展战略，作为企业发展战略的重要组成部分。</p></div>
+        <div class="card"><h4>产品研发可靠性管理</h4><p>是产品研发管理的一个组成部分，针对具体产品的研发生产过程进行可靠性活动的策划与控制。</p></div>
+      </div>
+    </section>
+
+    <section class="panel" id="s2">
+      <div class="section-kicker">7.1.2</div>
+      <h2>可靠性管理的范围与重要性</h2>
+      <p>产品的可靠性工作涉及产品寿命周期的各个不同阶段，每个阶段都有很多的可靠性工作要做。企业的可靠性管理同样要履行策划、组织、监督和控制的职能。</p>
+      <p>在市场激烈竞争的今天，所有企业都要制定发展战略。在制定企业发展战略时，应把企业的<span class="keyword purple">可靠性发展战略</span>作为重要的组成部分，这也是可靠性管理的重要工作内容。</p>
+      <div class="callout warn">重点：可靠性管理不是"额外负担"，而是企业战略的核心组成部分。没有可靠性管理，产品设计、制造和使用各环节的可靠性活动就无法有效协调。</div>
+    </section>
+
+    <section class="panel" id="quiz">
+      <div class="section-kicker">互动练习</div>
+      <h2>5 道练习题</h2>
+      <div class="quiz-section">
+        <div class="question" data-id="q1" data-answer="D" data-type="single">
+          <div class="question-header">第1题：教材认为产品可靠性是？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q1" value="A"><span>A. 仅靠设计就能保证的</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="B"><span>B. 仅靠制造工艺就能保证的</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="C"><span>C. 仅靠使用阶段维护就能保证的</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="D"><span>D. 设计出来的、制造出来的、管理出来的</span></label>
+        </div>
+        <div class="question" data-id="q2" data-answer="ABCD" data-type="multi">
+          <div class="question-header">第2题：可靠性管理的基本职能包括哪些？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q2" value="A"><span>A. 策划</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="B"><span>B. 组织</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="C"><span>C. 监督</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="D"><span>D. 控制</span></label>
+        </div>
+        <div class="question" data-id="q3" data-answer="B" data-type="single">
+          <div class="question-header">第3题：可靠性管理应从哪个阶段抓起？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q3" value="A"><span>A. 产品使用阶段</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="B"><span>B. 产品设计和开发阶段</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="C"><span>C. 产品报废阶段</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="D"><span>D. 产品售后服务阶段</span></label>
+        </div>
+        <div class="question" data-id="q4" data-answer="AC" data-type="multi">
+          <div class="question-header">第4题：关于可靠性管理的层次，教材提到哪两个层次？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. 企业整体的可靠性管理</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. 供应商的可靠性管理</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. 具体产品研发生产的可靠性管理</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. 行业标准的可靠性管理</span></label>
+        </div>
+        <div class="question" data-id="q5" data-answer="ABD" data-type="multi">
+          <div class="question-header">第5题：关于可靠性管理，下列说法正确的有？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q5" value="A"><span>A. 可靠性管理涉及产品寿命周期的各个阶段</span></label>
+          <label class="option-label"><input type="checkbox" name="q5" value="B"><span>B. 可靠性管理应从系统工程观点出发</span></label>
+          <label class="option-label"><input type="checkbox" name="q5" value="C"><span>C. 可靠性管理只是质量部门的职责</span></label>
+          <label class="option-label"><input type="checkbox" name="q5" value="D"><span>D. 企业应将可靠性发展战略作为企业发展战略的重要组成部分</span></label>
+        </div>
+        <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
+        <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-kicker">补充记忆</div>
+      <h2>本节抓手</h2>
+      <div class="tag-list"><span class="tag">可靠性管理</span><span class="tag">策划组织监督控制</span><span class="tag">系统工程</span><span class="tag">全寿命周期</span><span class="tag">可靠性发展战略</span></div>
+      <div class="callout">一句话总结：可靠性管理是从系统工程观点出发，对产品全寿命周期各阶段的可靠性活动进行策划、组织、监督和控制，以尽可能少的资源实现可靠性要求。</div>
+    </section>
+
+  </div></main>
+
+  <footer class="footer"><p>© 可靠性工程师手册互动讲解页</p><div class="sign">可靠性管理概述 · §7-1</div></footer>
+</div>
+<script>
+const explanations = {
+  q1: '教材明确指出：产品可靠性是设计出来的、制造出来的、管理出来的。三者缺一不可。',
+  q2: '教材定义可靠性管理的基本职能为策划、组织、监督和控制四项。',
+  q3: '教材指出可靠性管理必须从产品的设计和开发阶段抓起。',
+  q4: '教材明确提到可靠性管理包括企业整体的可靠性管理和具体产品研发生产的可靠性管理两个层次。',
+  q5: '可靠性管理涉及全寿命周期各阶段，从系统工程观点出发，是企业战略的重要组成部分，而非仅是质量部门的职责。'
+};
+const questions = [
+  {id:'q1', text:'教材认为产品可靠性是？'},
+  {id:'q2', text:'可靠性管理的基本职能包括哪些？'},
+  {id:'q3', text:'可靠性管理应从哪个阶段抓起？'},
+  {id:'q4', text:'关于可靠性管理的层次，教材提到哪两个层次？'},
+  {id:'q5', text:'关于可靠性管理，下列说法正确的有？'}
+];
+function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).sort().join('');const ok=checked===correct; if(ok)score++; html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">'; html+='<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>'; if(!ok)html+='<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>'; else html+='<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>'; html+='<div class="result-explain">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?'  满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
+</script>
+</body>
+</html>

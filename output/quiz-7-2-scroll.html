@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>可靠性工程师手册|§7-2 制定并实施可靠性发展战略</title>
+  <meta property="og:title" content="可靠性工程师手册|§7-2 制定并实施可靠性发展战略" />
+  <meta property="og:description" content="§7-2 制定并实施可靠性发展战略。包含完整讲解、关键术语、重点提醒与 5 道互动练习题。" />
+  <style>
+    :root {--bg:#f6faff;--paper:#ffffff;--ink:#152033;--muted:#637083;--line:#dbe7f4;--blue:#246bfe;--cyan:#0f9fb6;--green:#159a63;--orange:#f08a24;--red:#d94b5f;--purple:#7657d8;--shadow:0 18px 45px rgba(39,72,114,.11);--radius:8px;--max:1180px;}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,rgba(36,107,254,.06),rgba(15,159,182,.03) 38%,transparent 72%),var(--bg);line-height:1.65}
+    a{color:inherit;text-decoration:none}.page-shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,250,255,.86);border-bottom:1px solid rgba(219,231,244,.9)}
+    .topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(36,107,254,.22);position:relative;flex:0 0 auto}.brand-mark::after{content:"";width:14px;height:14px;border:2px solid #fff;border-left:0;border-bottom:0;position:absolute;top:9px;left:8px;transform:rotate(45deg)}.brand-title{font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-subtitle{font-size:12px;color:var(--muted);margin-top:1px}.top-links{display:flex;align-items:center;gap:6px;color:#334158;font-size:13px;white-space:nowrap}.top-links a{padding:7px 9px;border-radius:7px;transition:background 160ms ease,color 160ms ease}.top-links a:hover{background:#eaf2ff;color:var(--blue)}
+    .hero{max-width:var(--max);margin:0 auto;padding:58px 24px 34px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:32px;align-items:stretch}.hero h1{margin:0;font-size:clamp(36px,5vw,68px);line-height:1.05;letter-spacing:0;max-width:850px}.hero-lead{color:#405066;font-size:18px;margin:22px 0 0;max-width:720px}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 16px;border-radius:8px;border:1px solid var(--line);background:#fff;color:#233047;font-size:14px;font-weight:700;cursor:pointer}.button.primary{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 14px 30px rgba(36,107,254,.22)}
+    .hero-board{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center;height:100%;min-height:340px}.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:center}.score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:8px;padding:14px;min-height:116px;transition:transform 180ms ease,border-color 180ms ease,background 180ms ease}.score-item:hover{transform:translateY(-4px);border-color:#b7cdfa;background:#ffffff}.score-number{font-size:28px;font-weight:850;line-height:1}.score-title{margin-top:8px;font-size:15px;font-weight:800}.score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}
+    .main-layout{max-width:900px;margin:0 auto;padding:18px 24px 72px}.content{display:grid;gap:22px}section{scroll-margin-top:96px}.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px}.section-kicker{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:0;margin-bottom:8px}h2{margin:0 0 14px;font-size:clamp(26px,3vw,38px);line-height:1.14;letter-spacing:0}h3{margin:24px 0 9px;font-size:20px;line-height:1.25;letter-spacing:0}p{margin:10px 0;color:#304059}ul,ol{margin:10px 0 0;padding-left:22px;color:#304059}li+li{margin-top:5px}.callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b}.callout.warn{border-left-color:var(--orange);background:#fff5e9;color:#6a3a08}.keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850}.keyword.green{background:#e7f7ef;color:var(--green)}.keyword.orange{background:#fff0dc;color:var(--orange)}.keyword.purple{background:#f0edff;color:var(--purple)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:8px;padding:18px}.card h4{margin:0 0 8px;font-size:16px;letter-spacing:0}.card p{margin:0;font-size:14px}.formula{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}.formula-step{min-height:104px;border:1px solid #dce8f6;background:#fff;border-radius:8px;padding:14px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:8px}.formula-step strong{font-size:16px}.formula-step span{color:var(--muted);font-size:12px;line-height:1.4}
+    .quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}.question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}.question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px}.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px}.badge-multi{background:#fff0f6;color:#d63384}.badge-single{background:#e8f5e9;color:#2e7d32}.option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px}.option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0}.submit-wrap{text-align:center;margin:20px 0}.submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}.result{display:none;margin-top:20px}.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}.result-correct{background:#e8f5e9;border:1px solid #a5d6a7}.result-wrong{background:#fce4ec;border:1px solid #ef9a9a}.result-q{font-weight:600;margin-bottom:6px}.result-your{color:#d32f2f}.result-answer{color:#2e7d32;font-weight:600}.result-explain{margin-top:6px;color:#555;font-size:13px}.score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}.footer{text-align:center;padding:16px;font-size:12px;color:#999}.footer .sign{font-size:13px;color:#666;margin-top:6px}
+    .divider{height:1px;background:#e8e8e8;margin:16px 0}.tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}
+    @media (max-width: 980px){.hero,.main-layout{grid-template-columns:1fr}.hero-board{order:-1}.cards,.formula{grid-template-columns:1fr 1fr}}
+    @media (max-width: 640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px}.cards,.formula{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}
+  </style>
+</head>
+<body>
+<div class="page-shell">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top" aria-label="返回顶部"><span class="brand-mark" aria-hidden="true"></span><span><span class="brand-title">可靠性工程师手册</span><span class="brand-subtitle">§7-2 制定并实施可靠性发展战略</span></span></a>
+      <nav class="top-links"><a href="#s1">战略意义</a><a href="#s2">战略内容</a><a href="#quiz">练习题</a></nav>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div>
+      <h1>制定并实施可靠性发展战略</h1>
+      <p class="hero-lead">企业必须从全局高度对可靠性进行全面、系统、科学的策划与规划，制定企业可靠性发展战略，并将其作为企业整个发展战略的重要组成部分。本节讲解战略的意义、内容和典型案例。</p>
+    </div>
+    <div class="hero-board">
+      <div class="score-grid">
+        <div class="score-item"><div class="score-number" style="color: var(--blue);">战略级</div><div class="score-title">定位</div><div class="score-text">企业发展战略的重要组成部分</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--green);">10+项</div><div class="score-title">战略内容</div><div class="score-text">目标、原则、机构、培训、信息系统等</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--orange);">MTBF</div><div class="score-title">典型指标</div><div class="score-text">美国空军：到2000年可靠性翻一番</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--purple);">MTTR</div><div class="score-title">维修性指标</div><div class="score-text">美国空军：维修性指标减半</div></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-layout"><div class="content">
+
+    <section class="panel" id="s1">
+      <div class="section-kicker">7.2.1</div>
+      <h2>为什么需要可靠性发展战略</h2>
+      <p>教材指出：企业生存与发展的重要基础是能向社会提供<span class="keyword">高质量、高可靠性的产品</span>。企业要参与优胜劣汰的市场竞争，实现利益最大化并获得最大利润，创建百年不衰的品牌，从制造转变为创造，提高顾客满意度和品牌忠诚度——所有这一切，产品的可靠性都是重要的因素之一。</p>
+      <p>企业产品的可靠性涉及的范围很广：</p>
+      <div class="cards">
+        <div class="card"><h4>涉及人员广</h4><p>既涉及高层管理人员、部门领导，又涉及一线技术人员。</p></div>
+        <div class="card"><h4>涉及环节多</h4><p>既涉及设计，又涉及制造与售后服务。</p></div>
+        <div class="card"><h4>涉及层面全</h4><p>既涉及认识层面，又涉及技术层面。</p></div>
+        <div class="card"><h4>涉及资源广</h4><p>既涉及人员素质的提高，又涉及试验条件的建设。</p></div>
+      </div>
+      <div class="callout">因此必须从企业的高度对可靠性、维修性、测试性、保障性和安全性等工作进行全面、系统、科学的策划或规划——这就是制定企业可靠性发展战略。</div>
+    </section>
+
+    <section class="panel" id="s2">
+      <div class="section-kicker">7.2.2</div>
+      <h2>可靠性发展战略应包含的内容</h2>
+      <p>教材列举了可靠性发展战略应包含的主要内容：</p>
+      <ol>
+        <li>提出<span class="keyword green">可考核的产品可靠性、维修性目标</span></li>
+        <li>明确可靠性工作的指导思想和工作基本原则</li>
+        <li>建立可靠性研究机构和队伍</li>
+        <li>制定中长期可靠性培训计划</li>
+        <li>建设质量与可靠性信息系统</li>
+        <li>改进流程，将可靠性、维修性、测试性、保障性和安全性有机融入设计、制造以及售后服务的各个流程之中</li>
+        <li>制定企业可靠性、维修性工作的规范或标准</li>
+        <li>明确企业高管和部门负责人及各类人员相关的<span class="keyword orange">可靠性职责</span></li>
+        <li>建立并完善各种可靠性试验系统</li>
+        <li>制定可靠性工作奖惩措施等</li>
+      </ol>
+      <div class="callout warn">典型案例：美国空军于20世纪80年代中期提出的装备可靠性指标——到2000年可靠性翻一番（MTBF从500小时增加到1000小时），维修性指标减半（MTTR从40分钟减少为20分钟）。目标既明确直观，又可以考核。</div>
+    </section>
+
+    <section class="panel" id="quiz">
+      <div class="section-kicker">互动练习</div>
+      <h2>5 道练习题</h2>
+      <div class="quiz-section">
+        <div class="question" data-id="q1" data-answer="C" data-type="single">
+          <div class="question-header">第1题：可靠性发展战略应属于企业的哪个层面？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q1" value="A"><span>A. 仅是质量部门的部门规划</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="B"><span>B. 仅是研发部门的技术计划</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="C"><span>C. 企业整个发展战略的重要组成部分</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="D"><span>D. 仅是售后服务的工作安排</span></label>
+        </div>
+        <div class="question" data-id="q2" data-answer="ABCD" data-type="multi">
+          <div class="question-header">第2题：可靠性发展战略应包括以下哪些内容？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q2" value="A"><span>A. 提出可考核的可靠性、维修性目标</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="B"><span>B. 建立可靠性研究机构和队伍</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="C"><span>C. 制定中长期可靠性培训计划</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="D"><span>D. 制定可靠性工作奖惩措施</span></label>
+        </div>
+        <div class="question" data-id="q3" data-answer="B" data-type="single">
+          <div class="question-header">第3题：美国空军的可靠性目标中，MTBF的目标是什么？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q3" value="A"><span>A. 减半</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="B"><span>B. 翻一番</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="C"><span>C. 提高三倍</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="D"><span>D. 保持不变</span></label>
+        </div>
+        <div class="question" data-id="q4" data-answer="AD" data-type="multi">
+          <div class="question-header">第4题：关于美国空军可靠性目标，下列说法正确的有？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. MTBF从500小时增加到1000小时</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. MTTR翻一番</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. MTBF减半</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. MTTR从40分钟减少为20分钟</span></label>
+        </div>
+        <div class="question" data-id="q5" data-answer="ABC" data-type="multi">
+          <div class="question-header">第5题：企业产品可靠性涉及的范围包括？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q5" value="A"><span>A. 高层管理人员、部门领导和一线技术人员</span></label>
+          <label class="option-label"><input type="checkbox" name="q5" value="B"><span>B. 设计、制造与售后服务</span></label>
+          <label class="option-label"><input type="checkbox" name="q5" value="C"><span>C. 人员素质提高和试验条件建设</span></label>
+          <label class="option-label"><input type="checkbox" name="q5" value="D"><span>D. 仅与研发部门有关</span></label>
+        </div>
+        <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
+        <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-kicker">补充记忆</div>
+      <h2>本节抓手</h2>
+      <div class="tag-list"><span class="tag">可靠性发展战略</span><span class="tag">可考核目标</span><span class="tag">MTBF翻一番</span><span class="tag">MTTR减半</span><span class="tag">企业战略组成</span></div>
+      <div class="callout">一句话总结：可靠性发展战略是企业整个发展战略的重要组成部分，必须从企业高度进行全面、系统、科学的策划，目标要明确可考核。</div>
+    </section>
+
+  </div></main>
+
+  <footer class="footer"><p>© 可靠性工程师手册互动讲解页</p><div class="sign">制定并实施可靠性发展战略 · §7-2</div></footer>
+</div>
+<script>
+const explanations = {
+  q1: '教材指出应把企业的可靠性发展战略作为企业整个发展战略的重要组成部分，不是某个部门的事。',
+  q2: '教材列出了可靠性发展战略应包含的多项内容，ABCD四项均在列举之中。',
+  q3: '教材指出美国空军的目标是到2000年可靠性翻一番，即MTBF从500小时增加到1000小时。',
+  q4: '教材典型例子：MTBF从500小时增加到1000小时（翻一番），MTTR从40分钟减少为20分钟（减半）。',
+  q5: '教材指出企业产品可靠性涉及高层到一线、设计到售后、认识到技术、人员素质到试验条件等全方位，不仅限于研发部门。'
+};
+const questions = [
+  {id:'q1', text:'可靠性发展战略应属于企业的哪个层面？'},
+  {id:'q2', text:'可靠性发展战略应包括以下哪些内容？'},
+  {id:'q3', text:'美国空军的可靠性目标中，MTBF的目标是什么？'},
+  {id:'q4', text:'关于美国空军可靠性目标，下列说法正确的有？'},
+  {id:'q5', text:'企业产品可靠性涉及的范围包括？'}
+];
+function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).sort().join('');const ok=checked===correct; if(ok)score++; html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">'; html+='<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>'; if(!ok)html+='<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>'; else html+='<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>'; html+='<div class="result-explain">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?'  满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
+</script>
+</body>
+</html>

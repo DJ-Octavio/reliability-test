@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>可靠性工程师手册|§6-5 数据收集、处理与应用的工程应用要点</title>
+  <meta property="og:title" content="可靠性工程师手册|§6-5 数据收集、处理与应用的工程应用要点" />
+  <meta property="og:description" content="§6-5 数据收集、处理与应用的工程应用要点。包含完整讲解、关键术语、重点提醒与 5 道互动练习题。" />
+  <style>
+    :root {--bg:#f6faff;--paper:#ffffff;--ink:#152033;--muted:#637083;--line:#dbe7f4;--blue:#246bfe;--cyan:#0f9fb6;--green:#159a63;--orange:#f08a24;--red:#d94b5f;--purple:#7657d8;--shadow:0 18px 45px rgba(39,72,114,.11);--radius:8px;--max:1180px;}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,rgba(36,107,254,.06),rgba(15,159,182,.03) 38%,transparent 72%),var(--bg);line-height:1.65}
+    a{color:inherit;text-decoration:none}.page-shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,250,255,.86);border-bottom:1px solid rgba(219,231,244,.9)}
+    .topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(36,107,254,.22);position:relative;flex:0 0 auto}.brand-mark::after{content:"";width:14px;height:14px;border:2px solid #fff;border-left:0;border-bottom:0;position:absolute;top:9px;left:8px;transform:rotate(45deg)}.brand-title{font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-subtitle{font-size:12px;color:var(--muted);margin-top:1px}.top-links{display:flex;align-items:center;gap:6px;color:#334158;font-size:13px;white-space:nowrap}.top-links a{padding:7px 9px;border-radius:7px;transition:background 160ms ease,color 160ms ease}.top-links a:hover{background:#eaf2ff;color:var(--blue)}
+    .hero{max-width:var(--max);margin:0 auto;padding:58px 24px 34px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:32px;align-items:stretch}.hero h1{margin:0;font-size:clamp(36px,5vw,68px);line-height:1.05;letter-spacing:0;max-width:850px}.hero-lead{color:#405066;font-size:18px;margin:22px 0 0;max-width:720px}.hero-board{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center;height:100%;min-height:340px}.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:center}.score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:8px;padding:14px;min-height:116px;transition:transform 180ms ease,border-color 180ms ease,background 180ms ease}.score-item:hover{transform:translateY(-4px);border-color:#b7cdfa;background:#ffffff}.score-number{font-size:28px;font-weight:850;line-height:1}.score-title{margin-top:8px;font-size:15px;font-weight:800}.score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}
+    .main-layout{max-width:900px;margin:0 auto;padding:18px 24px 72px}.content{display:grid;gap:22px}section{scroll-margin-top:96px}.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px}.section-kicker{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:0;margin-bottom:8px}h2{margin:0 0 14px;font-size:clamp(26px,3vw,38px);line-height:1.14;letter-spacing:0}h3{margin:24px 0 9px;font-size:20px;line-height:1.25;letter-spacing:0}p{margin:10px 0;color:#304059}ul,ol{margin:10px 0 0;padding-left:22px;color:#304059}li+li{margin-top:5px}.callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b}.callout.warn{border-left-color:var(--orange);background:#fff5e9;color:#6a3a08}.keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850}.keyword.green{background:#e7f7ef;color:var(--green)}.keyword.orange{background:#fff0dc;color:var(--orange)}.keyword.purple{background:#f0edff;color:var(--purple)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:8px;padding:18px}.card h4{margin:0 0 8px;font-size:16px;letter-spacing:0}.card p{margin:0;font-size:14px}
+    .quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}.question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}.question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px}.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px}.badge-multi{background:#fff0f6;color:#d63384}.badge-single{background:#e8f5e9;color:#2e7d32}.option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px}.option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0}.submit-wrap{text-align:center;margin:20px 0}.submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}.result{display:none;margin-top:20px}.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}.result-correct{background:#e8f5e9;border:1px solid #a5d6a7}.result-wrong{background:#fce4ec;border:1px solid #ef9a9a}.result-q{font-weight:600;margin-bottom:6px}.result-your{color:#d32f2f}.result-answer{color:#2e7d32;font-weight:600}.result-explain{margin-top:6px;color:#555;font-size:13px}.score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}.footer{text-align:center;padding:16px;font-size:12px;color:#999}.footer .sign{font-size:13px;color:#666;margin-top:6px}
+    .tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}
+    @media (max-width: 980px){.hero,.main-layout{grid-template-columns:1fr}.hero-board{order:-1}.cards{grid-template-columns:1fr 1fr}}
+    @media (max-width: 640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px}.cards{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}
+  </style>
+</head>
+<body>
+<div class="page-shell">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top"><span class="brand-mark"></span><span><span class="brand-title">可靠性工程师手册</span><span class="brand-subtitle">§6-5 工程应用要点</span></span></a>
+      <nav class="top-links"><a href="#s1">制度建设</a><a href="#s2">数据管理要点</a><a href="#s3">分析方法选择</a><a href="#quiz">练习题</a></nav>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div>
+      <h1>数据收集、处理与应用的工程应用要点</h1>
+      <p class="hero-lead">本节讲解可靠性数据工程在实际工作中的5条关键应用要点，涵盖制度建设、供应商管理、数据库对接、数据异常检验和分析方法选择。</p>
+    </div>
+    <div class="hero-board">
+      <div class="score-grid">
+        <div class="score-item"><div class="score-number" style="color:var(--blue);">5条</div><div class="score-title">工程要点</div><div class="score-text">教材总结的5条关键要求</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--green);">全寿命</div><div class="score-title">制度覆盖</div><div class="score-text">收集、处理、应用全周期数据</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--orange);">异常</div><div class="score-title">数据检验</div><div class="score-text">异常性检验，剔除异常数据</div></div>
+        <div class="score-item"><div class="score-number" style="color:var(--purple);">范围</div><div class="score-title">方法选择</div><div class="score-text">搞清使用范围和条件</div></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-layout"><div class="content">
+
+    <section class="panel" id="s1">
+      <div class="section-kicker">6.5 要点（1）</div>
+      <h2>制度建设：制定数据收集、处理与应用制度</h2>
+      <p>产品研发单位应制定可靠性数据的<span class="keyword">收集、处理和应用的制度</span>，系统收集和管理全寿命周期的可靠性数据。</p>
+      <h3>核心要求</h3>
+      <ul>
+        <li>制度应覆盖数据的<span class="keyword green">收集</span>、<span class="keyword green">处理</span>和<span class="keyword green">应用</span>三个环节</li>
+        <li>数据范围应覆盖产品的<span class="keyword orange">全寿命周期</span></li>
+        <li>制度应以文件形式明确，不能仅靠口头约定</li>
+      </ul>
+      <div class="callout">制度建设的核心是"有章可循"——明确谁来收集、什么时候收集、怎么收集、怎么存储、怎么应用，形成闭环管理。</div>
+    </section>
+
+    <section class="panel" id="s2">
+      <div class="section-kicker">6.5 要点（2）~（4）</div>
+      <h2>数据管理的关键要点</h2>
+      <h3>要点（2）：供应商数据管理</h3>
+      <p><span class="keyword purple">供应商的可靠性数据应纳入研发单位的可靠性数据管理。</span></p>
+      <p>这意味着研发单位不能只关注自身数据，还需要将供应商提供的元器件、零部件的可靠性数据统一纳入管理体系，确保供应链数据的完整性和可追溯性。</p>
+      <h3>要点（3）：数据库对接</h3>
+      <p>从产品数据库中应能<span class="keyword">提取、导入</span>可靠性数据。</p>
+      <p>可靠性数据不应独立于产品数据库之外，应能与产品数据库实现数据交互，确保数据的共享和一致性。</p>
+      <h3>要点（4）：数据异常检验</h3>
+      <p>应对收集的数据进行<span class="keyword orange">初步判断</span>，看是否符合产品实际情况。特别是当评估的结果出现异常时，应对数据进行<span class="keyword orange">异常性检验</span>，剔除异常数据。</p>
+      <div class="callout warn">异常数据可能来自测量误差、记录错误或特殊工况。如果不剔除异常数据，会严重影响可靠性评估的准确性，导致"垃圾进、垃圾出"。</div>
+    </section>
+
+    <section class="panel" id="s3">
+      <div class="section-kicker">6.5 要点（5）</div>
+      <h2>分析方法的选择</h2>
+      <p>在选择分析方法之前，一定要搞清楚所选方法的<span class="keyword">使用范围和条件</span>。</p>
+      <h3>为什么这很重要？</h3>
+      <ul>
+        <li>不同的统计方法有不同的<span class="keyword green">适用前提</span>（如样本量要求、分布假设等）</li>
+        <li>方法使用不当会导致<span class="keyword orange">错误结论</span></li>
+        <li>例如：χ²检验法要求样本量足够大，小样本使用可能得到不可靠的结果</li>
+        <li>例如：指数分布假设故障率为常数，若实际故障率递增，则应选用威布尔分布</li>
+      </ul>
+      <h3>5条要点总结</h3>
+      <div class="cards">
+        <div class="card"><h4>① 制度建设</h4><p>制定收集、处理、应用制度，覆盖全寿命周期</p></div>
+        <div class="card"><h4>② 供应商管理</h4><p>供应商可靠性数据纳入研发单位统一管理</p></div>
+        <div class="card"><h4>③ 数据库对接</h4><p>从产品数据库中可提取、导入可靠性数据</p></div>
+        <div class="card"><h4>④ 异常检验</h4><p>初步判断数据合理性，剔除异常数据</p></div>
+      </div>
+      <div class="callout">第⑤条"搞清方法的使用范围和条件"是贯穿前面所有数据处理环节的基本功——方法选错，一切白做。</div>
+    </section>
+
+    <section class="panel" id="quiz">
+      <div class="section-kicker">互动练习</div>
+      <h2>5 道练习题</h2>
+      <div class="quiz-section">
+        <div class="question" data-id="q1" data-answer="B" data-type="single">
+          <div class="question-header">第1题：产品研发单位制定可靠性数据制度时，数据收集范围应覆盖哪个阶段？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q1" value="A"><span>A. 仅使用阶段</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="B"><span>B. 全寿命周期</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="C"><span>C. 仅研发和生产阶段</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="D"><span>D. 仅可靠性试验阶段</span></label>
+        </div>
+        <div class="question" data-id="q2" data-answer="ACD" data-type="multi">
+          <div class="question-header">第2题：关于供应商的可靠性数据管理，以下哪些说法正确？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q2" value="A"><span>A. 供应商的可靠性数据应纳入研发单位的可靠性数据管理</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="B"><span>B. 供应商数据独立管理，不需要纳入研发单位体系</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="C"><span>C. 从产品数据库中应能提取、导入可靠性数据</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="D"><span>D. 供应链数据的完整性和可追溯性需要统一管理来保证</span></label>
+        </div>
+        <div class="question" data-id="q3" data-answer="D" data-type="single">
+          <div class="question-header">第3题：当评估结果出现异常时，首先应该做什么？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q3" value="A"><span>A. 直接修改评估模型</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="B"><span>B. 忽略异常结果，继续分析</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="C"><span>C. 增加更多试验样本</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="D"><span>D. 对数据进行异常性检验，剔除异常数据</span></label>
+        </div>
+        <div class="question" data-id="q4" data-answer="AB" data-type="multi">
+          <div class="question-header">第4题：在选择可靠性分析方法之前，需要搞清楚哪些事项？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. 所选方法的使用范围</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. 所选方法的使用条件</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. 所选方法的计算速度</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. 所选方法是否需要编程实现</span></label>
+        </div>
+        <div class="question" data-id="q5" data-answer="C" data-type="single">
+          <div class="question-header">第5题：以下哪项不属于教材中提到的5条工程应用要点？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q5" value="A"><span>A. 制定可靠性数据的收集、处理和应用制度</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="B"><span>B. 供应商的可靠性数据应纳入研发单位的可靠性数据管理</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="C"><span>C. 可靠性数据应全部由第三方检测机构收集</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="D"><span>D. 在选择分析方法之前要搞清楚所选方法的使用范围和条件</span></label>
+        </div>
+        <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
+        <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-kicker">补充记忆</div>
+      <h2>本节抓手</h2>
+      <div class="tag-list"><span class="tag">制度建设</span><span class="tag">供应商管理</span><span class="tag">数据库对接</span><span class="tag">异常检验</span><span class="tag">方法选择</span><span class="tag">全寿命周期</span><span class="tag">使用范围</span></div>
+      <div class="callout">一句话总结：工程应用5条要点——建制度（全寿命）、管供应商（纳入体系）、接数据库（提取导入）、检异常（剔除异常数据）、选方法（搞清范围条件）。</div>
+    </section>
+
+  </div></main>
+  <footer class="footer"><p>© 可靠性工程师手册互动讲解页</p><div class="sign">数据收集、处理与应用的工程应用要点 · §6-5</div></footer>
+</div>
+<script>
+const explanations={
+  q1:'教材指出产品研发单位应制定可靠性数据的收集、处理和应用的制度，系统收集和管理全寿命周期的可靠性数据。',
+  q2:'教材指出供应商的可靠性数据应纳入研发单位的可靠性数据管理，从产品数据库中应能提取、导入可靠性数据。供应商数据独立管理的说法与教材要求相矛盾。',
+  q3:'教材明确指出当评估的结果出现异常时，应对数据进行异常性检验，剔除异常数据。不能直接修改模型或忽略异常。',
+  q4:'教材指出在选择分析方法之前，一定要搞清楚所选方法的使用范围和条件。计算速度和是否需要编程不是教材提到的考虑因素。',
+  q5:'教材列出的5条要点分别是：①制定制度②供应商数据纳入管理③数据库提取导入④异常性检验⑤搞清方法范围和条件。"由第三方检测机构收集"不在教材要点之中。'
+};
+const questions=[
+  {id:'q1',text:'产品研发单位制定可靠性数据制度时，数据收集范围应覆盖哪个阶段？'},
+  {id:'q2',text:'关于供应商的可靠性数据管理，以下哪些说法正确？'},
+  {id:'q3',text:'当评估结果出现异常时，首先应该做什么？'},
+  {id:'q4',text:'在选择可靠性分析方法之前，需要搞清楚哪些事项？'},
+  {id:'q5',text:'以下哪项不属于教材中提到的5条工程应用要点？'}
+];
+function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).sort().join('');const ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>';else html+='<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>';html+='<div class="result-explain">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?'  满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
+</script>
+</body>
+</html>

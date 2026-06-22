@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>可靠性工程师手册|§7-3 可靠性工作的基本原则</title>
+  <meta property="og:title" content="可靠性工程师手册|§7-3 可靠性工作的基本原则" />
+  <meta property="og:description" content="§7-3 可靠性工作的基本原则。包含完整讲解、关键术语、重点提醒与 5 道互动练习题。" />
+  <style>
+    :root {--bg:#f6faff;--paper:#ffffff;--ink:#152033;--muted:#637083;--line:#dbe7f4;--blue:#246bfe;--cyan:#0f9fb6;--green:#159a63;--orange:#f08a24;--red:#d94b5f;--purple:#7657d8;--shadow:0 18px 45px rgba(39,72,114,.11);--radius:8px;--max:1180px;}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,rgba(36,107,254,.06),rgba(15,159,182,.03) 38%,transparent 72%),var(--bg);line-height:1.65}
+    a{color:inherit;text-decoration:none}.page-shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,250,255,.86);border-bottom:1px solid rgba(219,231,244,.9)}
+    .topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(36,107,254,.22);position:relative;flex:0 0 auto}.brand-mark::after{content:"";width:14px;height:14px;border:2px solid #fff;border-left:0;border-bottom:0;position:absolute;top:9px;left:8px;transform:rotate(45deg)}.brand-title{font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-subtitle{font-size:12px;color:var(--muted);margin-top:1px}.top-links{display:flex;align-items:center;gap:6px;color:#334158;font-size:13px;white-space:nowrap}.top-links a{padding:7px 9px;border-radius:7px;transition:background 160ms ease,color 160ms ease}.top-links a:hover{background:#eaf2ff;color:var(--blue)}
+    .hero{max-width:var(--max);margin:0 auto;padding:58px 24px 34px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:32px;align-items:stretch}.hero h1{margin:0;font-size:clamp(36px,5vw,68px);line-height:1.05;letter-spacing:0;max-width:850px}.hero-lead{color:#405066;font-size:18px;margin:22px 0 0;max-width:720px}
+    .hero-board{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center;height:100%;min-height:340px}.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:center}.score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:8px;padding:14px;min-height:116px;transition:transform 180ms ease,border-color 180ms ease,background 180ms ease}.score-item:hover{transform:translateY(-4px);border-color:#b7cdfa;background:#ffffff}.score-number{font-size:28px;font-weight:850;line-height:1}.score-title{margin-top:8px;font-size:15px;font-weight:800}.score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}
+    .main-layout{max-width:900px;margin:0 auto;padding:18px 24px 72px}.content{display:grid;gap:22px}section{scroll-margin-top:96px}.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px}.section-kicker{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:0;margin-bottom:8px}h2{margin:0 0 14px;font-size:clamp(26px,3vw,38px);line-height:1.14;letter-spacing:0}h3{margin:24px 0 9px;font-size:20px;line-height:1.25;letter-spacing:0}p{margin:10px 0;color:#304059}ul,ol{margin:10px 0 0;padding-left:22px;color:#304059}li+li{margin-top:5px}.callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b}.callout.warn{border-left-color:var(--orange);background:#fff5e9;color:#6a3a08}.keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850}.keyword.green{background:#e7f7ef;color:var(--green)}.keyword.orange{background:#fff0dc;color:var(--orange)}.keyword.purple{background:#f0edff;color:var(--purple)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:8px;padding:18px}.card h4{margin:0 0 8px;font-size:16px;letter-spacing:0}.card p{margin:0;font-size:14px}
+    .quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}.question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}.question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px}.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px}.badge-multi{background:#fff0f6;color:#d63384}.badge-single{background:#e8f5e9;color:#2e7d32}.option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px}.option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0}.submit-wrap{text-align:center;margin:20px 0}.submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}.result{display:none;margin-top:20px}.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}.result-correct{background:#e8f5e9;border:1px solid #a5d6a7}.result-wrong{background:#fce4ec;border:1px solid #ef9a9a}.result-q{font-weight:600;margin-bottom:6px}.result-your{color:#d32f2f}.result-answer{color:#2e7d32;font-weight:600}.result-explain{margin-top:6px;color:#555;font-size:13px}.score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}.footer{text-align:center;padding:16px;font-size:12px;color:#999}.footer .sign{font-size:13px;color:#666;margin-top:6px}
+    .tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}
+    @media (max-width: 980px){.hero,.main-layout{grid-template-columns:1fr}.hero-board{order:-1}.cards{grid-template-columns:1fr 1fr}}
+    @media (max-width: 640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px}.cards{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}
+  </style>
+</head>
+<body>
+<div class="page-shell">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top" aria-label="返回顶部"><span class="brand-mark" aria-hidden="true"></span><span><span class="brand-title">可靠性工程师手册</span><span class="brand-subtitle">§7-3 可靠性工作的基本原则</span></span></a>
+      <nav class="top-links"><a href="#s1">方针原则</a><a href="#s2">十条原则</a><a href="#quiz">练习题</a></nav>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div>
+      <h1>可靠性工作的基本原则</h1>
+      <p class="hero-lead">教材列出了可靠性工作的十条基本原则，涵盖从定性定量要求、预防为主、并行工程、成熟设计、软件工程、制造控制到闭环管理等方面，是系统性开展可靠性工作的行动指南。</p>
+    </div>
+    <div class="hero-board">
+      <div class="score-grid">
+        <div class="score-item"><div class="score-number" style="color: var(--blue);">10条</div><div class="score-title">基本原则</div><div class="score-text">系统性开展可靠性工作的指南</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--green);">预防为主</div><div class="score-title">核心方针</div><div class="score-text">早期投入，预防、发现和纠正缺陷</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--orange);">并行工程</div><div class="score-title">协调途径</div><div class="score-text">纳入设计开发策划，统一规划</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--purple);">闭环管理</div><div class="score-title">持续改进</div><div class="score-text">及时反馈，实现持续改进</div></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-layout"><div class="content">
+
+    <section class="panel" id="s1">
+      <div class="section-kicker">7.3.1</div>
+      <h2>可靠性工作的目标与方针</h2>
+      <p>教材指出：开展可靠性工作的目标是保证研发的产品或改进的产品达到规定的可靠性的<span class="keyword">定性和定量要求</span>，以满足用户对产品的可用性、任务成功性和安全性的要求，降低对维修和保障资源的要求，减少寿命周期费用，最终使用户满意。</p>
+      <p>核心方针：<span class="keyword green">预防为主、早期投入</span>。应把预防、发现和纠正设计、制造中的缺陷和故障以及消除单点故障作为可靠性工作的重点。</p>
+      <div class="callout">可靠性工作必须遵循"预防为主、早期投入"的方针——越早发现问题，纠正代价越小，收益越大。</div>
+    </section>
+
+    <section class="panel" id="s2">
+      <div class="section-kicker">7.3.2</div>
+      <h2>十条基本原则概览</h2>
+      <p>教材列出的十条基本原则涵盖了可靠性工作的方方面面：</p>
+      <div class="cards">
+        <div class="card"><h4>①定性定量要求</h4><p>产品研发必须有可靠性等定性、定量要求，应合理、科学、可实现。</p></div>
+        <div class="card"><h4>②预防为主</h4><p>遵循预防为主、早期投入的方针，重点是预防、发现和纠正缺陷。</p></div>
+        <div class="card"><h4>③统一规划</h4><p>纳入设计开发策划，统一规划，协调进行，并行工程是有效途径。</p></div>
+        <div class="card"><h4>④成熟设计</h4><p>遵循采用成熟设计的原则，控制未充分验证的新技术应用。</p></div>
+        <div class="card"><h4>⑤软件工程</h4><p>软件开发须符合软件工程要求，关键软件应有可靠性要求并测评。</p></div>
+        <div class="card"><h4>⑥制造控制</h4><p>采用统计过程控制、FMEA和环境应力筛选等方法保证设计实现。</p></div>
+        <div class="card"><h4>⑦规范化</h4><p>利用标准、规范、手册或工程经验开展工作，形成报告。</p></div>
+        <div class="card"><h4>⑧监督控制</h4><p>加强设计开发和生产制造过程的监督与控制，设置可靠性评审点。</p></div>
+        <div class="card"><h4>⑨使用可靠性</h4><p>重视使用过程中的可靠性，及时记录故障信息，闭环管理，持续改进。</p></div>
+        <div class="card"><h4>⑩效费比</h4><p>根据产品特点、关键程度、新技术含量等选择效费比高的工作项目。</p></div>
+      </div>
+      <div class="callout warn">重点提醒：十条原则不是孤立的，而是一个有机整体——从目标设定到过程控制，从设计到使用，形成完整的可靠性工作闭环。</div>
+    </section>
+
+    <section class="panel" id="quiz">
+      <div class="section-kicker">互动练习</div>
+      <h2>5 道练习题</h2>
+      <div class="quiz-section">
+        <div class="question" data-id="q1" data-answer="B" data-type="single">
+          <div class="question-header">第1题：可靠性工作必须遵循的核心方针是？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q1" value="A"><span>A. 事后纠正为主</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="B"><span>B. 预防为主、早期投入</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="C"><span>C. 仅在使用阶段投入</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="D"><span>D. 以降低成本为首要目标</span></label>
+        </div>
+        <div class="question" data-id="q2" data-answer="ACD" data-type="multi">
+          <div class="question-header">第2题：以下哪些属于教材列出的可靠性工作基本原则？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q2" value="A"><span>A. 纳入产品设计和开发策划，统一规划</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="B"><span>B. 尽可能使用全新的未经验证的技术</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="C"><span>C. 设置可靠性评审点，严格进行可靠性评审</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="D"><span>D. 及时记录故障信息，形成闭环管理</span></label>
+        </div>
+        <div class="question" data-id="q3" data-answer="C" data-type="single">
+          <div class="question-header">第3题：教材提到实现综合协调的有效工程途径是？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q3" value="A"><span>A. 串行工程</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="B"><span>B. 独立开发</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="C"><span>C. 并行工程</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="D"><span>D. 事后评审</span></label>
+        </div>
+        <div class="question" data-id="q4" data-answer="ABD" data-type="multi">
+          <div class="question-header">第4题：关于制造过程对可靠性的影响，教材提到可采用哪些方法？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. 统计过程控制</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. 过程故障模式及影响分析</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. 取消所有检验环节</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. 环境应力筛选</span></label>
+        </div>
+        <div class="question" data-id="q5" data-answer="D" data-type="single">
+          <div class="question-header">第5题：选择可靠性工作项目时，教材建议应根据什么来选择？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q5" value="A"><span>A. 仅根据领导喜好</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="B"><span>B. 仅根据预算多少</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="C"><span>C. 仅根据进度要求</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="D"><span>D. 根据产品特点、关键程度、新技术含量、费用、进度等选择效费比高的项目</span></label>
+        </div>
+        <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
+        <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-kicker">补充记忆</div>
+      <h2>本节抓手</h2>
+      <div class="tag-list"><span class="tag">预防为主</span><span class="tag">早期投入</span><span class="tag">并行工程</span><span class="tag">成熟设计</span><span class="tag">闭环管理</span><span class="tag">效费比</span><span class="tag">十条原则</span></div>
+      <div class="callout">一句话总结：可靠性工作十条原则的核心是"预防为主、早期投入"，通过统一规划、成熟设计、制造控制、评审监督和闭环反馈，系统性地实现产品可靠性目标。</div>
+    </section>
+
+  </div></main>
+
+  <footer class="footer"><p>© 可靠性工程师手册互动讲解页</p><div class="sign">可靠性工作的基本原则 · §7-3</div></footer>
+</div>
+<script>
+const explanations = {
+  q1: '教材明确指出可靠性工作必须遵循"预防为主、早期投入"的方针。',
+  q2: '教材原则包括纳入设计开发策划（③）、设置评审点（⑧）、闭环管理（⑨）。原则④是控制未验证的新技术，而非尽可能使用全新未验证技术。',
+  q3: '教材指出并行工程是实现综合协调的有效工程途径。',
+  q4: '教材原则⑥提到采用统计过程控制、过程故障模式及影响分析和环境应力筛选等方法。取消检验环节与保证可靠性相悖。',
+  q5: '教材原则⑩指出应根据产品的特点、复杂和关键程度、新技术含量、费用、进度等因素选择效费比高的工作项目。'
+};
+const questions = [
+  {id:'q1', text:'可靠性工作必须遵循的核心方针是？'},
+  {id:'q2', text:'以下哪些属于教材列出的可靠性工作基本原则？'},
+  {id:'q3', text:'教材提到实现综合协调的有效工程途径是？'},
+  {id:'q4', text:'关于制造过程对可靠性的影响，教材提到可采用哪些方法？'},
+  {id:'q5', text:'选择可靠性工作项目时，教材建议应根据什么来选择？'}
+];
+function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).sort().join('');const ok=checked===correct; if(ok)score++; html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">'; html+='<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>'; if(!ok)html+='<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>'; else html+='<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>'; html+='<div class="result-explain">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?'  满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
+</script>
+</body>
+</html>
