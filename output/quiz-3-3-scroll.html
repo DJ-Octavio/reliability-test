@@ -1,201 +1,229 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>§3-3 故障模式、影响及危害性分析</title>
+  <title>可靠性工程师手册|§3-3 故障模式、影响及危害性分析</title>
+  <meta property="og:title" content="可靠性工程师手册|§3-3 故障模式、影响及危害性分析" />
+  <meta property="og:description" content="§3-3 故障模式、影响及危害性分析。包含完整讲解、关键术语、重点提醒与 5 道互动练习题。" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="zh_CN" />
   <style>
-    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#f6faff;color:#152033;line-height:1.7}
-    .wrap{max-width:980px;margin:0 auto;padding:28px 18px 60px}
-    .hero{background:#fff;border:1px solid #dbe7f4;border-radius:16px;padding:28px;box-shadow:0 12px 30px rgba(39,72,114,.08)}
-    h1{margin:0 0 12px;font-size:34px;line-height:1.15}
-    .lead{font-size:17px;color:#405066;margin:0 0 16px}
-    .tags{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
-    .tag{background:#eaf2ff;color:#246bfe;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:700}
-    section{background:#fff;border:1px solid #dbe7f4;border-radius:16px;padding:24px;margin-top:18px;box-shadow:0 12px 30px rgba(39,72,114,.06)}
-    h2{margin:0 0 12px;font-size:24px}
-    h3{margin:18px 0 8px;font-size:18px}
-    p,li{font-size:15px;color:#304059}
-    ul,ol{margin:10px 0 0 20px}
-    .callout{border-left:4px solid #246bfe;background:#eef5ff;padding:14px 16px;border-radius:0 12px 12px 0;margin:14px 0}
-    .warn{border-left-color:#f08a24;background:#fff5e9}
-    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-    .card{border:1px solid #e1ebf7;border-radius:14px;padding:16px;background:#fbfdff}
-    .quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
-    .quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}
-    .question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}
-    .question-header{font-weight:800;margin-bottom:8px}
-    .badge{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:10px;font-size:12px}
-    .single{background:#e8f5e9;color:#2e7d32}.multi{background:#fff0f6;color:#d63384}
-    .option-label{display:block;margin:6px 0;cursor:pointer;font-size:14px}
-    .option-label input{margin-right:10px;accent-color:#2b6aff;width:16px;height:16px}
-    .submit-wrap{text-align:center;margin:20px 0}
-    .submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}
-    .result{display:none;margin-top:20px}
-    .result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}
-    .result-correct{background:#e8f5e9;border:1px solid #a5d6a7}
-    .result-wrong{background:#fce4ec;border:1px solid #ef9a9a}
-    .result-q{font-weight:600;margin-bottom:6px}
-    .result-your{color:#d32f2f}
-    .result-answer{color:#2e7d32;font-weight:600}
-    .result-explain{margin-top:6px;color:#555;font-size:13px}
-    .score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}
-    .footer{margin-top:18px;color:#748196;font-size:12px;text-align:center}
-    @media(max-width:700px){.grid{grid-template-columns:1fr}}
+    :root {
+      --bg: #f6faff;
+      --paper: #ffffff;
+      --ink: #152033;
+      --muted: #637083;
+      --line: #dbe7f4;
+      --blue: #246bfe;
+      --cyan: #0f9fb6;
+      --green: #159a63;
+      --orange: #f08a24;
+      --red: #d94b5f;
+      --purple: #7657d8;
+      --shadow: 0 18px 45px rgba(39, 72, 114, 0.11);
+      --radius: 8px;
+      --max: 1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,rgba(36,107,254,.06),rgba(15,159,182,.03) 38%,transparent 72%),var(--bg);line-height:1.65}
+    a{color:inherit;text-decoration:none}
+    .page-shell{min-height:100vh}
+    .topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(246,250,255,.86);border-bottom:1px solid rgba(219,231,244,.9)}
+    .topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 10px 24px rgba(36,107,254,.22);position:relative;flex:0 0 auto}.brand-mark::after{content:"";width:14px;height:14px;border:2px solid #fff;border-left:0;border-bottom:0;position:absolute;top:9px;left:8px;transform:rotate(45deg)}.brand-title{font-size:15px;font-weight:750;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-subtitle{font-size:12px;color:var(--muted);margin-top:1px}.top-links{display:flex;align-items:center;gap:6px;color:#334158;font-size:13px;white-space:nowrap}.top-links a{padding:7px 9px;border-radius:7px;transition:background 160ms ease,color 160ms ease}.top-links a:hover{background:#eaf2ff;color:var(--blue)}
+    .hero{max-width:var(--max);margin:0 auto;padding:58px 24px 34px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:32px;align-items:stretch}.hero h1{margin:0;font-size:clamp(36px,5vw,68px);line-height:1.05;letter-spacing:0;max-width:850px}.hero-lead{color:#405066;font-size:18px;margin:22px 0 0;max-width:720px}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 16px;border-radius:8px;border:1px solid var(--line);background:#fff;color:#233047;font-size:14px;font-weight:700;cursor:pointer}.button.primary{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 14px 30px rgba(36,107,254,.22)}
+    .hero-board{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:center;height:100%;min-height:340px}.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:center}.score-item{background:#f8fbff;border:1px solid #e1ebf7;border-radius:8px;padding:14px;min-height:116px;transition:transform 180ms ease,border-color 180ms ease,background 180ms ease}.score-item:hover{transform:translateY(-4px);border-color:#b7cdfa;background:#ffffff}.score-number{font-size:28px;font-weight:850;line-height:1}.score-title{margin-top:8px;font-size:15px;font-weight:800}.score-text{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.45}
+    .main-layout{max-width:900px;margin:0 auto;padding:18px 24px 72px}.content{display:grid;gap:22px}section{scroll-margin-top:96px}.panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 34px rgba(39,72,114,.08);padding:28px}.section-kicker{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:0;margin-bottom:8px}h2{margin:0 0 14px;font-size:clamp(26px,3vw,38px);line-height:1.14;letter-spacing:0}h3{margin:24px 0 9px;font-size:20px;line-height:1.25;letter-spacing:0}p{margin:10px 0;color:#304059}ul,ol{margin:10px 0 0;padding-left:22px;color:#304059}li+li{margin-top:5px}.callout{margin:18px 0;padding:16px 18px;border-left:4px solid var(--blue);background:#eef5ff;border-radius:0 8px 8px 0;font-weight:750;color:#1d355b}.callout.warn{border-left-color:var(--orange);background:#fff5e9;color:#6a3a08}.keyword{display:inline-block;padding:1px 7px 2px;margin:0 1px;border-radius:7px;background:#eaf2ff;color:var(--blue);font-weight:850}.keyword.green{background:#e7f7ef;color:var(--green)}.keyword.orange{background:#fff0dc;color:var(--orange)}.keyword.purple{background:#f0edff;color:var(--purple)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.card{border:1px solid #e1ebf7;background:#fbfdff;border-radius:8px;padding:18px}.card h4{margin:0 0 8px;font-size:16px;letter-spacing:0}.card p{margin:0;font-size:14px}.formula{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}.formula-step{min-height:104px;border:1px solid #dce8f6;background:#fff;border-radius:8px;padding:14px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:8px}.formula-step strong{font-size:16px}.formula-step span{color:var(--muted);font-size:12px;line-height:1.4}
+    .quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}.question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}.question-header{font-size:14px;font-weight:600;color:#333;margin-bottom:10px}.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:6px}.badge-multi{background:#fff0f6;color:#d63384}.badge-single{background:#e8f5e9;color:#2e7d32}.option-label{display:flex;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:14px}.option-label input{margin-top:3px;margin-right:10px;accent-color:#2b6aff;width:16px;height:16px;flex-shrink:0}.submit-wrap{text-align:center;margin:20px 0}.submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}.result{display:none;margin-top:20px}.result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}.result-correct{background:#e8f5e9;border:1px solid #a5d6a7}.result-wrong{background:#fce4ec;border:1px solid #ef9a9a}.result-q{font-weight:600;margin-bottom:6px}.result-your{color:#d32f2f}.result-answer{color:#2e7d32;font-weight:600}.result-explain{margin-top:6px;color:#555;font-size:13px}.score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}.footer{text-align:center;padding:16px;font-size:12px;color:#999}.footer .sign{font-size:13px;color:#666;margin-top:6px}
+    .tag-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.tag{background:#f0f2ff;color:#1a52d6;font-size:12px;padding:4px 12px;border-radius:12px}.timeline{position:relative;padding-left:24px}.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#e8ecff}.timeline-item{position:relative;margin-bottom:16px}.timeline-item::before{content:'';position:absolute;left:-20px;top:4px;width:12px;height:12px;border-radius:50%;background:#2b6aff;border:2px solid #fff;box-shadow:0 0 0 2px #e8ecff}.timeline-year{font-weight:700;color:#1a52d6;font-size:14px}.timeline-text{font-size:14px;color:#555;margin-top:2px}
+    @media (max-width: 980px){.hero,.main-layout{grid-template-columns:1fr}.hero-board{order:-1}.cards,.formula{grid-template-columns:1fr 1fr}}
+    @media (max-width: 640px){.topbar-inner,.hero,.main-layout{padding-left:16px;padding-right:16px}.cards,.formula{grid-template-columns:1fr}.top-links{display:none}.panel{padding:20px}}
   </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="hero">
-    <h1>§3-3 故障模式、影响及危害性分析</h1>
-    <p class="lead">FMECA 是一种自下而上的归纳分析方法，通过识别产品每个潜在的故障模式，判断其对系统的影响并按严重程度排序，从而在设计阶段尽早发现并消除薄弱环节。</p>
-    <div class="tags">
-      <span class="tag">FMEA</span><span class="tag">FMECA</span><span class="tag">CA</span><span class="tag">危害性分析</span><span class="tag">RPN</span>
+<div class="page-shell">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top" aria-label="返回顶部">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>
+          <span class="brand-title">可靠性工程师手册</span>
+          <span class="brand-subtitle">§3-3 故障模式、影响及危害性分析</span>
+        </span>
+      </a>
+      <nav class="top-links">
+        <a href="#s1">概述</a><a href="#s2">方法</a><a href="#s3">严重度</a><a href="#s4">分析步骤</a><a href="#s5">应用</a><a href="#quiz">练习题</a>
+      </nav>
     </div>
-  </div>
+  </header>
 
-  
-    <section>
-      <h2>本节内容</h2>
-      <h3>1. FMECA 概述</h3>
-      <p><b>FMECA</b>（Failure Mode, Effects and Criticality Analysis）即故障模式、影响及危害性分析，是 <span class="keyword">FMEA</span>（故障模式及影响分析）和 <span class="keyword">CA</span>（危害性分析）的组合。FMEA 用于识别产品潜在的故障模式并评估其对系统的影响；CA 则是对故障模式按其严重程度进行分级排序。</p>
-      <div class="callout">💡 核心思路：FMEA 解决"可能出什么错、后果是什么"，CA 解决"哪个问题最严重、优先处理哪个"。两者结合形成完整的分析闭环。</div>
-
-      <h3>2. FMEA 的分析步骤</h3>
-      <p>FMECA 的分析流程包括以下关键步骤：</p>
-      <ul>
-        <li><b>明确系统定义</b>：确定分析对象的边界、功能、接口及工作模式</li>
-        <li><b>绘制功能框图/可靠性框图</b>：明确各组成单元之间的功能关系</li>
-        <li><b>识别故障模式</b>：列出每个单元可能出现的所有故障模式</li>
-        <li><b>分析故障影响</b>：分析每种故障模式对上一层及系统整体的影响</li>
-        <li><b>确定故障检测方法</b>：说明如何发现该故障</li>
-        <li><b>提出补偿措施</b>：针对严重故障模式提出设计改进建议</li>
-      </ul>
-      <div class="callout warn">⚠️ FMEA 的核心价值在于"尽早发现"——在设计阶段就识别潜在故障，而非等到试验或使用阶段才暴露问题。</div>
-
-      <h3>3. 危害性分析（CA）</h3>
-      <p>危害性分析是对 FMEA 结果的进一步量化和排序。主要方法有两种：</p>
-      <div class="grid">
-        <div class="card"><b>风险优先数法（RPN）</b><p>对故障模式的严重度 S、发生频度 O、检测难度 D 分别打分（1~10），RPN = S × O × D。RPN 越大，越需要优先处理。</p></div>
-        <div class="card"><b>危害度矩阵法</b><p>将故障模式按严重度等级（Ⅰ~Ⅳ）和发生概率（A~E）绘制矩阵，落在高严重度、高概率区域的故障模式优先处理。</p></div>
+  <section class="hero" id="top">
+    <div>
+      <h1>故障模式、影响及危害性分析</h1>
+      <p class="hero-lead">FMECA 是一种自下而上的归纳分析方法，结合故障模式及影响分析（FMEA）与危害性分析（CA），用于识别潜在故障模式、评估其后果并按严重程度排序，从而在设计阶段尽早发现并消除薄弱环节。</p>
+      <div class="hero-actions">
+        <a class="button primary" href="#quiz">开始练习</a>
+        <a class="button" href="#s1">先看讲解</a>
       </div>
-
-      <h3>4. 严重度等级</h3>
-      <p>通常分为四个等级：</p>
-      <ul>
-        <li><b>Ⅰ级（灾难的）</b>：导致人员死亡或系统毁坏</li>
-        <li><b>Ⅱ级（严重的）</b>：导致人员严重受伤或系统严重损坏</li>
-        <li><b>Ⅲ级（轻度的）</b>：导致人员轻度受伤或系统轻度损坏</li>
-        <li><b>Ⅳ级（可忽略的）</b>：不会导致人员受伤或系统损坏，但需关注</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>重点提醒</h2>
-      <ul>
-        <li>FMECA = <b>FMEA</b>（故障模式及影响分析）+ <b>CA</b>（危害性分析）</li>
-        <li>FMEA 是"自下而上"的分析方法，从单元故障模式出发推导系统影响</li>
-        <li>危害性分析中 <b>RPN = S × O × D</b>，三个因子都要关注，不能只盯严重度</li>
-        <li>FMECA 应尽早开展，贯穿设计全过程，并在设计变更时及时更新</li>
-      </ul>
-    </section>
-
-  
-    <section class="quiz-section">
-      <h2>📝 练习题</h2>
-      <div class="question" data-id="1" data-answer="C" data-type="single">
-        <div class="question-header">1. FMECA 是哪两种分析的组合？<span class="badge badge-single">单选</span></div>
-        <label class="option-label"><input type="radio" name="q1" value="A">A. FTA 和 FMEA</label>
-        <label class="option-label"><input type="radio" name="q1" value="B">B. FMEA 和 FTA 的简化版</label>
-        <label class="option-label"><input type="radio" name="q1" value="C">C. FMEA（故障模式及影响分析）和 CA（危害性分析）</label>
-        <label class="option-label"><input type="radio" name="q1" value="D">D. 可靠性分配和可靠性预计</label>
+    </div>
+    <div class="hero-board">
+      <div class="score-grid">
+        <div class="score-item"><div class="score-number" style="color: var(--blue);">FTA</div><div class="score-title">自上而下</div><div class="score-text">从顶事件逐层追溯直接原因</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--green);">最小割集</div><div class="score-title">关键输出</div><div class="score-text">用于识别导致顶事件的最小底事件组合</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--orange);">概率</div><div class="score-title">定量分析</div><div class="score-text">可计算顶事件发生概率和重要度</div></div>
+        <div class="score-item"><div class="score-number" style="color: var(--purple);">7步</div><div class="score-title">一般流程</div><div class="score-text">准备、顶事件、建树、规范化、定性、定量、建议</div></div>
       </div>
-      <div class="question" data-id="2" data-answer="D" data-type="single">
-        <div class="question-header">2. RPN（风险优先数）的计算公式是？<span class="badge badge-single">单选</span></div>
-        <label class="option-label"><input type="radio" name="q2" value="A">A. RPN = S + O + D</label>
-        <label class="option-label"><input type="radio" name="q2" value="B">B. RPN = S × O</label>
-        <label class="option-label"><input type="radio" name="q2" value="C">C. RPN = S × D</label>
-        <label class="option-label"><input type="radio" name="q2" value="D">D. RPN = S × O × D</label>
-      </div>
-      <div class="question" data-id="3" data-answer="A" data-type="single">
-        <div class="question-header">3. 严重度等级中，"导致人员死亡或系统毁坏"属于哪一级？<span class="badge badge-single">单选</span></div>
-        <label class="option-label"><input type="radio" name="q3" value="A">A. Ⅰ级（灾难的）</label>
-        <label class="option-label"><input type="radio" name="q3" value="B">B. Ⅱ级（严重的）</label>
-        <label class="option-label"><input type="radio" name="q3" value="C">C. Ⅲ级（轻度的）</label>
-        <label class="option-label"><input type="radio" name="q3" value="D">D. Ⅳ级（可忽略的）</label>
-      </div>
-      <div class="question" data-id="4" data-answer="ABCD" data-type="multi">
-        <div class="question-header">4. FMECA 的分析步骤包括以下哪些？<span class="badge badge-multi">多选</span></div>
-        <label class="option-label"><input type="checkbox" name="q4" value="A">A. 识别故障模式</label>
-        <label class="option-label"><input type="checkbox" name="q4" value="B">B. 分析故障影响</label>
-        <label class="option-label"><input type="checkbox" name="q4" value="C">C. 确定故障检测方法</label>
-        <label class="option-label"><input type="checkbox" name="q4" value="D">D. 提出补偿措施</label>
-      </div>
-      <div class="question" data-id="5" data-answer="ABC" data-type="multi">
-        <div class="question-header">5. 关于 RPN 的描述，正确的有哪些？<span class="badge badge-multi">多选</span></div>
-        <label class="option-label"><input type="checkbox" name="q5" value="A">A. S 代表严重度</label>
-        <label class="option-label"><input type="checkbox" name="q5" value="B">B. O 代表发生频度</label>
-        <label class="option-label"><input type="checkbox" name="q5" value="C">C. D 代表检测难度</label>
-        <label class="option-label"><input type="checkbox" name="q5" value="D">D. RPN 值越小越需要优先处理</label>
-      </div>
-      <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
-      <div class="result" id="result"></div>
-    </section>
-
-
-  <section>
-    <h2>📌 补充记忆</h2>
-    <div class="callout">
-      <b>FMECA 一句话记忆</b>：FMEA 找问题（什么会坏、坏了怎样），CA 排优先级（哪个最严重先处理哪个）。RPN = S × O × D，三个因子缺一不可。
     </div>
   </section>
 
-  <div class="footer">§3-3 故障模式、影响及危害性分析 | 可靠性工程师手册互动学习</div>
+  <main class="main-layout">
+    <div class="content">
+      <section class="panel" id="s1">
+        <div class="section-kicker">3.3.1</div>
+        <h2>FMECA 概述：先找“会怎么坏”，再判“坏得有多严重”</h2>
+        <p>故障模式、影响及危害性分析（<span class="keyword">FMECA</span>）是把 <span class="keyword">FMEA</span> 和 <span class="keyword orange">CA</span> 结合起来的一种分析方法。FMEA 关注故障模式及其影响，CA 关注危害程度和优先级，两者结合，就能把潜在薄弱点从“找出来”到“排顺序”一次完成。</p>
+        <p>教材强调，FMECA 的目标不是单纯列出问题，而是把问题与后果连起来，让设计人员知道：哪里会坏、坏了会怎样、先改哪一个最值。</p>
+        <div class="cards">
+          <div class="card"><h4>FMEA 做什么</h4><p>识别各零部件、子系统可能出现的故障模式，并分析其对上层功能和系统的影响。</p></div>
+          <div class="card"><h4>CA 做什么</h4><p>对已识别的故障模式按严重程度、发生频度和检测难度进行量化排序。</p></div>
+          <div class="card"><h4>分析价值</h4><p>在设计阶段提前暴露问题，为设计改进、试验策划和维修保障提供依据。</p></div>
+          <div class="card"><h4>最终目标</h4><p>把有限资源优先投到最危险、最值得先处理的故障模式上。</p></div>
+        </div>
+        <div class="callout">一句话：<span class="keyword">FMECA = 识别故障 + 评估后果 + 排优先级</span>。</div>
+      </section>
+
+      <section class="panel" id="s2">
+        <div class="section-kicker">3.3.2</div>
+        <h2>危害性分析的方法与含义</h2>
+        <h3>常用的危害性分析思路</h3>
+        <ul>
+          <li><span class="keyword">严重度</span>：故障后果有多严重，是否会导致人员伤害、系统毁坏或任务失败。</li>
+          <li><span class="keyword green">发生频度</span>：该故障模式出现的可能性有多大。</li>
+          <li><span class="keyword purple">检测难度</span>：该故障是否容易在设计、制造、试验或使用中被发现。</li>
+        </ul>
+        <h3>风险优先数</h3>
+        <p>教材中常用 <span class="keyword">RPN = S × O × D</span> 表示风险优先数，其中 S 是严重度，O 是发生频度，D 是检测难度。RPN 越大，表示该故障模式越值得优先处理。</p>
+        <div class="callout warn">⚠️ 注意：不能只看严重度。一个“后果很严重但几乎不发生”的问题，未必比“中等严重但高频发生”的问题更应优先处理。</div>
+        <div class="cards">
+          <div class="card"><h4>严重度</h4><p>决定“后果有多大”。</p></div>
+          <div class="card"><h4>发生频度</h4><p>决定“会不会常出现”。</p></div>
+          <div class="card"><h4>检测难度</h4><p>决定“能不能早点发现”。</p></div>
+          <div class="card"><h4>综合判定</h4><p>三者一起看，才是真正的优先级排序。</p></div>
+        </div>
+      </section>
+
+      <section class="panel" id="s3">
+        <div class="section-kicker">3.3.3</div>
+        <h2>严重度等级：先把“坏到什么程度”分清楚</h2>
+        <p>教材中对故障模式的严重度通常按对人员和系统的影响进行分级，便于后续排序和资源投放。</p>
+        <div class="formula">
+          <div class="formula-step"><strong>Ⅰ级</strong><span>灾难的：导致人员死亡或系统毁坏</span></div>
+          <div class="formula-step"><strong>Ⅱ级</strong><span>严重的：导致人员严重受伤或系统严重损坏</span></div>
+          <div class="formula-step"><strong>Ⅲ级</strong><span>轻度的：导致人员轻度受伤或系统轻度损坏</span></div>
+          <div class="formula-step"><strong>Ⅳ级</strong><span>可忽略的：影响较小，但仍需关注</span></div>
+        </div>
+        <div class="callout">严重度等级的作用是把“所有问题”变成“有顺序的问题”。等级越高，越要优先处理。</div>
+      </section>
+
+      <section class="panel" id="s4">
+        <div class="section-kicker">3.3.4</div>
+        <h2>FMECA 的一般分析步骤</h2>
+        <div class="timeline">
+          <div class="timeline-item"><div class="timeline-year">第1步 明确分析对象</div><div class="timeline-text">确定系统边界、功能、接口与工作模式。</div></div>
+          <div class="timeline-item"><div class="timeline-year">第2步 列出故障模式</div><div class="timeline-text">识别每个单元可能发生的各种故障。</div></div>
+          <div class="timeline-item"><div class="timeline-year">第3步 分析影响</div><div class="timeline-text">分析故障对上一层单元、系统任务和人员安全的影响。</div></div>
+          <div class="timeline-item"><div class="timeline-year">第4步 评价并排序</div><div class="timeline-text">结合严重度、频度、检测难度给出优先处理顺序。</div></div>
+          <div class="timeline-item"><div class="timeline-year">第5步 提出措施</div><div class="timeline-text">针对高风险故障模式提出设计改进、试验或管理措施。</div></div>
+        </div>
+        <div class="callout warn">FMECA 的关键不是“把表填满”，而是“把真正危险的点揪出来并改掉”。</div>
+      </section>
+
+      <section class="panel" id="s5">
+        <div class="section-kicker">3.3.5</div>
+        <h2>FMECA 在工程中的用法</h2>
+        <p>FMECA 适用于设计、试验、生产和使用全过程。它既能帮助设计人员在方案阶段发现薄弱环节，也能为试验项目选择、维修保障和故障诊断提供依据。</p>
+        <p>在工程实践中，FMECA 往往与可靠性分配、故障模式、影响及危害性分析、试验评价等方法配合使用，形成完整的可靠性分析链条。</p>
+        <div class="cards">
+          <div class="card"><h4>设计阶段</h4><p>尽早识别薄弱环节，减少返工。</p></div>
+          <div class="card"><h4>试验阶段</h4><p>确定重点试验对象和验证顺序。</p></div>
+          <div class="card"><h4>使用阶段</h4><p>支持故障诊断与维修策略制定。</p></div>
+          <div class="card"><h4>管理阶段</h4><p>帮助建立风险清单和整改闭环。</p></div>
+        </div>
+      </section>
+
+      <section class="panel" id="quiz">
+        <div class="section-kicker">互动练习</div>
+        <h2>5 道题：2 单选 + 3 多选</h2>
+        <div class="question" data-id="q1" data-answer="C" data-type="single">
+          <div class="question-header">第1题：FMECA 中的 FMEA 主要做什么？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q1" value="A"><span>A. 只计算顶事件概率</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="B"><span>B. 只统计产品寿命数据</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="C"><span>C. 识别故障模式并分析其影响</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="D"><span>D. 只做维修人员培训</span></label>
+        </div>
+        <div class="question" data-id="q2" data-answer="ABD" data-type="multi">
+          <div class="question-header">第2题：关于危害性分析，哪些说法正确？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q2" value="A"><span>A. 需要考虑严重度</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="B"><span>B. 需要考虑发生频度</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="C"><span>C. 只要严重度高就一定优先处理</span></label>
+          <label class="option-label"><input type="checkbox" name="q2" value="D"><span>D. 检测难度也是重要因素之一</span></label>
+        </div>
+        <div class="question" data-id="q3" data-answer="AC" data-type="multi">
+          <div class="question-header">第3题：下列关于严重度等级的说法，哪些正确？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q3" value="A"><span>A. Ⅰ级通常是灾难的</span></label>
+          <label class="option-label"><input type="checkbox" name="q3" value="B"><span>B. Ⅳ级表示最严重</span></label>
+          <label class="option-label"><input type="checkbox" name="q3" value="C"><span>C. Ⅱ级通常表示严重损坏或重伤</span></label>
+          <label class="option-label"><input type="checkbox" name="q3" value="D"><span>D. 等级划分与后果无关</span></label>
+        </div>
+        <div class="question" data-id="q4" data-answer="ABCD" data-type="multi">
+          <div class="question-header">第4题：FMECA 的工程应用可以覆盖哪些阶段？<span class="badge badge-multi">多选</span></div>
+          <label class="option-label"><input type="checkbox" name="q4" value="A"><span>A. 设计阶段</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="B"><span>B. 试验阶段</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="C"><span>C. 使用阶段</span></label>
+          <label class="option-label"><input type="checkbox" name="q4" value="D"><span>D. 管理阶段</span></label>
+        </div>
+        <div class="question" data-id="q5" data-answer="B" data-type="single">
+          <div class="question-header">第5题：教材中常用的风险优先数公式是？<span class="badge badge-single">单选</span></div>
+          <label class="option-label"><input type="radio" name="q5" value="A"><span>A. RPN = S + O + D</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="B"><span>B. RPN = S × O × D</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="C"><span>C. RPN = S × O</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="D"><span>D. RPN = O × D</span></label>
+        </div>
+        <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
+        <div class="result" id="result"><div class="score-bar" id="scoreBar"></div><div id="resultDetails"></div></div>
+      </section>
+
+      <section class="panel">
+        <div class="section-kicker">学习提醒</div>
+        <h2>重点提醒</h2>
+        <div class="tag-list">
+          <span class="tag">自上而下</span><span class="tag">顶事件</span><span class="tag">最小割集</span><span class="tag">共因事件</span><span class="tag">重要度</span>
+        </div>
+        <div class="callout">记忆点：FTA 先定顶事件，再逐层找直接原因；定性分析找最小割集，定量分析算概率与重要度，最后一定要回到“改进哪个底事件最值钱”。</div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer"><p>© 可靠性工程师手册互动讲解页</p><div class="sign">§3-3 故障模式、影响及危害性分析</div></footer>
 </div>
-
-    <script>
-    const explanations = {
-      1: "FMECA = FMEA（故障模式及影响分析）+ CA（危害性分析）。FMEA 识别故障模式及其影响，CA 对故障模式按严重程度排序。",
-      2: "RPN = S（严重度）× O（发生频度）× D（检测难度），三个因子相乘，RPN 越大越需优先处理。",
-      3: "Ⅰ级（灾难的）：导致人员死亡或系统毁坏；Ⅱ级（严重的）：导致人员严重受伤或系统严重损坏；Ⅲ级（轻度的）；Ⅳ级（可忽略的）。",
-      4: "FMECA 完整步骤包括：明确系统定义 → 绘制框图 → 识别故障模式 → 分析故障影响 → 确定检测方法 → 提出补偿措施，ABCD 全部正确。",
-      5: "RPN = S × O × D，其中 S=严重度、O=发生频度、D=检测难度。RPN 越大越需优先处理，D 选项说反了。"
-    };
-    const questions = document.querySelectorAll('.question');
-    function submitQuiz() {
-      let score = 0;
-      let html = '<div class="score-bar">得分：<span id="scoreNum">0</span>/100</div>';
-      questions.forEach(q => {
-        const id = q.dataset.id;
-        const answer = q.dataset.answer;
-        const type = q.dataset.type;
-        let userAnswer = [];
-        if (type === 'single') {
-          const checked = q.querySelector('input[type="radio"]:checked');
-          userAnswer = checked ? [checked.value] : [];
-        } else {
-          q.querySelectorAll('input[type="checkbox"]:checked').forEach(c => userAnswer.push(c.value));
-        }
-        userAnswer.sort();
-        const correct = answer.split('').sort();
-        const isCorrect = JSON.stringify(userAnswer) === JSON.stringify(correct);
-        if (isCorrect) score += 20;
-        const cls = isCorrect ? 'result-correct' : 'result-wrong';
-        const icon = isCorrect ? '✅' : '❌';
-        html += '<div class="result-card ' + cls + '">';
-        html += '<div class="result-q">' + icon + ' 第' + id + '题</div>';
-        html += '<div class="result-your">你的答案：' + (userAnswer.length ? userAnswer.join(',') : '未作答') + '</div>';
-        html += '<div class="result-answer">正确答案：' + answer + '</div>';
-        html += '<div class="result-explain">' + (explanations[id] || '') + '</div>';
-        html += '</div>';
-      });
-      document.getElementById('scoreNum').textContent = score;
-      const resultDiv = document.getElementById('result');
-      resultDiv.innerHTML = html;
-      resultDiv.style.display = 'block';
-      resultDiv.scrollIntoView({ behavior: 'smooth' });
-    }
-    </script>
-
+<script>
+var explanations = {
+  q1: "教材明确指出，FTA 是以不希望发生的顶事件为起点，通过由上向下的层次分析，逐层找出直接原因。因此分析方向是自上而下。",
+  q2: "顶事件是逻辑门的输出事件；底事件位于树底端，只作为输入事件；中间事件位于顶事件和底事件之间。B 说法错误。",
+  q3: "教材要求：建树前明确边界条件，建树出发点是简化系统图；各级故障事件要严格定义；建树时不允许门对门直接相连。共因事件要用同一标号。",
+  q4: "FMECA 可覆盖设计、试验、使用和管理阶段，目的是把分析结果真正落到工程实践中。",
+  q5: "教材常用风险优先数公式为 RPN = S × O × D，其中 S 是严重度，O 是发生频度，D 是检测难度。"
+};
+var questions = [
+  {id: "q1", text: "FTA 的分析方向是什么？"},
+  {id: "q2", text: "关于故障树中的术语，哪些说法正确？"},
+  {id: "q3", text: "关于 FTA 建树规则，哪些说法正确？"},
+  {id: "q4", text: "关于故障树规范化，哪些变换是教材明确提到的？"},
+  {id: "q5", text: "关于定性与定量分析，哪些说法正确？"}
+];
+function submitQuiz(){let score=0,html='';questions.forEach((q,idx)=>{const box=document.querySelector('.question[data-id="'+q.id+'"]');const correct=box.getAttribute('data-answer');const checked=[...box.querySelectorAll('input:checked')].map(x=>x.value).join('');const ok=checked===correct;if(ok)score++;html+='<div class="result-card '+(ok?'result-correct':'result-wrong')+'">';html+='<div class="result-q">'+(ok?'✅':'❌')+' 第'+(idx+1)+'题：'+q.text+'</div>';if(!ok)html+='<div>你的答案：<span class="result-your">'+(checked||'未作答')+'</span> | 正确答案：<span class="result-answer">'+correct+'</span></div>';else html+='<div>答案：<span class="result-answer">'+correct+'</span> ✅</div>';html+='<div class="result-explain">'+explanations[q.id]+'</div></div>';});document.getElementById('scoreBar').textContent='得分：'+score+' / '+questions.length+(score===questions.length?'  满分！':'');document.getElementById('resultDetails').innerHTML=html;document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});document.querySelector('.submit-btn').textContent='已提交';document.querySelector('.submit-btn').disabled=true;document.querySelector('.submit-btn').style.opacity='0.6';document.querySelectorAll('.question input').forEach(inp=>inp.disabled=true)}
+</script>
 </body>
 </html>
