@@ -1,11 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>可靠性工程师手册|§3-3 故障模式、影响及危害性分析</title>
-  <meta property="og:title" content="可靠性工程师手册|§3-3 故障模式、影响及危害性分析" />
-  <meta property="og:description" content="§3-3 故障模式、影响及危害性分析。包含完整讲解、关键术语、重点提醒与 5 道互动练习题。" />
+  <title>§3-3 故障模式、影响及危害性分析</title>
   <style>
     body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#f6faff;color:#152033;line-height:1.7}
     .wrap{max-width:980px;margin:0 auto;padding:28px 18px 60px}
@@ -23,92 +21,181 @@
     .warn{border-left-color:#f08a24;background:#fff5e9}
     .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
     .card{border:1px solid #e1ebf7;border-radius:14px;padding:16px;background:#fbfdff}
-    .q{border:1px solid #e5e6eb;border-radius:12px;padding:14px;margin:14px 0;background:#fafbfc}
-    .qhead{font-weight:800;margin-bottom:8px}
+    .quiz-section{background:#fff;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+    .quiz-section h2{font-size:16px;font-weight:600;color:#d63384;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #fde2e2}
+    .question{background:#fafbfc;border:1px solid #e5e6eb;border-radius:8px;padding:16px;margin-bottom:14px}
+    .question-header{font-weight:800;margin-bottom:8px}
     .badge{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:10px;font-size:12px}
     .single{background:#e8f5e9;color:#2e7d32}.multi{background:#fff0f6;color:#d63384}
-    .opt{display:block;margin:6px 0}
+    .option-label{display:block;margin:6px 0;cursor:pointer;font-size:14px}
+    .option-label input{margin-right:10px;accent-color:#2b6aff;width:16px;height:16px}
+    .submit-wrap{text-align:center;margin:20px 0}
+    .submit-btn{background:linear-gradient(135deg,#2b6aff,#1a52d6);color:#fff;border:none;border-radius:24px;padding:12px 48px;font-size:16px;font-weight:600;cursor:pointer}
+    .result{display:none;margin-top:20px}
+    .result-card{border-radius:10px;padding:16px;margin-bottom:12px;font-size:14px}
+    .result-correct{background:#e8f5e9;border:1px solid #a5d6a7}
+    .result-wrong{background:#fce4ec;border:1px solid #ef9a9a}
+    .result-q{font-weight:600;margin-bottom:6px}
+    .result-your{color:#d32f2f}
+    .result-answer{color:#2e7d32;font-weight:600}
+    .result-explain{margin-top:6px;color:#555;font-size:13px}
+    .score-bar{background:linear-gradient(135deg,#2b6aff,#4caf50);color:#fff;text-align:center;padding:16px;border-radius:10px;margin-bottom:16px;font-size:22px;font-weight:700}
     .footer{margin-top:18px;color:#748196;font-size:12px;text-align:center}
+    @media(max-width:700px){.grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
 <div class="wrap">
   <div class="hero">
     <h1>§3-3 故障模式、影响及危害性分析</h1>
-    <p class="lead">本节讲的是如何从“潜在故障模式”出发，自下而上分析它对产品、系统和顾客带来的影响，并用严酷度、发生概率和检测能力来判断风险优先级。它是后续维修性、安全性、测试性与保障性分析的基础。</p>
+    <p class="lead">FMECA 是一种自下而上的归纳分析方法，通过识别产品每个潜在的故障模式，判断其对系统的影响并按严重程度排序，从而在设计阶段尽早发现并消除薄弱环节。</p>
     <div class="tags">
-      <span class="tag">FMEA</span><span class="tag">FMECA</span><span class="tag">CA</span><span class="tag">严酷度</span><span class="tag">RPN</span><span class="tag">PFMECA</span>
+      <span class="tag">FMEA</span><span class="tag">FMECA</span><span class="tag">CA</span><span class="tag">危害性分析</span><span class="tag">RPN</span>
     </div>
   </div>
 
+  
+    <section>
+      <h2>本节内容</h2>
+      <h3>1. FMECA 概述</h3>
+      <p><b>FMECA</b>（Failure Mode, Effects and Criticality Analysis）即故障模式、影响及危害性分析，是 <span class="keyword">FMEA</span>（故障模式及影响分析）和 <span class="keyword">CA</span>（危害性分析）的组合。FMEA 用于识别产品潜在的故障模式并评估其对系统的影响；CA 则是对故障模式按其严重程度进行分级排序。</p>
+      <div class="callout">💡 核心思路：FMEA 解决"可能出什么错、后果是什么"，CA 解决"哪个问题最严重、优先处理哪个"。两者结合形成完整的分析闭环。</div>
+
+      <h3>2. FMEA 的分析步骤</h3>
+      <p>FMECA 的分析流程包括以下关键步骤：</p>
+      <ul>
+        <li><b>明确系统定义</b>：确定分析对象的边界、功能、接口及工作模式</li>
+        <li><b>绘制功能框图/可靠性框图</b>：明确各组成单元之间的功能关系</li>
+        <li><b>识别故障模式</b>：列出每个单元可能出现的所有故障模式</li>
+        <li><b>分析故障影响</b>：分析每种故障模式对上一层及系统整体的影响</li>
+        <li><b>确定故障检测方法</b>：说明如何发现该故障</li>
+        <li><b>提出补偿措施</b>：针对严重故障模式提出设计改进建议</li>
+      </ul>
+      <div class="callout warn">⚠️ FMEA 的核心价值在于"尽早发现"——在设计阶段就识别潜在故障，而非等到试验或使用阶段才暴露问题。</div>
+
+      <h3>3. 危害性分析（CA）</h3>
+      <p>危害性分析是对 FMEA 结果的进一步量化和排序。主要方法有两种：</p>
+      <div class="grid">
+        <div class="card"><b>风险优先数法（RPN）</b><p>对故障模式的严重度 S、发生频度 O、检测难度 D 分别打分（1~10），RPN = S × O × D。RPN 越大，越需要优先处理。</p></div>
+        <div class="card"><b>危害度矩阵法</b><p>将故障模式按严重度等级（Ⅰ~Ⅳ）和发生概率（A~E）绘制矩阵，落在高严重度、高概率区域的故障模式优先处理。</p></div>
+      </div>
+
+      <h3>4. 严重度等级</h3>
+      <p>通常分为四个等级：</p>
+      <ul>
+        <li><b>Ⅰ级（灾难的）</b>：导致人员死亡或系统毁坏</li>
+        <li><b>Ⅱ级（严重的）</b>：导致人员严重受伤或系统严重损坏</li>
+        <li><b>Ⅲ级（轻度的）</b>：导致人员轻度受伤或系统轻度损坏</li>
+        <li><b>Ⅳ级（可忽略的）</b>：不会导致人员受伤或系统损坏，但需关注</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>重点提醒</h2>
+      <ul>
+        <li>FMECA = <b>FMEA</b>（故障模式及影响分析）+ <b>CA</b>（危害性分析）</li>
+        <li>FMEA 是"自下而上"的分析方法，从单元故障模式出发推导系统影响</li>
+        <li>危害性分析中 <b>RPN = S × O × D</b>，三个因子都要关注，不能只盯严重度</li>
+        <li>FMECA 应尽早开展，贯穿设计全过程，并在设计变更时及时更新</li>
+      </ul>
+    </section>
+
+  
+    <section class="quiz-section">
+      <h2>📝 练习题</h2>
+      <div class="question" data-id="1" data-answer="C" data-type="single">
+        <div class="question-header">1. FMECA 是哪两种分析的组合？<span class="badge badge-single">单选</span></div>
+        <label class="option-label"><input type="radio" name="q1" value="A">A. FTA 和 FMEA</label>
+        <label class="option-label"><input type="radio" name="q1" value="B">B. FMEA 和 FTA 的简化版</label>
+        <label class="option-label"><input type="radio" name="q1" value="C">C. FMEA（故障模式及影响分析）和 CA（危害性分析）</label>
+        <label class="option-label"><input type="radio" name="q1" value="D">D. 可靠性分配和可靠性预计</label>
+      </div>
+      <div class="question" data-id="2" data-answer="D" data-type="single">
+        <div class="question-header">2. RPN（风险优先数）的计算公式是？<span class="badge badge-single">单选</span></div>
+        <label class="option-label"><input type="radio" name="q2" value="A">A. RPN = S + O + D</label>
+        <label class="option-label"><input type="radio" name="q2" value="B">B. RPN = S × O</label>
+        <label class="option-label"><input type="radio" name="q2" value="C">C. RPN = S × D</label>
+        <label class="option-label"><input type="radio" name="q2" value="D">D. RPN = S × O × D</label>
+      </div>
+      <div class="question" data-id="3" data-answer="A" data-type="single">
+        <div class="question-header">3. 严重度等级中，"导致人员死亡或系统毁坏"属于哪一级？<span class="badge badge-single">单选</span></div>
+        <label class="option-label"><input type="radio" name="q3" value="A">A. Ⅰ级（灾难的）</label>
+        <label class="option-label"><input type="radio" name="q3" value="B">B. Ⅱ级（严重的）</label>
+        <label class="option-label"><input type="radio" name="q3" value="C">C. Ⅲ级（轻度的）</label>
+        <label class="option-label"><input type="radio" name="q3" value="D">D. Ⅳ级（可忽略的）</label>
+      </div>
+      <div class="question" data-id="4" data-answer="ABCD" data-type="multi">
+        <div class="question-header">4. FMECA 的分析步骤包括以下哪些？<span class="badge badge-multi">多选</span></div>
+        <label class="option-label"><input type="checkbox" name="q4" value="A">A. 识别故障模式</label>
+        <label class="option-label"><input type="checkbox" name="q4" value="B">B. 分析故障影响</label>
+        <label class="option-label"><input type="checkbox" name="q4" value="C">C. 确定故障检测方法</label>
+        <label class="option-label"><input type="checkbox" name="q4" value="D">D. 提出补偿措施</label>
+      </div>
+      <div class="question" data-id="5" data-answer="ABC" data-type="multi">
+        <div class="question-header">5. 关于 RPN 的描述，正确的有哪些？<span class="badge badge-multi">多选</span></div>
+        <label class="option-label"><input type="checkbox" name="q5" value="A">A. S 代表严重度</label>
+        <label class="option-label"><input type="checkbox" name="q5" value="B">B. O 代表发生频度</label>
+        <label class="option-label"><input type="checkbox" name="q5" value="C">C. D 代表检测难度</label>
+        <label class="option-label"><input type="checkbox" name="q5" value="D">D. RPN 值越小越需要优先处理</label>
+      </div>
+      <div class="submit-wrap"><button class="submit-btn" onclick="submitQuiz()">提交答案</button></div>
+      <div class="result" id="result"></div>
+    </section>
+
+
   <section>
-    <h2>本节内容</h2>
-    <h3>1. 概念先行：FMECA 由什么组成</h3>
-    <p><b>FMECA</b>（故障模式、影响及危害性分析）由 <b>FMEA</b>（故障模式及影响分析）和 <b>CA</b>（危害性分析）组成。教材明确指出：<b>CA 是 FMEA 的补充和扩展，只有进行了 FMEA，才能进行 CA</b>。这意味着，先找出“会怎么坏、为什么坏、坏了会怎样”，再进一步判断“哪一种坏法最危险”。</p>
-    <div class="callout">一句话记忆：<b>FMEA 解决“故障怎么来、影响是什么”</b>，<b>CA 解决“哪一个最危险、先处理哪个”</b>。</div>
-
-    <h3>2. FMEA 的工作方式：自下而上、事前分析</h3>
-    <p>FMEA 是一种<b>自下而上</b>的归纳分析方法，重点在于把产品中的潜在失效模式逐项找出来，并分析其原因、后果和可检测性。教材特别强调，FMEA 是“事发前的行为”，不是事后的补救；成功实施的关键在于<b>适时</b>，要在设计或工艺失效模式被纳入之前完成。</p>
-    <div class="callout warn">重点提醒：FMEA 不是写事故报告，而是提前把设计薄弱点找出来。</div>
-
-    <h3>3. 设计 FMECA：功能与硬件、过程两条线</h3>
-    <p>教材把设计 FMECA 分为两大类：</p>
-    <ul>
-      <li><b>功能及硬件 FMECA</b>：关注产品在功能、结构层面的潜在故障模式、原因、影响和检测方式。</li>
-      <li><b>过程 FMECA（PFMECA）</b>：关注制造、装配、工艺过程中的缺陷如何影响产品质量和可靠性。</li>
-    </ul>
-    <p>前者偏设计，后者偏制造工艺。两者都不是只看结果，而是要追到“为什么会这样”。</p>
-
-    <h3>4. 严酷度、发生概率、检测方式与改进措施</h3>
-    <p>功能及硬件 FMECA 中，常见步骤包括：分析对象定义、故障模式分析、故障原因分析、故障影响及严酷度分析、故障检测方法分析、设计改进与使用补偿措施分析，以及表格化实施。</p>
-    <p>严酷度按 I、II、III、IV 类划分，分别对应灾难、致命、中等、轻度。危害性分析既可以用<b>评分排序法</b>，也可以用<b>危害性矩阵</b>。评分排序法中，<b>评分值 = 严酷度等级 × 发生概率等级</b>；对于工艺 FMECA，教材给出的<b>RPN = S × O × D</b>，即严酷度、发生概率和被检测难度的乘积。</p>
-    <div class="grid">
-      <div class="card"><b>严酷度</b><p>看“后果有多严重”，比如是否导致人员伤亡、任务失败、重大损失。</p></div>
-      <div class="card"><b>发生概率</b><p>看“这种故障有多容易出现”，是风险排序的重要依据。</p></div>
-      <div class="card"><b>检测能力</b><p>看“能不能在失效前或失效后及时发现”，直接影响维修性和测试性。</p></div>
-      <div class="card"><b>改进措施</b><p>优先考虑设计更改、冗余、防错、降额、试验验证等，目标是降低风险值。</p></div>
+    <h2>📌 补充记忆</h2>
+    <div class="callout">
+      <b>FMECA 一句话记忆</b>：FMEA 找问题（什么会坏、坏了怎样），CA 排优先级（哪个最严重先处理哪个）。RPN = S × O × D，三个因子缺一不可。
     </div>
-
-    <h3>5. PQ、DFMEA、PFMECA 与 QS9000</h3>
-    <p>教材还介绍了 GJB/Z 1391-2006 规定的功能及硬件 FMECA，以及 QS9000/ISO 16949 中的潜在失效模式、影响分析表格。两者形式不同，但本质一致：都是围绕潜在失效，逐项分析功能、后果、起因、控制、检测、建议措施和跟踪结果。</p>
-    <div class="callout">工程应用要点：FMECA 的价值不在“填表”，而在于<b>暴露薄弱环节、推动设计改进、控制风险优先级</b>。</div>
   </section>
 
-  <section>
-    <h2>关键术语</h2>
-    <ul>
-      <li><b>FMEA</b>：故障模式及影响分析。</li>
-      <li><b>FMECA</b>：故障模式、影响及危害性分析。</li>
-      <li><b>CA</b>：危害性分析，是 FMEA 的扩展。</li>
-      <li><b>DFMEA</b>：设计 FMEA，关注产品设计层面的潜在失效。</li>
-      <li><b>PFMECA</b>：过程 FMECA，关注工艺与制造过程。</li>
-      <li><b>严酷度</b>：后果严重程度的等级。</li>
-      <li><b>RPN</b>：风险优先数，常用于工艺失效模式排序。</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>重点提醒</h2>
-    <ul>
-      <li>FMECA 是<b>自下而上</b>的分析，不是自上而下。</li>
-      <li>FMEA 要<b>事前做</b>，越早越好。</li>
-      <li>功能及硬件 FMECA 关注<b>故障模式—原因—影响—检测—改进</b>的闭环。</li>
-      <li>PFMECA 的核心是把<b>工艺缺陷</b>和<b>产品最终风险</b>连起来。</li>
-      <li>评分或 RPN 越高，不代表一定要立即报废，而是说明<b>优先级更高</b>，需要先改。</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>练习题</h2>
-    <div class="q"><div class="qhead">1. 下列关于 FMECA 的说法，正确的是？ <span class="badge multi">多选</span></div><label class="opt"><input type="checkbox">A. FMECA 由 FMEA 和 CA 组成</label><label class="opt"><input type="checkbox">B. CA 是 FMEA 的补充和扩展</label><label class="opt"><input type="checkbox">C. 只要做了 CA，就不必再做 FMEA</label><label class="opt"><input type="checkbox">D. FMEA 不是事前分析，而是事故后分析</label></div>
-    <div class="q"><div class="qhead">2. 教材中对 FMEA 性质的描述最贴切的是？ <span class="badge single">单选</span></div><label class="opt"><input type="radio">A. 自上而下的验证方法</label><label class="opt"><input type="radio">B. 自下而上的归纳分析方法</label><label class="opt"><input type="radio">C. 只用于售后故障统计的方法</label><label class="opt"><input type="radio">D. 只适用于软件测试的方法</label></div>
-    <div class="q"><div class="qhead">3. 关于功能及硬件 FMECA 的步骤，哪几项属于教材明确提到的内容？ <span class="badge multi">多选</span></div><label class="opt"><input type="checkbox">A. 故障模式分析</label><label class="opt"><input type="checkbox">B. 故障原因分析</label><label class="opt"><input type="checkbox">C. 故障影响及严酷度分析</label><label class="opt"><input type="checkbox">D. 供应商价格谈判</label></div>
-    <div class="q"><div class="qhead">4. 工艺 FMECA 中，RPN 的计算公式是？ <span class="badge single">单选</span></div><label class="opt"><input type="radio">A. RPN = S + O + D</label><label class="opt"><input type="radio">B. RPN = S × O × D</label><label class="opt"><input type="radio">C. RPN = O ÷ D</label><label class="opt"><input type="radio">D. RPN = S × D</label></div>
-    <div class="q"><div class="qhead">5. 下列哪些属于教材中提到的故障检测方法示例？ <span class="badge multi">多选</span></div><label class="opt"><input type="checkbox">A. 目视检查</label><label class="opt"><input type="checkbox">B. 原位测试</label><label class="opt"><input type="checkbox">C. 离位检测</label><label class="opt"><input type="checkbox">D. 仅靠人工记忆</label></div>
-    <div class="callout">答案要点：1.AB；2.B；3.ABC；4.B；5.ABC</div>
-  </section>
-
-  <div class="footer">§3-3 学习页面已生成，可直接预览和继续完善。</div>
+  <div class="footer">§3-3 故障模式、影响及危害性分析 | 可靠性工程师手册互动学习</div>
 </div>
+
+    <script>
+    const explanations = {
+      1: "FMECA = FMEA（故障模式及影响分析）+ CA（危害性分析）。FMEA 识别故障模式及其影响，CA 对故障模式按严重程度排序。",
+      2: "RPN = S（严重度）× O（发生频度）× D（检测难度），三个因子相乘，RPN 越大越需优先处理。",
+      3: "Ⅰ级（灾难的）：导致人员死亡或系统毁坏；Ⅱ级（严重的）：导致人员严重受伤或系统严重损坏；Ⅲ级（轻度的）；Ⅳ级（可忽略的）。",
+      4: "FMECA 完整步骤包括：明确系统定义 → 绘制框图 → 识别故障模式 → 分析故障影响 → 确定检测方法 → 提出补偿措施，ABCD 全部正确。",
+      5: "RPN = S × O × D，其中 S=严重度、O=发生频度、D=检测难度。RPN 越大越需优先处理，D 选项说反了。"
+    };
+    const questions = document.querySelectorAll('.question');
+    function submitQuiz() {
+      let score = 0;
+      let html = '<div class="score-bar">得分：<span id="scoreNum">0</span>/100</div>';
+      questions.forEach(q => {
+        const id = q.dataset.id;
+        const answer = q.dataset.answer;
+        const type = q.dataset.type;
+        let userAnswer = [];
+        if (type === 'single') {
+          const checked = q.querySelector('input[type="radio"]:checked');
+          userAnswer = checked ? [checked.value] : [];
+        } else {
+          q.querySelectorAll('input[type="checkbox"]:checked').forEach(c => userAnswer.push(c.value));
+        }
+        userAnswer.sort();
+        const correct = answer.split('').sort();
+        const isCorrect = JSON.stringify(userAnswer) === JSON.stringify(correct);
+        if (isCorrect) score += 20;
+        const cls = isCorrect ? 'result-correct' : 'result-wrong';
+        const icon = isCorrect ? '✅' : '❌';
+        html += '<div class="result-card ' + cls + '">';
+        html += '<div class="result-q">' + icon + ' 第' + id + '题</div>';
+        html += '<div class="result-your">你的答案：' + (userAnswer.length ? userAnswer.join(',') : '未作答') + '</div>';
+        html += '<div class="result-answer">正确答案：' + answer + '</div>';
+        html += '<div class="result-explain">' + (explanations[id] || '') + '</div>';
+        html += '</div>';
+      });
+      document.getElementById('scoreNum').textContent = score;
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = html;
+      resultDiv.style.display = 'block';
+      resultDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+    </script>
+
 </body>
 </html>
